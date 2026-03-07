@@ -87,4 +87,27 @@ export const messages: Record<string, string> = {
   "achievement.silverReached.desc": "Reach Silver tier",
   "achievement.goldReached.title": "Gold Mind",
   "achievement.goldReached.desc": "Reach Gold tier",
+
+  // Session screens (flashcard & quiz)
+  "session.tapToReveal": "Tap to reveal",
+  "session.term": "Term",
+  "session.translation": "Translation",
+  "session.knewIt": "I knew it!",
+  "session.didntKnow": "Didn't know",
+  "session.noWords": "This list has no words yet.",
+  "session.notEnoughWords": "Need at least 2 words to take a quiz.",
+  "session.whatIsTranslation": "What is the translation?",
+
+  // Session summary
+  "session.summary.title": "Session Complete!",
+  "session.summary.flashcardSubtitle": "Great work on your flashcards!",
+  "session.summary.quizSubtitle": "Great work on your quiz!",
+  "session.summary.correct": "Correct",
+  "session.summary.score": "Score",
+  "session.summary.xpEarned": "XP Earned",
+  "session.summary.duration": "Duration",
+  "session.summary.perfectScore": "Perfect Score! Amazing work!",
+  "session.summary.tryQuiz": "🧠 Try Quiz",
+  "session.summary.tryFlashcards": "🃏 Try Flashcards",
+  "session.summary.backToHome": "Back to Home",
 };
