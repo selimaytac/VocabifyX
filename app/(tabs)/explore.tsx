@@ -1,3 +1,4 @@
+import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
@@ -29,10 +30,14 @@ function ExploreListCard({
   list,
   isInLibrary,
   onAdd,
+  addLabel,
+  inLibraryLabel,
 }: {
   list: PredefinedList;
   isInLibrary: boolean;
   onAdd: () => void;
+  addLabel: string;
+  inLibraryLabel: string;
 }) {
   return (
     <Card elevated marginBottom="$3">
@@ -70,11 +75,11 @@ function ExploreListCard({
 
         {isInLibrary ? (
           <SecondaryButton size="$3" disabled opacity={0.6}>
-            ✓ In Library
+            ✓ {inLibraryLabel}
           </SecondaryButton>
         ) : (
           <PrimaryButton size="$3" onPress={onAdd}>
-            + Add to Library
+            + {addLabel}
           </PrimaryButton>
         )}
       </YStack>
@@ -83,6 +88,7 @@ function ExploreListCard({
 }
 
 export default function ExploreScreen() {
+  const { i18n } = useLingui();
   const locale = useLanguageStore((state) => state.locale);
   const addList = useListsStore((state) => state.addList);
   const hasListFromSource = useListsStore((state) => state.hasListFromSource);
@@ -93,18 +99,7 @@ export default function ExploreScreen() {
 
   const categoryLabels = LIST_CATEGORIES.map((cat) => ({
     key: cat.key,
-    label:
-      cat.key === "all"
-        ? "All"
-        : cat.key === "travel"
-          ? "Travel"
-          : cat.key === "business"
-            ? "Business"
-            : cat.key === "technology"
-              ? "Technology"
-              : cat.key === "daily_life"
-                ? "Daily Life"
-                : "Academic",
+    label: i18n._(cat.labelKey),
   }));
 
   const filteredLists =
@@ -145,8 +140,8 @@ export default function ExploreScreen() {
     <ScrollView>
       <YStack padding="$4" gap="$4">
         <YStack>
-          <H1>Explore</H1>
-          <Body color="$colorSubtitle">Discover curated vocabulary lists</Body>
+          <H1>{i18n._("explore.title")}</H1>
+          <Body color="$colorSubtitle">{i18n._("explore.subtitle")}</Body>
         </YStack>
 
         <CategoryChips
@@ -161,6 +156,8 @@ export default function ExploreScreen() {
             list={list}
             isInLibrary={hasListFromSource(list.id)}
             onAdd={() => handleAddToLibrary(list)}
+            addLabel={i18n._("explore.addToLibrary")}
+            inLibraryLabel={i18n._("explore.inLibrary")}
           />
         ))}
       </YStack>

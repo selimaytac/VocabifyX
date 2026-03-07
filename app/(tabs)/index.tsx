@@ -1,3 +1,4 @@
+import { useLingui } from "@lingui/react";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
@@ -21,7 +22,13 @@ import {
 import { useSessionsStore } from "@/store/sessionsStore";
 import { useUserStore } from "@/store/userStore";
 
-function ListCard({ list }: { list: UserVocabList }) {
+function ListCard({
+  list,
+  wordsLabel,
+}: {
+  list: UserVocabList;
+  wordsLabel: string;
+}) {
   const completion = getCompletionPercent(list);
 
   return (
@@ -38,25 +45,16 @@ function ListCard({ list }: { list: UserVocabList }) {
           </YStack>
           <Caption>{completion}%</Caption>
         </XStack>
-        <BodySmall color="$colorSubtitle">{list.words.length} words</BodySmall>
+        <BodySmall color="$colorSubtitle">
+          {list.words.length} {wordsLabel}
+        </BodySmall>
       </YStack>
     </Card>
   );
 }
 
-function EmptyState() {
-  return (
-    <YStack alignItems="center" paddingVertical="$8" gap="$3">
-      <Body fontSize={48}>📚</Body>
-      <H3 textAlign="center">No lists yet</H3>
-      <BodySmall color="$colorSubtitle" textAlign="center">
-        Create your first vocabulary list to get started!
-      </BodySmall>
-    </YStack>
-  );
-}
-
 export default function HomeScreen() {
+  const { i18n } = useLingui();
   const profile = useUserStore((state) => state.profile);
   const lists = useListsStore((state) => state.lists);
   const { currentStreak } = useGameStore();
@@ -70,23 +68,45 @@ export default function HomeScreen() {
   return (
     <ScrollView>
       <YStack padding="$4" gap="$4">
-        <H1>👋 Hello, {displayName}!</H1>
+        <H1>
+          👋 {i18n._("home.greeting")}, {displayName}!
+        </H1>
 
         <XStack gap="$2">
-          <StatChip icon="📖" value={todaySessions.length} label="Sessions" />
-          <StatChip icon="⚡" value={todayXP} label="XP Today" />
-          <StatChip icon="🔥" value={currentStreak} label="Streak" />
+          <StatChip
+            icon="📖"
+            value={todaySessions.length}
+            label={i18n._("home.sessions")}
+          />
+          <StatChip icon="⚡" value={todayXP} label={i18n._("home.xpToday")} />
+          <StatChip
+            icon="🔥"
+            value={currentStreak}
+            label={i18n._("home.streak")}
+          />
         </XStack>
 
         <XStack justifyContent="space-between" alignItems="center">
-          <H3>My Lists</H3>
+          <H3>{i18n._("home.myLists")}</H3>
           <Caption>{lists.length} lists</Caption>
         </XStack>
 
         {lists.length === 0 ? (
-          <EmptyState />
+          <YStack alignItems="center" paddingVertical="$8" gap="$3">
+            <Body fontSize={48}>📚</Body>
+            <H3 textAlign="center">{i18n._("home.emptyTitle")}</H3>
+            <BodySmall color="$colorSubtitle" textAlign="center">
+              {i18n._("home.emptySubtitle")}
+            </BodySmall>
+          </YStack>
         ) : (
-          lists.map((list) => <ListCard key={list.id} list={list} />)
+          lists.map((list) => (
+            <ListCard
+              key={list.id}
+              list={list}
+              wordsLabel={i18n._("home.words")}
+            />
+          ))
         )}
       </YStack>
     </ScrollView>

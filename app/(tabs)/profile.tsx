@@ -1,3 +1,4 @@
+import { useLingui } from "@lingui/react";
 import { ChevronRight, Settings } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
 import { ScrollView } from "react-native";
@@ -24,6 +25,7 @@ import { useListsStore } from "@/store/listsStore";
 import { useUserStore } from "@/store/userStore";
 
 export default function ProfileScreen() {
+  const { i18n } = useLingui();
   const { user, signOut } = useAuth();
   const profile = useUserStore((state) => state.profile);
   const router = useRouter();
@@ -57,26 +59,46 @@ export default function ProfileScreen() {
         </Card>
 
         <XStack gap="$2">
-          <StatChip icon="⚡" value={totalXP} label="Total XP" />
-          <StatChip icon="🔥" value={`${currentStreak}d`} label="Streak" />
-          <StatChip icon="📚" value={lists.length} label="Lists" />
+          <StatChip
+            icon="⚡"
+            value={totalXP}
+            label={i18n._("profile.totalXP")}
+          />
+          <StatChip
+            icon="🔥"
+            value={`${currentStreak}d`}
+            label={i18n._("profile.streak")}
+          />
+          <StatChip
+            icon="📚"
+            value={lists.length}
+            label={i18n._("profile.listsCreated")}
+          />
         </XStack>
 
         <XStack gap="$2">
           <StatChip
             icon="📝"
             value={stats.sessionsCompleted}
-            label="Sessions"
+            label={i18n._("profile.sessionsCompleted")}
           />
-          <StatChip icon="🎯" value={stats.wordsMastered} label="Mastered" />
-          <StatChip icon="🏆" value={`${longestStreak}d`} label="Best Streak" />
+          <StatChip
+            icon="🎯"
+            value={stats.wordsMastered}
+            label={i18n._("profile.wordsLearned")}
+          />
+          <StatChip
+            icon="🏆"
+            value={`${longestStreak}d`}
+            label={i18n._("profile.streak")}
+          />
         </XStack>
 
         <Card elevated>
-          <H3 marginBottom="$2">Recent Achievements</H3>
+          <H3 marginBottom="$2">{i18n._("profile.recentAchievements")}</H3>
           {recentAchievements.length === 0 ? (
             <BodySmall color="$colorSubtitle">
-              Complete sessions to unlock achievements!
+              {i18n._("profile.noAchievements")}
             </BodySmall>
           ) : (
             <YStack gap="$2">
@@ -92,7 +114,7 @@ export default function ProfileScreen() {
                   >
                     <Body fontSize={24}>{achievement.icon}</Body>
                     <YStack flex={1}>
-                      <Label>{achievement.titleKey.split(".").pop()}</Label>
+                      <Label>{i18n._(achievement.titleKey)}</Label>
                       <Caption>+{ua.xpAwarded} XP</Caption>
                     </YStack>
                   </XStack>
@@ -109,14 +131,14 @@ export default function ProfileScreen() {
           <XStack justifyContent="space-between" alignItems="center">
             <XStack alignItems="center" gap="$3">
               <Settings size={20} color="$gray11" />
-              <Label>Settings</Label>
+              <Label>{i18n._("common.settings")}</Label>
             </XStack>
             <ChevronRight size={20} color="$gray9" />
           </XStack>
         </Card>
 
         <OutlineButton onPress={signOut} marginTop="$4">
-          Log Out
+          {i18n._("common.logout")}
         </OutlineButton>
       </YStack>
     </ScrollView>
