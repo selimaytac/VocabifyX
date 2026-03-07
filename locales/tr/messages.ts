@@ -252,4 +252,31 @@ export const messages: Record<string, string> = {
   "notifications.streakTitle": "Seri tehlikede! 🔥",
   "notifications.streakBody":
     "Serinizin sıfırlanmasına izin vermeyin — şimdi çalışın!",
+
+  // Yeniden katılım bildirimi (kullanıcı alımını yarıda bırakınca gönderilir)
+  "notifications.reEngagementTitle": "Geri gel ve tamamla! 📚",
+  "notifications.reEngagementBody":
+    "Öğrenme yolculuğuna başlamak için bu kadar yaklaştın!",
+
+  // Ödeme ekranı
+  "paywall.title": "Premium'u Aç ⭐",
+  "paywall.headlinePersonal": "Öğrenmeye başla, {name}!",
+  "paywall.headlineDefault": "Premium ile tüm özelliklerin kilidini aç",
+  "paywall.feature1": "Sınırsız kart ve quiz oturumları",
+  "paywall.feature2": "Yapay zeka destekli kelime üretimi",
+  "paywall.feature3": "Ayrıntılı ilerleme takibi ve istatistikler",
+  "paywall.feature4": "Seri koruma bildirimleri",
+  "paywall.annualPlan": "Yıllık Plan",
+  "paywall.monthlyPlan": "Aylık Plan",
+  "paywall.perYear": "/ yıl",
+  "paywall.perMonth": "/ ay",
+  "paywall.mostPopular": "En Popüler",
+  "paywall.subscribe": "Şimdi Abone Ol",
+  "paywall.processing": "İşleniyor…",
+  "paywall.restore": "Satın Alımları Geri Yükle",
+  "paywall.noThanks": "Şimdi Değil",
+  "paywall.legalNote":
+    "Abonelik otomatik yenilenir. Ayarlar'dan istediğiniz zaman iptal edebilirsiniz.",
+  "paywall.noOfferings":
+    "Fiyatlandırma mevcut değil. Lütfen daha sonra tekrar deneyin.",
 };

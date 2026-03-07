@@ -1,6 +1,6 @@
 import { useLingui } from "@lingui/react";
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextInput } from "react-native";
 import { XStack, YStack } from "tamagui";
 
@@ -25,6 +25,10 @@ import {
   type PredefinedList,
 } from "@/constants/predefined-lists";
 import { analyticsService } from "@/services/analytics/analytics.service";
+import {
+  cancelReEngagementNotification,
+  scheduleReEngagementNotification,
+} from "@/services/notifications/notifications.service";
 import { useGameStore } from "@/store/gameStore";
 import { useLanguageStore } from "@/store/languageStore";
 import { useListsStore, type VocabWord } from "@/store/listsStore";
@@ -32,13 +36,23 @@ import { useUserStore } from "@/store/userStore";
 
 type OnboardingStep = "welcome" | "language" | "firstList" | "allSet";
 
+const RESUMABLE_STEPS: OnboardingStep[] = ["language", "firstList", "allSet"];
+
+function resolveInitialStep(storedStep: string | null): OnboardingStep {
+  if (
+    storedStep !== null &&
+    (RESUMABLE_STEPS as string[]).includes(storedStep)
+  ) {
+    return storedStep as OnboardingStep;
+  }
+  return "welcome";
+}
+
 export default function OnboardingScreen() {
   const { i18n } = useLingui();
-  const [step, setStep] = useState<OnboardingStep>("welcome");
-  const [name, setName] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<ListCategory>("all");
-  const [selectedList, setSelectedList] = useState<PredefinedList | null>(null);
 
+  const storedStep = useUserStore((state) => state.onboardingStep);
+  const setOnboardingStep = useUserStore((state) => state.setOnboardingStep);
   const setHasCompletedOnboarding = useUserStore(
     (state) => state.setHasCompletedOnboarding,
   );
@@ -48,6 +62,18 @@ export default function OnboardingScreen() {
   const addList = useListsStore((state) => state.addList);
   const { incrementStat, checkAndUnlockAchievements } = useGameStore();
   const router = useRouter();
+
+  const [step, setStep] = useState<OnboardingStep>(() =>
+    resolveInitialStep(storedStep),
+  );
+  const [name, setName] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState<ListCategory>("all");
+  const [selectedList, setSelectedList] = useState<PredefinedList | null>(null);
+
+  // Persist the current step so onboarding is resumable on reopen
+  useEffect(() => {
+    setOnboardingStep(step);
+  }, [step, setOnboardingStep]);
 
   const predefinedLists = getPredefinedListsByLocale(locale);
 
@@ -79,6 +105,13 @@ export default function OnboardingScreen() {
         avatarUrl: null,
       });
     }
+    // Schedule a re-engagement notification in case the user abandons here
+    scheduleReEngagementNotification(
+      i18n._("notifications.reEngagementTitle"),
+      i18n._("notifications.reEngagementBody"),
+    ).catch((err) =>
+      console.warn("Re-engagement notification schedule failed:", err),
+    );
     setStep("language");
   };
 
@@ -119,6 +152,11 @@ export default function OnboardingScreen() {
 
   const handleFinish = () => {
     analyticsService.track("onboarding_completed");
+    // Cancel the re-engagement notification – onboarding is now complete
+    cancelReEngagementNotification().catch((err) =>
+      console.warn("Re-engagement notification cancel failed:", err),
+    );
+    setOnboardingStep(null);
     setHasCompletedOnboarding(true);
     router.replace("/(tabs)");
   };

@@ -90,3 +90,28 @@ export async function scheduleReminders(
 export async function cancelAllNotifications(): Promise<void> {
   await Notifications.cancelAllScheduledNotificationsAsync();
 }
+
+export async function scheduleReEngagementNotification(
+  title: string,
+  body: string,
+): Promise<void> {
+  const hasPermission = await requestNotificationPermission();
+  if (!hasPermission) return;
+
+  const fireDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
+
+  await Notifications.scheduleNotificationAsync({
+    identifier: "onboarding-reengagement",
+    content: { title, body },
+    trigger: {
+      type: Notifications.SchedulableTriggerInputTypes.DATE,
+      date: fireDate,
+    },
+  });
+}
+
+export async function cancelReEngagementNotification(): Promise<void> {
+  await Notifications.cancelScheduledNotificationAsync(
+    "onboarding-reengagement",
+  );
+}

@@ -60,6 +60,7 @@ export default function RootLayout() {
             <Stack.Screen name="settings" />
             <Stack.Screen name="list" />
             <Stack.Screen name="achievements" />
+            <Stack.Screen name="paywall" />
           </Stack>
           <AchievementUnlockModal />
           <LevelUpModal />

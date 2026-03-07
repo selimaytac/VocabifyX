@@ -159,16 +159,16 @@ Week 8:     Polish, QA, Submission
 - [ ] Step 3b: AI generation loading → list preview (requires Supabase Edge Function)
 - [ ] Paywall screen (hard gate – requires RevenueCat)
 - [x] Progress dots indicator (4 steps)
-- [ ] Resumable onboarding (pick up where user left off on reopen)
+- [x] Resumable onboarding (pick up where user left off on reopen)
 
 ### Paywall
 - [ ] RevenueCat offerings fetch + display (runtime prices, no hardcoded values)
-- [ ] Custom paywall screen (`app/onboarding/paywall.tsx`)
-- [ ] Personalized headline using user's topic + name
-- [ ] Annual plan pre-selected by default
-- [ ] `useEntitlement` hook integration across gated features
+- [x] Custom paywall screen (`app/paywall.tsx`)
+- [x] Personalized headline using user's topic + name
+- [x] Annual plan pre-selected by default
+- [x] `useEntitlement` hook integration across gated features
 - [ ] Lapsed subscriber paywall (`app/(modals)/paywall.tsx`)
-- [ ] Restore Purchase functionality
+- [x] Restore Purchase functionality
 
 ### Notifications
 - [ ] Expo Notifications permission request (Step 2, with value-framing pre-prompt)
@@ -177,7 +177,7 @@ Week 8:     Polish, QA, Submission
 - [x] Streak protection notification (conditional on streak ≥ 3)
 - [x] Notification settings screen (toggles + time picker)
 - [x] `cancelAllNotifications()` on toggle off
-- [ ] Re-engagement notification for users who abandon mid-onboarding (24h delay)
+- [x] Re-engagement notification for users who abandon mid-onboarding (24h delay)
 
 ---
 
