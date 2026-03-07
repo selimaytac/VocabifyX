@@ -3,8 +3,8 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 import {
   type Achievement,
-  ACHIEVEMENTS,
   type AchievementCondition,
+  ACHIEVEMENTS,
 } from "@/constants/achievements";
 import { getLevelForXP, type LevelDefinition } from "@/constants/levels";
 import { createZustandStorage } from "@/utils/zustand.utils";

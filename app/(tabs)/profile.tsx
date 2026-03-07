@@ -58,11 +58,7 @@ export default function ProfileScreen() {
 
         <XStack gap="$2">
           <StatChip icon="⚡" value={totalXP} label="Total XP" />
-          <StatChip
-            icon="🔥"
-            value={`${currentStreak}d`}
-            label="Streak"
-          />
+          <StatChip icon="🔥" value={`${currentStreak}d`} label="Streak" />
           <StatChip icon="📚" value={lists.length} label="Lists" />
         </XStack>
 
@@ -72,16 +68,8 @@ export default function ProfileScreen() {
             value={stats.sessionsCompleted}
             label="Sessions"
           />
-          <StatChip
-            icon="🎯"
-            value={stats.wordsMastered}
-            label="Mastered"
-          />
-          <StatChip
-            icon="🏆"
-            value={`${longestStreak}d`}
-            label="Best Streak"
-          />
+          <StatChip icon="🎯" value={stats.wordsMastered} label="Mastered" />
+          <StatChip icon="🏆" value={`${longestStreak}d`} label="Best Streak" />
         </XStack>
 
         <Card elevated>

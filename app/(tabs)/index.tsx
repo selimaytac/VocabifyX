@@ -1,9 +1,7 @@
-import { Plus } from "@tamagui/lucide-icons";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
-import { PrimaryButton, SecondaryButton } from "@/components/DesignSystem/Button";
 import { Card } from "@/components/DesignSystem/Card";
 import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
 import { StatChip } from "@/components/DesignSystem/StatChip";
@@ -13,13 +11,12 @@ import {
   Caption,
   H1,
   H3,
-  Label,
 } from "@/components/DesignSystem/Typography";
 import { useGameStore } from "@/store/gameStore";
 import {
   getCompletionPercent,
-  type UserVocabList,
   useListsStore,
+  type UserVocabList,
 } from "@/store/listsStore";
 import { useSessionsStore } from "@/store/sessionsStore";
 import { useUserStore } from "@/store/userStore";
@@ -41,9 +38,7 @@ function ListCard({ list }: { list: UserVocabList }) {
           </YStack>
           <Caption>{completion}%</Caption>
         </XStack>
-        <BodySmall color="$colorSubtitle">
-          {list.words.length} words
-        </BodySmall>
+        <BodySmall color="$colorSubtitle">{list.words.length} words</BodySmall>
       </YStack>
     </Card>
   );
@@ -64,7 +59,7 @@ function EmptyState() {
 export default function HomeScreen() {
   const profile = useUserStore((state) => state.profile);
   const lists = useListsStore((state) => state.lists);
-  const { totalXP, currentStreak } = useGameStore();
+  const { currentStreak } = useGameStore();
   const getSessionsToday = useSessionsStore((state) => state.getSessionsToday);
 
   const [todaySessions] = useState(() => getSessionsToday());
@@ -78,17 +73,9 @@ export default function HomeScreen() {
         <H1>👋 Hello, {displayName}!</H1>
 
         <XStack gap="$2">
-          <StatChip
-            icon="📖"
-            value={todaySessions.length}
-            label="Sessions"
-          />
+          <StatChip icon="📖" value={todaySessions.length} label="Sessions" />
           <StatChip icon="⚡" value={todayXP} label="XP Today" />
-          <StatChip
-            icon="🔥"
-            value={currentStreak}
-            label="Streak"
-          />
+          <StatChip icon="🔥" value={currentStreak} label="Streak" />
         </XStack>
 
         <XStack justifyContent="space-between" alignItems="center">

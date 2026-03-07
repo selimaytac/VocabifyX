@@ -2,8 +2,8 @@ import { YStack } from "tamagui";
 
 import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
 import { BodySmall, Caption } from "@/components/DesignSystem/Typography";
-import { getXPForNextLevel, getLevelDisplayName } from "@/constants/levels";
 import type { LevelDefinition } from "@/constants/levels";
+import { getLevelDisplayName, getXPForNextLevel } from "@/constants/levels";
 
 interface XPBarProps {
   totalXP: number;

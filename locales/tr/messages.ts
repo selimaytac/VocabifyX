@@ -28,8 +28,7 @@ export const messages: Record<string, string> = {
   "home.xpToday": "Bugünkü XP",
   "home.streak": "Seri",
   "home.emptyTitle": "Henüz liste yok",
-  "home.emptySubtitle":
-    "Başlamak için ilk kelime listeni oluştur!",
+  "home.emptySubtitle": "Başlamak için ilk kelime listeni oluştur!",
   "home.createList": "Liste Oluştur",
   "home.flashcards": "Kartlar",
   "home.quiz": "Quiz",

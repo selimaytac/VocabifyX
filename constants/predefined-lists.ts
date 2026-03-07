@@ -416,7 +416,8 @@ export const PREDEFINED_LISTS_EN: PredefinedList[] = [
         id: "w43",
         term: "Methodology",
         translation: "Metodoloji",
-        example: "The methodology section describes how the study was conducted.",
+        example:
+          "The methodology section describes how the study was conducted.",
         difficulty: "intermediate",
         partOfSpeech: "noun",
       },

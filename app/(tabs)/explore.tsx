@@ -2,7 +2,10 @@ import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
-import { PrimaryButton, SecondaryButton } from "@/components/DesignSystem/Button";
+import {
+  PrimaryButton,
+  SecondaryButton,
+} from "@/components/DesignSystem/Button";
 import { Card } from "@/components/DesignSystem/Card";
 import { CategoryChips } from "@/components/DesignSystem/CategoryChip";
 import {
@@ -11,7 +14,6 @@ import {
   Caption,
   H1,
   H3,
-  Label,
 } from "@/components/DesignSystem/Typography";
 import {
   getPredefinedListsByLocale,
@@ -19,9 +21,9 @@ import {
   type ListCategory,
   type PredefinedList,
 } from "@/constants/predefined-lists";
+import { useGameStore } from "@/store/gameStore";
 import { useLanguageStore } from "@/store/languageStore";
 import { useListsStore, type VocabWord } from "@/store/listsStore";
-import { useGameStore } from "@/store/gameStore";
 
 function ExploreListCard({
   list,
@@ -85,8 +87,7 @@ export default function ExploreScreen() {
   const addList = useListsStore((state) => state.addList);
   const hasListFromSource = useListsStore((state) => state.hasListFromSource);
   const { awardXP, incrementStat, checkAndUnlockAchievements } = useGameStore();
-  const [selectedCategory, setSelectedCategory] =
-    useState<ListCategory>("all");
+  const [selectedCategory, setSelectedCategory] = useState<ListCategory>("all");
 
   const predefinedLists = getPredefinedListsByLocale(locale);
 
@@ -145,9 +146,7 @@ export default function ExploreScreen() {
       <YStack padding="$4" gap="$4">
         <YStack>
           <H1>Explore</H1>
-          <Body color="$colorSubtitle">
-            Discover curated vocabulary lists
-          </Body>
+          <Body color="$colorSubtitle">Discover curated vocabulary lists</Body>
         </YStack>
 
         <CategoryChips
