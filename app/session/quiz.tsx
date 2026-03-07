@@ -15,6 +15,7 @@ import {
   H3,
   Label,
 } from "@/components/DesignSystem/Typography";
+import { analyticsService } from "@/services/analytics/analytics.service";
 import { useGameStore } from "@/store/gameStore";
 import { useListsStore, type VocabWord } from "@/store/listsStore";
 import { useSessionsStore } from "@/store/sessionsStore";
@@ -122,6 +123,17 @@ export default function QuizScreen() {
             duration,
           };
           addSession(session);
+
+          analyticsService.track("session_completed", {
+            mode: "quiz",
+            listId: list.id,
+            wordsReviewed: questions.length,
+            correctAnswers: finalCorrect,
+            score: Math.round((finalCorrect / questions.length) * 100),
+            xpEarned,
+            duration,
+            isPerfect,
+          });
 
           router.replace({
             pathname: "/session/summary",

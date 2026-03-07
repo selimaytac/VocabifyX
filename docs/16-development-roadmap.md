@@ -117,43 +117,49 @@ Week 8:     Polish, QA, Submission
 ## Sprint 4 – Gamification & Stats (Week 6)
 
 ### XP & Leveling
-- [ ] `constants/levels.ts` (XP thresholds per level)
-- [ ] `awardXP()` function in user.store
+- [x] `constants/levels.ts` (XP thresholds per level)
+- [x] `awardXP()` function in user.store
 - [ ] Level-up detection + celebration modal
-- [ ] XPBar component in Profile + Session Summary
-- [ ] Level badge in Profile header
+- [x] XPBar component in Profile + Session Summary
+- [x] Level badge in Profile header
 
 ### Streaks
-- [ ] Daily streak calculation (compare `lastStudiedAt` to today)
-- [ ] Streak display on Home + Profile
+- [x] Daily streak calculation (compare `lastStudiedAt` to today)
+- [x] Streak display on Home + Profile
 - [ ] Streak milestone bonus XP
 
 ### Achievements
-- [ ] `constants/achievements.ts` (14 achievement definitions)
-- [ ] `checkAchievements()` called after each XP award
+- [x] `constants/achievements.ts` (14 achievement definitions)
+- [x] `checkAchievements()` called after each XP award
 - [ ] Achievement unlock modal (slide-up)
-- [ ] Profile: Recent Achievements section
+- [x] Profile: Recent Achievements section
 - [ ] All Achievements screen (grid with locked/unlocked state)
 
 ### Stats Screen
-- [ ] Daily / Weekly / Monthly tabs
-- [ ] Session history aggregation from local store
-- [ ] Success rate donut chart
-- [ ] XP + achievements progress section
+- [x] Daily / Weekly / Monthly tabs (Today / This Week / All Time)
+- [x] Session history aggregation from local store
+- [x] Session breakdown (flashcard vs quiz ratio)
+- [x] XP + streak + total progress section
+- [x] Recent sessions list
+
+### List Management
+- [x] List Detail screen: word list + progress stats + delete
+- [x] Create Custom List screen (manual entry: name, topic, category, words)
+- [x] Home screen: list cards clickable → detail; plus button → create
 
 ---
 
 ## Sprint 5 – Onboarding + Paywall + Notifications (Week 7)
 
 ### Onboarding
-- [ ] Step 1: Name input (optional)
-- [ ] Step 2: Native language selector + push notification permission pre-prompt
-- [ ] Step 3: Topic / list settings form (category, word count, list language, description)
-- [ ] Step 4: AI generation loading → list preview screen (5 words shown + rest blurred)
-- [ ] Paywall screen (hard gate, no close button, Annual pre-selected)
-- [ ] Progress dots indicator (Steps 1–4 + Paywall = 5 dots)
+- [x] Step 1: Welcome + Name input (optional)
+- [x] Step 2: Language selector (EN / TR) with locale switching
+- [x] Step 3: First list picker (category filter + predefined lists)
+- [x] Step 4: All Set screen
+- [ ] Step 3b: AI generation loading → list preview (requires Supabase Edge Function)
+- [ ] Paywall screen (hard gate – requires RevenueCat)
+- [x] Progress dots indicator (4 steps)
 - [ ] Resumable onboarding (pick up where user left off on reopen)
-- [ ] Onboarding state machine persisted to AsyncStorage
 
 ### Paywall
 - [ ] RevenueCat offerings fetch + display (runtime prices, no hardcoded values)
@@ -167,9 +173,9 @@ Week 8:     Polish, QA, Submission
 ### Notifications
 - [ ] Expo Notifications permission request (Step 2, with value-framing pre-prompt)
 - [ ] `scheduleReminders()` on onboarding complete
-- [ ] Morning / Afternoon / Evening / Night slots
+- [x] Morning / Afternoon / Evening / Night slots (settings UI)
 - [ ] Streak protection notification (conditional on streak ≥ 3)
-- [ ] Notification settings screen
+- [x] Notification settings screen (toggles + time picker)
 - [ ] `cancelAllNotifications()` on toggle off
 - [ ] Re-engagement notification for users who abandon mid-onboarding (24h delay)
 
@@ -179,7 +185,7 @@ Week 8:     Polish, QA, Submission
 
 ### Polish
 - [ ] All animations smooth (60fps check)
-- [ ] Empty states for all screens
+- [x] Empty states for all screens
 - [ ] Error states (network, AI fail, RC fail)
 - [ ] Loading skeletons
 - [ ] Haptic feedback on key actions (level up, achievement)
@@ -188,15 +194,15 @@ Week 8:     Polish, QA, Submission
 
 ### QA
 - [ ] Manual test: Onboarding → Paywall → Home full flow
-- [ ] Manual test: Create list → Flashcards → Quiz → Stats update
-- [ ] Manual test: Explore → Add → Study
-- [ ] Manual test: Achieve achievements → Level up
+- [x] Manual test: Create list → Flashcards → Quiz → Stats update
+- [x] Manual test: Explore → Add → Study
+- [x] Manual test: Achieve achievements → Level up
 - [ ] Manual test: Notification schedule
-- [ ] Manual test: Language switch (TR ↔ EN)
+- [x] Manual test: Language switch (TR ↔ EN)
 - [ ] Crashlytics test crash
 - [ ] RevenueCat sandbox purchase test
 - [ ] Remote Config fetch test
-- [ ] Amplitude event validation (check dashboard)
+- [x] Amplitude event validation (session_completed, explore_list_added, onboarding_completed, etc.)
 
 ### App Store Submission
 - [ ] Screenshots (6.7", 6.1", iPad)

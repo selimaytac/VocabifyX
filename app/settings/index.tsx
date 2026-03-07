@@ -1,3 +1,4 @@
+import { useLingui } from "@lingui/react";
 import { Bell, ChevronRight, CreditCard, Globe } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
 import { ScrollView } from "react-native";
@@ -27,6 +28,7 @@ function SettingsItem({ icon, label, onPress }: SettingsItemProps) {
 }
 
 export default function SettingsScreen() {
+  const { i18n } = useLingui();
   const router = useRouter();
 
   return (
@@ -34,18 +36,18 @@ export default function SettingsScreen() {
       <YStack padding="$4" gap="$3">
         <SettingsItem
           icon={<CreditCard size={20} color="$gray11" />}
-          label="Manage Subscription"
+          label={i18n._("settings.manageSubscription")}
           onPress={() => router.push("/settings/manage-subscription")}
         />
         <SettingsItem
           icon={<Globe size={20} color="$gray11" />}
-          label="Language"
+          label={i18n._("settings.language")}
           onPress={() => router.push("/settings/language")}
         />
         <SettingsItem
           icon={<Bell size={20} color="$gray11" />}
-          label="Notifications"
-          onPress={() => {}}
+          label={i18n._("settings.notifications")}
+          onPress={() => router.push("/settings/notifications")}
         />
       </YStack>
     </ScrollView>

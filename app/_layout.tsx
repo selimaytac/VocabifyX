@@ -56,6 +56,7 @@ export default function RootLayout() {
             <Stack.Screen name="(tabs)" />
             <Stack.Screen name="session" />
             <Stack.Screen name="settings" />
+            <Stack.Screen name="list" />
           </Stack>
           <StatusBar style="auto" />
         </QueryClientProvider>
