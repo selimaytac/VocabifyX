@@ -226,4 +226,30 @@ export const messages: Record<string, string> = {
 
   // List detail not found
   "listDetail.notFound": "List not found.",
+
+  // Achievement modal
+  "achievement.unlocked": "Achievement Unlocked! 🏆",
+  "achievement.awesome": "Awesome!",
+  "achievement.moreUnlocked": "+{count} more unlocked",
+
+  // All achievements screen
+  "achievements.title": "Achievements",
+  "achievements.unlocked": "unlocked",
+  "achievements.locked": "Keep going to unlock",
+
+  // Level up modal
+  "levelUp.title": "Level Up! 🎉",
+  "levelUp.congratulations": "Congratulations!",
+  "levelUp.subtitle": "You've reached a new level. Keep it up!",
+  "levelUp.keepLearning": "Keep Learning!",
+
+  // Profile view all
+  "profile.viewAll": "View All",
+
+  // Notification scheduling
+  "notifications.types": "Notification Types",
+  "notifications.reminderTitle": "Time to study! 📚",
+  "notifications.reminderBody": "Keep your streak going — open VocabifyX now.",
+  "notifications.streakTitle": "Streak at risk! 🔥",
+  "notifications.streakBody": "Don't let your streak reset — study now!",
 };

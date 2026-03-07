@@ -119,21 +119,21 @@ Week 8:     Polish, QA, Submission
 ### XP & Leveling
 - [x] `constants/levels.ts` (XP thresholds per level)
 - [x] `awardXP()` function in user.store
-- [ ] Level-up detection + celebration modal
+- [x] Level-up detection + celebration modal
 - [x] XPBar component in Profile + Session Summary
 - [x] Level badge in Profile header
 
 ### Streaks
 - [x] Daily streak calculation (compare `lastStudiedAt` to today)
 - [x] Streak display on Home + Profile
-- [ ] Streak milestone bonus XP
+- [x] Streak milestone bonus XP
 
 ### Achievements
 - [x] `constants/achievements.ts` (14 achievement definitions)
 - [x] `checkAchievements()` called after each XP award
-- [ ] Achievement unlock modal (slide-up)
+- [x] Achievement unlock modal (slide-up)
 - [x] Profile: Recent Achievements section
-- [ ] All Achievements screen (grid with locked/unlocked state)
+- [x] All Achievements screen (grid with locked/unlocked state)
 
 ### Stats Screen
 - [x] Daily / Weekly / Monthly tabs (Today / This Week / All Time)
@@ -172,11 +172,11 @@ Week 8:     Polish, QA, Submission
 
 ### Notifications
 - [ ] Expo Notifications permission request (Step 2, with value-framing pre-prompt)
-- [ ] `scheduleReminders()` on onboarding complete
+- [x] `scheduleReminders()` on onboarding complete
 - [x] Morning / Afternoon / Evening / Night slots (settings UI)
-- [ ] Streak protection notification (conditional on streak ≥ 3)
+- [x] Streak protection notification (conditional on streak ≥ 3)
 - [x] Notification settings screen (toggles + time picker)
-- [ ] `cancelAllNotifications()` on toggle off
+- [x] `cancelAllNotifications()` on toggle off
 - [ ] Re-engagement notification for users who abandon mid-onboarding (24h delay)
 
 ---

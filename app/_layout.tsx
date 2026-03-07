@@ -8,6 +8,8 @@ import { useEffect } from "react";
 import { useColorScheme } from "react-native";
 import { TamaguiProvider } from "tamagui";
 
+import { AchievementUnlockModal } from "@/components/AchievementUnlockModal";
+import { LevelUpModal } from "@/components/LevelUpModal";
 import { messages as enMessages } from "@/locales/en/messages";
 import { messages as trMessages } from "@/locales/tr/messages";
 import { analyticsService } from "@/services/analytics/analytics.service";
@@ -57,7 +59,10 @@ export default function RootLayout() {
             <Stack.Screen name="session" />
             <Stack.Screen name="settings" />
             <Stack.Screen name="list" />
+            <Stack.Screen name="achievements" />
           </Stack>
+          <AchievementUnlockModal />
+          <LevelUpModal />
           <StatusBar style="auto" />
         </QueryClientProvider>
       </TamaguiProvider>

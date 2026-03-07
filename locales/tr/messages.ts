@@ -225,4 +225,31 @@ export const messages: Record<string, string> = {
 
   // Liste detay bulunamadı
   "listDetail.notFound": "Liste bulunamadı.",
+
+  // Başarı modalı
+  "achievement.unlocked": "Başarı Açıldı! 🏆",
+  "achievement.awesome": "Harika!",
+  "achievement.moreUnlocked": "+{count} daha açıldı",
+
+  // Tüm başarılar ekranı
+  "achievements.title": "Başarılar",
+  "achievements.unlocked": "açıldı",
+  "achievements.locked": "Devam et, açmak için",
+
+  // Seviye atlama modalı
+  "levelUp.title": "Seviye Atladın! 🎉",
+  "levelUp.congratulations": "Tebrikler!",
+  "levelUp.subtitle": "Yeni bir seviyeye ulaştın. Devam et!",
+  "levelUp.keepLearning": "Öğrenmeye Devam Et!",
+
+  // Profil tümünü gör
+  "profile.viewAll": "Tümünü Gör",
+
+  // Bildirim planlama
+  "notifications.types": "Bildirim Türleri",
+  "notifications.reminderTitle": "Çalışma zamanı! 📚",
+  "notifications.reminderBody": "Serinizi sürdürün — şimdi VocabifyX'i açın.",
+  "notifications.streakTitle": "Seri tehlikede! 🔥",
+  "notifications.streakBody":
+    "Serinizin sıfırlanmasına izin vermeyin — şimdi çalışın!",
 };
