@@ -22,6 +22,7 @@ import {
   type ListCategory,
   type PredefinedList,
 } from "@/constants/predefined-lists";
+import { analyticsService } from "@/services/analytics/analytics.service";
 import { useGameStore } from "@/store/gameStore";
 import { useLanguageStore } from "@/store/languageStore";
 import { useListsStore, type VocabWord } from "@/store/listsStore";
@@ -134,6 +135,11 @@ export default function ExploreScreen() {
     awardXP(5);
     incrementStat("exploreAdded");
     checkAndUnlockAchievements();
+    analyticsService.track("explore_list_added", {
+      listId: predefined.id,
+      listName: predefined.name,
+      category: predefined.topicCategory,
+    });
   };
 
   return (

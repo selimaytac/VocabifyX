@@ -1,4 +1,4 @@
-import { Compass, Home, User } from "@tamagui/lucide-icons";
+import { BarChart2, Compass, Home, User } from "@tamagui/lucide-icons";
 import { Tabs } from "expo-router";
 import { useTheme } from "tamagui";
 
@@ -33,6 +33,15 @@ export default function TabLayout() {
           title: "Explore",
           tabBarIcon: ({ color, size }) => (
             <Compass color={color} size={size} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="stats"
+        options={{
+          title: "Stats",
+          tabBarIcon: ({ color, size }) => (
+            <BarChart2 color={color} size={size} />
           ),
         }}
       />
