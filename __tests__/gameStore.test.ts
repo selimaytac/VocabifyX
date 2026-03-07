@@ -20,6 +20,39 @@ describe("gameStore", () => {
       useGameStore.getState().awardXP(20);
       expect(useGameStore.getState().totalXP).toBe(30);
     });
+
+    it("should detect level-up and set pendingLevelUp", () => {
+      // Level 2 starts at 100 XP
+      useGameStore.getState().awardXP(100);
+      expect(useGameStore.getState().pendingLevelUp).not.toBeNull();
+      expect(useGameStore.getState().pendingLevelUp?.level).toBe(2);
+    });
+
+    it("should not set pendingLevelUp when no level change", () => {
+      useGameStore.getState().awardXP(10);
+      expect(useGameStore.getState().pendingLevelUp).toBeNull();
+    });
+  });
+
+  describe("clearPendingLevelUp", () => {
+    it("should clear pendingLevelUp", () => {
+      useGameStore.getState().awardXP(100);
+      expect(useGameStore.getState().pendingLevelUp).not.toBeNull();
+      useGameStore.getState().clearPendingLevelUp();
+      expect(useGameStore.getState().pendingLevelUp).toBeNull();
+    });
+  });
+
+  describe("clearPendingAchievements", () => {
+    it("should clear pendingAchievements after unlock", () => {
+      useGameStore.getState().incrementStat("listsCreated");
+      useGameStore.getState().checkAndUnlockAchievements();
+      expect(
+        useGameStore.getState().pendingAchievements.length,
+      ).toBeGreaterThan(0);
+      useGameStore.getState().clearPendingAchievements();
+      expect(useGameStore.getState().pendingAchievements).toHaveLength(0);
+    });
   });
 
   describe("updateStreak", () => {
@@ -65,6 +98,54 @@ describe("gameStore", () => {
       useGameStore.getState().updateStreak();
       expect(useGameStore.getState().currentStreak).toBe(4);
       expect(useGameStore.getState().longestStreak).toBe(4);
+    });
+
+    it("should award bonus XP on 3-day streak milestone", () => {
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+
+      useGameStore.setState({
+        currentStreak: 2,
+        longestStreak: 2,
+        lastStudiedAt: yesterday.toISOString(),
+        totalXP: 0,
+      });
+
+      useGameStore.getState().updateStreak();
+      expect(useGameStore.getState().currentStreak).toBe(3);
+      expect(useGameStore.getState().totalXP).toBe(15);
+    });
+
+    it("should award bonus XP on 7-day streak milestone", () => {
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+
+      useGameStore.setState({
+        currentStreak: 6,
+        longestStreak: 6,
+        lastStudiedAt: yesterday.toISOString(),
+        totalXP: 0,
+      });
+
+      useGameStore.getState().updateStreak();
+      expect(useGameStore.getState().currentStreak).toBe(7);
+      expect(useGameStore.getState().totalXP).toBe(30);
+    });
+
+    it("should not award bonus XP on non-milestone streaks", () => {
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+
+      useGameStore.setState({
+        currentStreak: 4,
+        longestStreak: 4,
+        lastStudiedAt: yesterday.toISOString(),
+        totalXP: 0,
+      });
+
+      useGameStore.getState().updateStreak();
+      expect(useGameStore.getState().currentStreak).toBe(5);
+      expect(useGameStore.getState().totalXP).toBe(0);
     });
   });
 
@@ -132,6 +213,24 @@ describe("gameStore", () => {
       expect(newbie).toBeDefined();
       expect(newbie?.unlockedAt).toBeDefined();
       expect(newbie?.xpAwarded).toBe(10);
+    });
+
+    it("should populate pendingAchievements when achievements are unlocked", () => {
+      useGameStore.getState().incrementStat("listsCreated");
+      useGameStore.getState().checkAndUnlockAchievements();
+      expect(
+        useGameStore.getState().pendingAchievements.length,
+      ).toBeGreaterThan(0);
+      expect(
+        useGameStore
+          .getState()
+          .pendingAchievements.some((a) => a.id === "newbie"),
+      ).toBe(true);
+    });
+
+    it("should not populate pendingAchievements when nothing is unlocked", () => {
+      useGameStore.getState().checkAndUnlockAchievements();
+      expect(useGameStore.getState().pendingAchievements).toHaveLength(0);
     });
   });
 

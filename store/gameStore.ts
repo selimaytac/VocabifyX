@@ -24,6 +24,12 @@ export interface GameStats {
   quizPerfectScores: number;
 }
 
+const STREAK_MILESTONE_XP: Record<number, number> = {
+  3: 15,
+  7: 30,
+  30: 100,
+};
+
 interface GameState {
   totalXP: number;
   currentStreak: number;
@@ -31,12 +37,16 @@ interface GameState {
   lastStudiedAt: string | null;
   achievements: UserAchievement[];
   stats: GameStats;
+  pendingAchievements: Achievement[];
+  pendingLevelUp: LevelDefinition | null;
 
   awardXP: (amount: number) => void;
   updateStreak: () => void;
   incrementStat: (stat: keyof GameStats, amount?: number) => void;
   checkAndUnlockAchievements: () => Achievement[];
   getCurrentLevel: () => LevelDefinition;
+  clearPendingAchievements: () => void;
+  clearPendingLevelUp: () => void;
   reset: () => void;
 }
 
@@ -103,6 +113,8 @@ const initialState = {
     exploreAdded: 0,
     quizPerfectScores: 0,
   } as GameStats,
+  pendingAchievements: [] as Achievement[],
+  pendingLevelUp: null as LevelDefinition | null,
 };
 
 export const useGameStore = create<GameState>()(
@@ -110,10 +122,20 @@ export const useGameStore = create<GameState>()(
     (set, get) => ({
       ...initialState,
 
-      awardXP: (amount) =>
-        set((state) => ({
-          totalXP: state.totalXP + amount,
-        })),
+      awardXP: (amount) => {
+        const state = get();
+        const oldLevel = getLevelForXP(state.totalXP);
+        const newXP = state.totalXP + amount;
+        const newLevel = getLevelForXP(newXP);
+        const leveledUp = newLevel.level > oldLevel.level;
+        set((s) => ({
+          totalXP: s.totalXP + amount,
+          pendingLevelUp:
+            leveledUp && s.pendingLevelUp === null
+              ? newLevel
+              : s.pendingLevelUp,
+        }));
+      },
 
       updateStreak: () =>
         set((state) => {
@@ -125,10 +147,12 @@ export const useGameStore = create<GameState>()(
 
           if (state.lastStudiedAt && isYesterday(state.lastStudiedAt)) {
             const newStreak = state.currentStreak + 1;
+            const bonusXP = STREAK_MILESTONE_XP[newStreak] ?? 0;
             return {
               currentStreak: newStreak,
               longestStreak: Math.max(newStreak, state.longestStreak),
               lastStudiedAt: now,
+              totalXP: state.totalXP + bonusXP,
             };
           }
 
@@ -186,6 +210,10 @@ export const useGameStore = create<GameState>()(
           set((state) => ({
             achievements: [...state.achievements, ...newAchievementRecords],
             totalXP: state.totalXP + totalBonusXP,
+            pendingAchievements: [
+              ...state.pendingAchievements,
+              ...newlyUnlocked,
+            ],
           }));
         }
 
@@ -195,6 +223,10 @@ export const useGameStore = create<GameState>()(
       getCurrentLevel: () => {
         return getLevelForXP(get().totalXP);
       },
+
+      clearPendingAchievements: () => set({ pendingAchievements: [] }),
+
+      clearPendingLevelUp: () => set({ pendingLevelUp: null }),
 
       reset: () => set(initialState),
     }),

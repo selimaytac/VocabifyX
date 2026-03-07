@@ -95,7 +95,19 @@ export default function ProfileScreen() {
         </XStack>
 
         <Card elevated>
-          <H3 marginBottom="$2">{i18n._("profile.recentAchievements")}</H3>
+          <XStack
+            justifyContent="space-between"
+            alignItems="center"
+            marginBottom="$2"
+          >
+            <H3>{i18n._("profile.recentAchievements")}</H3>
+            <XStack
+              onPress={() => router.push("/achievements")}
+              pressStyle={{ opacity: 0.7 }}
+            >
+              <Caption color="$blue10">{i18n._("profile.viewAll")}</Caption>
+            </XStack>
+          </XStack>
           {recentAchievements.length === 0 ? (
             <BodySmall color="$colorSubtitle">
               {i18n._("profile.noAchievements")}
