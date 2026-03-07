@@ -1,3 +1,4 @@
+import { useLingui } from "@lingui/react";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { TextInput } from "react-native";
@@ -32,6 +33,7 @@ import { useUserStore } from "@/store/userStore";
 type OnboardingStep = "welcome" | "language" | "firstList" | "allSet";
 
 export default function OnboardingScreen() {
+  const { i18n } = useLingui();
   const [step, setStep] = useState<OnboardingStep>("welcome");
   const [name, setName] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<ListCategory>("all");
@@ -51,7 +53,7 @@ export default function OnboardingScreen() {
 
   const nonAllCategories = LIST_CATEGORIES.map((c) => ({
     key: c.key,
-    label: CATEGORY_LABELS_EN[c.key] ?? c.key,
+    label: i18n._(c.labelKey),
   }));
 
   const filteredLists =
@@ -153,13 +155,13 @@ export default function OnboardingScreen() {
           <YStack gap="$5">
             <YStack gap="$3" alignItems="center">
               <Body fontSize={64}>🎓</Body>
-              <H2 textAlign="center">Welcome to VocabifyX!</H2>
+              <H2 textAlign="center">{i18n._("onboarding.welcome")}</H2>
               <BodySmall color="$colorSubtitle" textAlign="center">
-                Learn vocabulary through smart flashcards and quizzes.
+                {i18n._("onboarding.welcomeSubtitle")}
               </BodySmall>
             </YStack>
             <YStack gap="$2">
-              <Label>What&apos;s your name?</Label>
+              <Label>{i18n._("onboarding.yourName")}</Label>
               <YStack
                 borderWidth={1}
                 borderColor="$borderColor"
@@ -170,7 +172,7 @@ export default function OnboardingScreen() {
                 <TextInput
                   value={name}
                   onChangeText={setName}
-                  placeholder="Enter your name (optional)"
+                  placeholder={i18n._("onboarding.namePlaceholder")}
                   style={{ fontSize: 16 }}
                 />
               </YStack>
@@ -181,7 +183,7 @@ export default function OnboardingScreen() {
         {step === "language" && (
           <YStack gap="$5" alignItems="center">
             <Body fontSize={48}>🌍</Body>
-            <H2 textAlign="center">Choose your language</H2>
+            <H2 textAlign="center">{i18n._("onboarding.chooseLanguage")}</H2>
             <YStack width="100%" gap="$3">
               <Card
                 pressStyle={{ opacity: 0.8, borderColor: "$blue10" }}
@@ -192,9 +194,9 @@ export default function OnboardingScreen() {
                 <XStack alignItems="center" gap="$3">
                   <Body fontSize={32}>🇬🇧</Body>
                   <YStack>
-                    <H3>English</H3>
+                    <H3>{i18n._("onboarding.english")}</H3>
                     <Caption color="$colorSubtitle">
-                      Interface in English
+                      {i18n._("onboarding.englishDesc")}
                     </Caption>
                   </YStack>
                 </XStack>
@@ -208,9 +210,9 @@ export default function OnboardingScreen() {
                 <XStack alignItems="center" gap="$3">
                   <Body fontSize={32}>🇹🇷</Body>
                   <YStack>
-                    <H3>Türkçe</H3>
+                    <H3>{i18n._("onboarding.turkish")}</H3>
                     <Caption color="$colorSubtitle">
-                      Arayüz Türkçe olsun
+                      {i18n._("onboarding.turkishDesc")}
                     </Caption>
                   </YStack>
                 </XStack>
@@ -222,9 +224,9 @@ export default function OnboardingScreen() {
         {step === "firstList" && (
           <YStack gap="$3">
             <YStack gap="$1">
-              <H2>Start with a list 📚</H2>
+              <H2>{i18n._("onboarding.firstList")}</H2>
               <BodySmall color="$colorSubtitle">
-                Pick a vocabulary pack to begin your journey.
+                {i18n._("onboarding.firstListSubtitle")}
               </BodySmall>
             </YStack>
             <CategoryChips
@@ -255,7 +257,7 @@ export default function OnboardingScreen() {
                     <YStack flex={1}>
                       <Label numberOfLines={1}>{list.name}</Label>
                       <Caption color="$colorSubtitle">
-                        {list.words.length} words
+                        {list.words.length} {i18n._("createList.wordCount")}
                       </Caption>
                     </YStack>
                     {selectedList?.id === list.id && (
@@ -271,11 +273,11 @@ export default function OnboardingScreen() {
         {step === "allSet" && (
           <YStack gap="$4" alignItems="center">
             <Body fontSize={72}>🚀</Body>
-            <H2 textAlign="center">You&apos;re all set!</H2>
+            <H2 textAlign="center">{i18n._("onboarding.allSet")}</H2>
             <BodySmall color="$colorSubtitle" textAlign="center">
               {selectedList
-                ? `Your first list "${selectedList.name}" is ready. Let's start learning!`
-                : "Your account is ready. Let's start learning!"}
+                ? i18n._("onboarding.allSetWithList")
+                : i18n._("onboarding.allSetSubtitle")}
             </BodySmall>
           </YStack>
         )}
@@ -284,38 +286,33 @@ export default function OnboardingScreen() {
       {/* Bottom actions */}
       <YStack gap="$3" paddingBottom="$4">
         {step === "welcome" && (
-          <PrimaryButton onPress={handleWelcomeNext}>Next →</PrimaryButton>
+          <PrimaryButton onPress={handleWelcomeNext}>
+            {i18n._("onboarding.next")} →
+          </PrimaryButton>
         )}
         {step === "language" && (
           <SecondaryButton onPress={() => setStep("firstList")}>
-            Skip
+            {i18n._("onboarding.skip")}
           </SecondaryButton>
         )}
         {step === "firstList" && (
           <>
             <PrimaryButton onPress={handleAddList} disabled={!selectedList}>
               {selectedList
-                ? `Add "${selectedList.name}" & Continue`
-                : "Select a list to continue"}
+                ? i18n._("onboarding.addListAndStart")
+                : i18n._("onboarding.selectListFirst")}
             </PrimaryButton>
             <SecondaryButton onPress={() => setStep("allSet")}>
-              Skip for now
+              {i18n._("onboarding.skipList")}
             </SecondaryButton>
           </>
         )}
         {step === "allSet" && (
-          <PrimaryButton onPress={handleFinish}>Get Started 🎉</PrimaryButton>
+          <PrimaryButton onPress={handleFinish}>
+            {i18n._("onboarding.getStarted")} 🎉
+          </PrimaryButton>
         )}
       </YStack>
     </YStack>
   );
 }
-
-const CATEGORY_LABELS_EN: Record<string, string> = {
-  all: "All",
-  travel: "Travel",
-  business: "Business",
-  technology: "Technology",
-  daily_life: "Daily Life",
-  academic: "Academic",
-};

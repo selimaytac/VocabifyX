@@ -181,15 +181,20 @@ export const messages: Record<string, string> = {
   "onboarding.namePlaceholder": "Adınızı girin (isteğe bağlı)",
   "onboarding.chooseLanguage": "Arayüz dilinizi seçin",
   "onboarding.english": "🇬🇧 İngilizce",
+  "onboarding.englishDesc": "Arayüz İngilizce olsun",
   "onboarding.turkish": "🇹🇷 Türkçe",
+  "onboarding.turkishDesc": "Arayüz Türkçe olsun",
   "onboarding.firstList": "Bir listeyle başlayın",
   "onboarding.firstListSubtitle":
     "Yolculuğunuza başlamak için bir kelime paketi seçin.",
   "onboarding.pickCategory": "Kategoriye göre gözat",
   "onboarding.addAndStart": "Ekle ve Başla",
+  "onboarding.addListAndStart": "Ekle ve Devam Et",
+  "onboarding.selectListFirst": "Devam etmek için bir liste seçin",
   "onboarding.skipList": "Şimdilik atla",
   "onboarding.allSet": "Hazırsınız! 🚀",
-  "onboarding.allSetSubtitle": "İlk listeniz hazır. Öğrenmeye başlayalım!",
+  "onboarding.allSetSubtitle": "Hesabınız hazır. Öğrenmeye başlayalım!",
+  "onboarding.allSetWithList": "İlk listeniz hazır. Öğrenmeye başlayalım!",
 
   // Bildirim ayarları
   "notifications.title": "Bildirimler",
@@ -208,6 +213,16 @@ export const messages: Record<string, string> = {
   "notifications.permissionTitle": "Bildirimleri Etkinleştir",
   "notifications.permissionDesc":
     "VocabifyX'in size çalışma hatırlatıcıları göndermesine izin verin",
+  "notifications.permissionNote":
+    "Bildirim planlaması cihaz izni gerektirir. Ayarlar yerel olarak kaydedilir ve izin verildiğinde uygulanır.",
   "notifications.enable": "Etkinleştir",
   "notifications.notNow": "Şimdi Değil",
+
+  // İstatistik bölüm başlıkları
+  "stats.sessionBreakdown": "Oturum Dağılımı",
+  "stats.allTimeTitle": "🏆 Tüm Zamanlar",
+  "stats.streakTitle": "🔥 Seri",
+
+  // Liste detay bulunamadı
+  "listDetail.notFound": "Liste bulunamadı.",
 };

@@ -182,15 +182,20 @@ export const messages: Record<string, string> = {
   "onboarding.namePlaceholder": "Enter your name (optional)",
   "onboarding.chooseLanguage": "Choose your interface language",
   "onboarding.english": "🇬🇧 English",
+  "onboarding.englishDesc": "Interface in English",
   "onboarding.turkish": "🇹🇷 Turkish",
+  "onboarding.turkishDesc": "Interface in Turkish",
   "onboarding.firstList": "Start with a list",
   "onboarding.firstListSubtitle":
     "Pick a vocabulary pack to begin your journey.",
   "onboarding.pickCategory": "Browse by category",
   "onboarding.addAndStart": "Add & Get Started",
+  "onboarding.addListAndStart": "Add & Continue",
+  "onboarding.selectListFirst": "Select a list to continue",
   "onboarding.skipList": "Skip for now",
   "onboarding.allSet": "You're all set! 🚀",
-  "onboarding.allSetSubtitle":
+  "onboarding.allSetSubtitle": "Your account is ready. Let's start learning!",
+  "onboarding.allSetWithList":
     "Your first list is ready. Let's start learning!",
 
   // Notification settings
@@ -209,6 +214,16 @@ export const messages: Record<string, string> = {
   "notifications.night": "Night (9:30 PM)",
   "notifications.permissionTitle": "Enable Notifications",
   "notifications.permissionDesc": "Allow VocabifyX to send you study reminders",
+  "notifications.permissionNote":
+    "Notification scheduling requires device permissions. Settings are saved locally and will apply when permissions are granted.",
   "notifications.enable": "Enable",
   "notifications.notNow": "Not Now",
+
+  // Stats section headings
+  "stats.sessionBreakdown": "Session Breakdown",
+  "stats.allTimeTitle": "🏆 All Time",
+  "stats.streakTitle": "🔥 Streak",
+
+  // List detail not found
+  "listDetail.notFound": "List not found.",
 };

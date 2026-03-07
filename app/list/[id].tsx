@@ -103,7 +103,7 @@ export default function ListDetailScreen() {
   if (!list) {
     return (
       <YStack flex={1} justifyContent="center" alignItems="center" padding="$4">
-        <Body>List not found.</Body>
+        <Body>{i18n._("listDetail.notFound")}</Body>
       </YStack>
     );
   }

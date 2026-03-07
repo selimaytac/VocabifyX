@@ -151,8 +151,7 @@ export default function NotificationsScreen() {
               💡
             </Body>
             <BodySmall color="$colorSubtitle" textAlign="center">
-              Notification scheduling requires device permissions. Settings are
-              saved locally and will apply when permissions are granted.
+              {i18n._("notifications.permissionNote")}
             </BodySmall>
           </YStack>
         </Card>

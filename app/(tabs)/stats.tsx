@@ -185,7 +185,7 @@ export default function StatsScreen() {
 
             {totalPeriodSessions > 0 && (
               <Card elevated>
-                <H3 marginBottom="$3">Session Breakdown</H3>
+                <H3 marginBottom="$3">{i18n._("stats.sessionBreakdown")}</H3>
                 <YStack gap="$3">
                   <YStack gap="$1">
                     <XStack justifyContent="space-between">
@@ -211,7 +211,7 @@ export default function StatsScreen() {
         )}
 
         <Card elevated>
-          <H3 marginBottom="$3">🏆 All Time</H3>
+          <H3 marginBottom="$3">{i18n._("stats.allTimeTitle")}</H3>
           <XStack gap="$2">
             <StatChip
               icon="⚡"
@@ -232,7 +232,7 @@ export default function StatsScreen() {
         </Card>
 
         <Card elevated>
-          <H3 marginBottom="$3">🔥 Streak</H3>
+          <H3 marginBottom="$3">{i18n._("stats.streakTitle")}</H3>
           <XStack gap="$2">
             <StatChip
               icon="🔥"
