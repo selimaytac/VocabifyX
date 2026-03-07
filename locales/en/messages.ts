@@ -252,4 +252,30 @@ export const messages: Record<string, string> = {
   "notifications.reminderBody": "Keep your streak going — open VocabifyX now.",
   "notifications.streakTitle": "Streak at risk! 🔥",
   "notifications.streakBody": "Don't let your streak reset — study now!",
+
+  // Re-engagement notification (sent when user abandons onboarding)
+  "notifications.reEngagementTitle": "Come back and finish! 📚",
+  "notifications.reEngagementBody":
+    "You're so close to starting your learning journey!",
+
+  // Paywall screen
+  "paywall.title": "Unlock Premium ⭐",
+  "paywall.headlinePersonal": "Start learning, {name}!",
+  "paywall.headlineDefault": "Unlock all features with Premium",
+  "paywall.feature1": "Unlimited flashcard & quiz sessions",
+  "paywall.feature2": "AI-powered vocabulary generation",
+  "paywall.feature3": "Detailed progress tracking & stats",
+  "paywall.feature4": "Streak protection notifications",
+  "paywall.annualPlan": "Annual Plan",
+  "paywall.monthlyPlan": "Monthly Plan",
+  "paywall.perYear": "/ year",
+  "paywall.perMonth": "/ month",
+  "paywall.mostPopular": "Most Popular",
+  "paywall.subscribe": "Subscribe Now",
+  "paywall.processing": "Processing…",
+  "paywall.restore": "Restore Purchases",
+  "paywall.noThanks": "Not Now",
+  "paywall.legalNote":
+    "Subscription renews automatically. Cancel anytime in Settings.",
+  "paywall.noOfferings": "Pricing unavailable. Please try again later.",
 };

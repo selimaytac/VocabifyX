@@ -13,14 +13,18 @@ interface UserProfile {
 interface UserState {
   profile: UserProfile | null;
   hasCompletedOnboarding: boolean;
+  /** Persists the current onboarding step so the flow is resumable on reopen. */
+  onboardingStep: string | null;
   setProfile: (profile: UserProfile | null) => void;
   setHasCompletedOnboarding: (value: boolean) => void;
+  setOnboardingStep: (step: string | null) => void;
   reset: () => void;
 }
 
 const initialState = {
   profile: null,
   hasCompletedOnboarding: false,
+  onboardingStep: null,
 };
 
 export const useUserStore = create<UserState>()(
@@ -30,6 +34,7 @@ export const useUserStore = create<UserState>()(
       setProfile: (profile) => set({ profile }),
       setHasCompletedOnboarding: (value) =>
         set({ hasCompletedOnboarding: value }),
+      setOnboardingStep: (step) => set({ onboardingStep: step }),
       reset: () => set(initialState),
     }),
     {
