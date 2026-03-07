@@ -87,4 +87,27 @@ export const messages: Record<string, string> = {
   "achievement.silverReached.desc": "Gümüş seviyesine ulaş",
   "achievement.goldReached.title": "Altın Zeka",
   "achievement.goldReached.desc": "Altın seviyesine ulaş",
+
+  // Oturum ekranları (flashcard & quiz)
+  "session.tapToReveal": "Görmek için dokun",
+  "session.term": "Kelime",
+  "session.translation": "Çeviri",
+  "session.knewIt": "Biliyordum!",
+  "session.didntKnow": "Bilmiyordum",
+  "session.noWords": "Bu listede henüz kelime yok.",
+  "session.notEnoughWords": "Quiz için en az 2 kelime gereklidir.",
+  "session.whatIsTranslation": "Çevirisi nedir?",
+
+  // Oturum özeti
+  "session.summary.title": "Oturum Tamamlandı!",
+  "session.summary.flashcardSubtitle": "Kartlarda harika iş çıkardın!",
+  "session.summary.quizSubtitle": "Quizde harika iş çıkardın!",
+  "session.summary.correct": "Doğru",
+  "session.summary.score": "Puan",
+  "session.summary.xpEarned": "Kazanılan XP",
+  "session.summary.duration": "Süre",
+  "session.summary.perfectScore": "Mükemmel Puan! Harika iş!",
+  "session.summary.tryQuiz": "🧠 Quiz Dene",
+  "session.summary.tryFlashcards": "🃏 Kartları Dene",
+  "session.summary.backToHome": "Ana Sayfaya Dön",
 };

@@ -1,8 +1,13 @@
 import { useLingui } from "@lingui/react";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
+import {
+  PrimaryButton,
+  SecondaryButton,
+} from "@/components/DesignSystem/Button";
 import { Card } from "@/components/DesignSystem/Card";
 import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
 import { StatChip } from "@/components/DesignSystem/StatChip";
@@ -25,10 +30,15 @@ import { useUserStore } from "@/store/userStore";
 function ListCard({
   list,
   wordsLabel,
+  flashcardsLabel,
+  quizLabel,
 }: {
   list: UserVocabList;
   wordsLabel: string;
+  flashcardsLabel: string;
+  quizLabel: string;
 }) {
+  const router = useRouter();
   const completion = getCompletionPercent(list);
 
   return (
@@ -48,6 +58,32 @@ function ListCard({
         <BodySmall color="$colorSubtitle">
           {list.words.length} {wordsLabel}
         </BodySmall>
+        <XStack gap="$2" marginTop="$1">
+          <PrimaryButton
+            flex={1}
+            size="$3"
+            onPress={() =>
+              router.push({
+                pathname: "/session/flashcard",
+                params: { listId: list.id },
+              })
+            }
+          >
+            🃏 {flashcardsLabel}
+          </PrimaryButton>
+          <SecondaryButton
+            flex={1}
+            size="$3"
+            onPress={() =>
+              router.push({
+                pathname: "/session/quiz",
+                params: { listId: list.id },
+              })
+            }
+          >
+            🧠 {quizLabel}
+          </SecondaryButton>
+        </XStack>
       </YStack>
     </Card>
   );
@@ -105,6 +141,8 @@ export default function HomeScreen() {
               key={list.id}
               list={list}
               wordsLabel={i18n._("home.words")}
+              flashcardsLabel={i18n._("home.flashcards")}
+              quizLabel={i18n._("home.quiz")}
             />
           ))
         )}
