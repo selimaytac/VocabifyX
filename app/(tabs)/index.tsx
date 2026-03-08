@@ -1,12 +1,11 @@
 import { useLingui } from "@lingui/react";
 import { Plus } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useMemo } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
 import { PrimaryButton } from "@/components/DesignSystem/Button";
-import { Card } from "@/components/DesignSystem/Card";
 import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
 import { Skeleton } from "@/components/DesignSystem/Skeleton";
 import { StatChip } from "@/components/DesignSystem/StatChip";
@@ -16,6 +15,7 @@ import {
   Caption,
   H1,
   H3,
+  Label,
 } from "@/components/DesignSystem/Typography";
 import { useGameStore } from "@/store/gameStore";
 import {
@@ -28,25 +28,29 @@ import { useUserStore } from "@/store/userStore";
 
 function ListCardSkeleton() {
   return (
-    <Card elevated marginBottom="$3">
-      <YStack gap="$3">
-        <XStack justifyContent="space-between" alignItems="flex-start">
-          <YStack flex={1} marginRight="$2" gap="$2">
-            <Skeleton height={20} width="60%" borderRadius={6} />
-            <Skeleton height={12} width="40%" borderRadius={6} />
-          </YStack>
-          <Skeleton height={22} width={60} borderRadius={100} />
-        </XStack>
-        <YStack gap="$1">
-          <Skeleton height={6} borderRadius={3} />
-          <Skeleton height={12} width="15%" borderRadius={6} />
+    <YStack
+      backgroundColor="#F8F8F8"
+      borderRadius={12}
+      padding="$4"
+      marginBottom="$3"
+      gap="$3"
+    >
+      <XStack justifyContent="space-between" alignItems="flex-start">
+        <YStack flex={1} marginRight="$2" gap="$2">
+          <Skeleton height={20} width="60%" borderRadius={6} />
+          <Skeleton height={12} width="40%" borderRadius={6} />
         </YStack>
-        <XStack gap="$2" marginTop="$1">
-          <Skeleton height={32} borderRadius={100} />
-          <Skeleton height={32} borderRadius={100} />
-        </XStack>
+        <Skeleton height={22} width={60} borderRadius={100} />
+      </XStack>
+      <YStack gap="$1">
+        <Skeleton height={4} borderRadius={3} />
+        <Skeleton height={12} width="15%" borderRadius={6} />
       </YStack>
-    </Card>
+      <XStack gap="$2" marginTop="$1">
+        <Skeleton height={40} borderRadius={12} />
+        <Skeleton height={40} borderRadius={12} />
+      </XStack>
+    </YStack>
   );
 }
 
@@ -65,88 +69,93 @@ function ListCard({
   const completion = getCompletionPercent(list);
 
   return (
-    <Card
-      elevated
+    <YStack
+      backgroundColor="#F8F8F8"
+      borderRadius={12}
+      padding="$4"
       marginBottom="$3"
+      gap="$3"
       pressStyle={{ opacity: 0.95 }}
       onPress={() =>
         router.push({ pathname: "/list/[id]", params: { id: list.id } })
       }
     >
-      <YStack gap="$3">
-        <XStack justifyContent="space-between" alignItems="flex-start">
-          <YStack flex={1} marginRight="$2">
-            <H3 numberOfLines={1}>{list.name}</H3>
-            <Caption>{list.topic}</Caption>
-          </YStack>
-          <XStack
-            backgroundColor={completion === 100 ? "$green3" : "$gray3"}
-            paddingHorizontal="$2"
-            paddingVertical="$1"
-            borderRadius={100}
-          >
-            <Caption
-              color={completion === 100 ? "$green10" : "$colorSubtitle"}
-              fontWeight="600"
-            >
-              {list.words.length} {wordsLabel}
-            </Caption>
-          </XStack>
-        </XStack>
-
-        <YStack gap="$1">
-          <ProgressBar
-            progress={completion / 100}
-            color={completion === 100 ? "success" : "primary"}
-            height={6}
-          />
-          <Caption color="$colorSubtitle">{completion}%</Caption>
+      <XStack justifyContent="space-between" alignItems="flex-start">
+        <YStack flex={1} marginRight="$2">
+          <H3 numberOfLines={1}>{list.name}</H3>
+          <Caption color="#D7D7D7">{list.topic}</Caption>
         </YStack>
-
-        <XStack gap="$2" marginTop="$1">
-          <XStack
-            flex={1}
-            backgroundColor="#1B2D4F"
-            borderRadius={100}
-            paddingVertical="$2"
-            justifyContent="center"
-            alignItems="center"
-            pressStyle={{ opacity: 0.8 }}
-            onPress={(e) => {
-              e.stopPropagation();
-              router.push({
-                pathname: "/session/flashcard",
-                params: { listId: list.id },
-              });
-            }}
+        <XStack
+          backgroundColor={completion === 100 ? "#E8FFF4" : "#F8F8F8"}
+          paddingHorizontal="$2"
+          paddingVertical="$1"
+          borderRadius={100}
+          borderWidth={1}
+          borderColor={completion === 100 ? "#38AD49" : "#F2F2F2"}
+        >
+          <Caption
+            color={completion === 100 ? "#38AD49" : "#D7D7D7"}
+            fontWeight="600"
           >
-            <Caption color="white" fontWeight="700">
-              🃏 {flashcardsLabel}
-            </Caption>
-          </XStack>
-          <XStack
-            flex={1}
-            backgroundColor="$gray3"
-            borderRadius={100}
-            paddingVertical="$2"
-            justifyContent="center"
-            alignItems="center"
-            pressStyle={{ opacity: 0.8 }}
-            onPress={(e) => {
-              e.stopPropagation();
-              router.push({
-                pathname: "/session/quiz",
-                params: { listId: list.id },
-              });
-            }}
-          >
-            <Caption color="$color" fontWeight="700">
-              🧠 {quizLabel}
-            </Caption>
-          </XStack>
+            {list.words.length} {wordsLabel}
+          </Caption>
         </XStack>
+      </XStack>
+
+      <YStack gap="$1">
+        <ProgressBar
+          progress={completion / 100}
+          color={completion === 100 ? "success" : "primary"}
+          height={4}
+        />
+        <Caption color="#D7D7D7">{completion}%</Caption>
       </YStack>
-    </Card>
+
+      <XStack gap="$2" marginTop="$1">
+        <XStack
+          flex={1}
+          backgroundColor="#007AFF"
+          borderRadius={10}
+          paddingVertical="$2.5"
+          justifyContent="center"
+          alignItems="center"
+          pressStyle={{ opacity: 0.8 }}
+          onPress={(e) => {
+            e.stopPropagation();
+            router.push({
+              pathname: "/session/flashcard",
+              params: { listId: list.id },
+            });
+          }}
+        >
+          <Label color="#FFFFFF" fontWeight="600">
+            {flashcardsLabel}
+          </Label>
+        </XStack>
+        <XStack
+          flex={1}
+          backgroundColor="#FFFFFF"
+          borderRadius={10}
+          borderWidth={1}
+          borderColor="#F2F2F2"
+          paddingVertical="$2.5"
+          justifyContent="center"
+          alignItems="center"
+          pressStyle={{ opacity: 0.8 }}
+          onPress={(e) => {
+            e.stopPropagation();
+            router.push({
+              pathname: "/session/quiz",
+              params: { listId: list.id },
+            });
+          }}
+        >
+          <Label color="#131313" fontWeight="600">
+            {quizLabel}
+          </Label>
+        </XStack>
+      </XStack>
+    </YStack>
   );
 }
 
@@ -157,20 +166,27 @@ export default function HomeScreen() {
   const lists = useListsStore((state) => state.lists);
   const hasHydrated = useListsStore((state) => state._hasHydrated);
   const { currentStreak } = useGameStore();
-  const getSessionsToday = useSessionsStore((state) => state.getSessionsToday);
+  const sessions = useSessionsStore((state) => state.sessions);
 
-  const [todaySessions] = useState(() => getSessionsToday());
+  const todaySessions = useMemo(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return sessions.filter(
+      (s) => s.completedAt && new Date(s.completedAt) >= today,
+    );
+  }, [sessions]);
+
   const todayXP = todaySessions.reduce((sum, s) => sum + s.xpEarned, 0);
 
   const displayName = profile?.displayName ?? "Learner";
 
   return (
-    <YStack flex={1} backgroundColor="$background">
-      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
+    <YStack flex={1} backgroundColor="#FFFFFF">
+      <ScrollView contentContainerStyle={{ paddingBottom: 90 }}>
         <YStack padding="$4" gap="$4">
           {/* Greeting */}
           <YStack paddingTop="$2" gap="$1">
-            <H1 fontSize={28} fontWeight="700">
+            <H1 fontSize={28} fontWeight="600">
               {i18n._("home.greeting")}, {displayName}! 👋
             </H1>
           </YStack>
@@ -194,23 +210,39 @@ export default function HomeScreen() {
             />
           </XStack>
 
-          {/* My Lists header */}
-          <XStack justifyContent="space-between" alignItems="center">
-            <H3>{i18n._("home.myLists")}</H3>
-            <XStack gap="$2" alignItems="center">
-              <Caption color="$colorSubtitle">{lists.length} lists</Caption>
-              <XStack
-                onPress={() => router.push("/list/create")}
-                backgroundColor="#1B2D4F"
-                borderRadius={20}
-                width={32}
-                height={32}
-                alignItems="center"
-                justifyContent="center"
-                pressStyle={{ opacity: 0.8 }}
-              >
-                <Plus size={18} color="white" />
-              </XStack>
+          {/* Saved vocabulary info card — Speaker style */}
+          <XStack
+            backgroundColor="#E5F2FF"
+            borderRadius={12}
+            padding="$3"
+            alignItems="center"
+            gap="$3"
+          >
+            <XStack
+              width={40}
+              height={40}
+              borderRadius={10}
+              backgroundColor="#007AFF"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Body fontSize={20}>📚</Body>
+            </XStack>
+            <YStack flex={1}>
+              <Label color="#131313">{i18n._("home.myLists")}</Label>
+              <Caption color="#007AFF">{lists.length} lists saved</Caption>
+            </YStack>
+            <XStack
+              onPress={() => router.push("/list/create")}
+              backgroundColor="#007AFF"
+              borderRadius={20}
+              width={32}
+              height={32}
+              alignItems="center"
+              justifyContent="center"
+              pressStyle={{ opacity: 0.8 }}
+            >
+              <Plus size={18} color="white" />
             </XStack>
           </XStack>
 
@@ -224,7 +256,7 @@ export default function HomeScreen() {
             <YStack alignItems="center" paddingVertical="$8" gap="$3">
               <Body fontSize={48}>📚</Body>
               <H3 textAlign="center">{i18n._("home.emptyTitle")}</H3>
-              <BodySmall color="$colorSubtitle" textAlign="center">
+              <BodySmall color="#D7D7D7" textAlign="center">
                 {i18n._("home.emptySubtitle")}
               </BodySmall>
               <PrimaryButton onPress={() => router.push("/list/create")}>

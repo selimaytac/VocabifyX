@@ -3,74 +3,136 @@ import {
   Bell,
   ChevronRight,
   CreditCard,
+  Edit3,
   Globe,
+  Info,
+  Share2,
+  Star,
   Trash2,
+  User,
 } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
-import { Alert, ScrollView } from "react-native";
+import { Alert, Linking, Share, ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
 import {
   Body,
   BodySmall,
   Caption,
+  H3,
   Label,
 } from "@/components/DesignSystem/Typography";
 import { useAuth } from "@/hooks/useAuth";
 import { useUserStore } from "@/store/userStore";
 
-interface SettingsRowProps {
+// ─── Shared primitives ──────────────────────────────────────────────────────
+
+const CARD_STYLE = {
+  backgroundColor: "#FFFFFF",
+  borderRadius: 16,
+  borderWidth: 1,
+  borderColor: "#F0F0F0",
+  overflow: "hidden",
+} as const;
+
+function SectionHeader({
+  children,
+  uppercase = false,
+}: {
+  children: string;
+  uppercase?: boolean;
+}) {
+  return (
+    <Caption
+      color="#999999"
+      fontWeight="600"
+      fontSize={13}
+      letterSpacing={uppercase ? 0.4 : 0}
+      paddingLeft="$1"
+      paddingBottom="$1"
+    >
+      {uppercase ? children.toUpperCase() : children}
+    </Caption>
+  );
+}
+
+function Divider() {
+  return <YStack height={1} backgroundColor="#F0F0F0" marginHorizontal="$4" />;
+}
+
+interface RowProps {
   icon: React.ReactNode;
   label: string;
   onPress?: () => void;
   trailing?: React.ReactNode;
-  showChevron?: boolean;
 }
 
-function SettingsRow({
-  icon,
-  label,
-  onPress,
-  trailing,
-  showChevron = true,
-}: SettingsRowProps) {
+function Row({ icon, label, onPress, trailing }: RowProps) {
   return (
     <XStack
       paddingHorizontal="$4"
       paddingVertical="$4"
       alignItems="center"
-      justifyContent="space-between"
+      gap="$3"
       onPress={onPress}
-      pressStyle={onPress ? { opacity: 0.7 } : undefined}
+      pressStyle={onPress ? { opacity: 0.65 } : undefined}
     >
-      <XStack alignItems="center" gap="$3" flex={1}>
+      <XStack
+        width={36}
+        height={36}
+        borderRadius={10}
+        backgroundColor="#F5F5F5"
+        alignItems="center"
+        justifyContent="center"
+        flexShrink={0}
+      >
         {icon}
-        <Label color="$color">{label}</Label>
       </XStack>
-      {trailing ??
-        (showChevron && onPress ? (
-          <ChevronRight size={18} color="$colorSubtitle" />
-        ) : null)}
+      <Label color="#131313" flex={1}>
+        {label}
+      </Label>
+      {trailing ?? (onPress ? <ChevronRight size={18} color="#BBBBBB" /> : null)}
     </XStack>
   );
 }
 
-function Divider() {
-  return (
-    <YStack height={1} backgroundColor="$borderColor" marginHorizontal="$4" />
-  );
-}
+// ─── Screen ─────────────────────────────────────────────────────────────────
 
 export default function SettingsScreen() {
   const { i18n } = useLingui();
   const router = useRouter();
   const { signOut } = useAuth();
   const profile = useUserStore((state) => state.profile);
+  const setProfile = useUserStore((state) => state.setProfile);
 
   const initial =
     profile?.displayName?.[0]?.toUpperCase() ??
     profile?.email?.[0]?.toUpperCase() ??
     "U";
+
+  const handleEditDisplayName = () => {
+    Alert.prompt(
+      i18n._("settings.displayName"),
+      undefined,
+      (text) => {
+        if (text?.trim() && profile) {
+          setProfile({ ...profile, displayName: text.trim() });
+        }
+      },
+      "plain-text",
+      profile?.displayName ?? "",
+    );
+  };
+
+  const handleShare = () => {
+    Share.share({
+      message: "Check out VocabifyX – the smartest way to learn vocabulary!",
+    });
+  };
+
+  const handleRate = () => {
+    Linking.openURL("https://apps.apple.com/").catch(() => undefined);
+  };
 
   const handleDeleteAccount = () => {
     Alert.alert(
@@ -88,118 +150,167 @@ export default function SettingsScreen() {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: "transparent" }}>
-      <YStack padding="$4" gap="$5" paddingBottom="$8">
-        {/* Account section */}
+    <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
+      <YStack padding="$4" gap="$5" paddingBottom="$10">
+
+        {/* ── 1. ACCOUNT ─────────────────────────────────── */}
         <YStack gap="$2">
-          <Caption
-            color="$colorSubtitle"
-            fontWeight="700"
-            fontSize={12}
-            paddingLeft="$1"
-          >
-            {i18n._("settings.account")}
-          </Caption>
-          <YStack
-            backgroundColor="$background"
-            borderRadius={16}
-            borderWidth={1}
-            borderColor="$borderColor"
-            overflow="hidden"
-          >
+          <SectionHeader>{i18n._("settings.account")}</SectionHeader>
+          <YStack {...CARD_STYLE}>
+
             {/* Profile row */}
             <XStack padding="$4" alignItems="center" gap="$3">
               <XStack
-                width={52}
-                height={52}
-                borderRadius={26}
-                backgroundColor="#30A46C"
+                width={56}
+                height={56}
+                borderRadius={28}
+                backgroundColor="#007AFF"
                 alignItems="center"
                 justifyContent="center"
                 flexShrink={0}
               >
-                <Body color="#FFFFFF" fontWeight="700" fontSize={22}>
+                <H3 color="#FFFFFF" fontWeight="700">
                   {initial}
-                </Body>
+                </H3>
               </XStack>
-              <YStack flex={1} gap="$1">
-                <Label fontWeight="700">{profile?.displayName ?? "—"}</Label>
-                <Caption color="$colorSubtitle">
-                  {profile?.email ?? "—"}
-                </Caption>
+              <YStack flex={1} gap="$0.5">
+                <Label fontWeight="700" fontSize={16} color="#131313">
+                  {profile?.displayName ?? "—"}
+                </Label>
+                <Caption color="#888888">{profile?.email ?? "—"}</Caption>
               </YStack>
               <XStack
-                backgroundColor="$gray3"
+                backgroundColor="#F0F0F0"
                 paddingHorizontal="$3"
                 paddingVertical="$1"
                 borderRadius={100}
               >
-                <Caption color="$colorSubtitle" fontWeight="600">
+                <Caption color="#888888" fontWeight="600">
                   {i18n._("settings.free")}
                 </Caption>
               </XStack>
             </XStack>
 
-            {profile?.id && (
+            {/* User ID */}
+            {profile?.id ? (
               <>
                 <Divider />
-                <XStack padding="$4" gap="$3" alignItems="center">
-                  <BodySmall color="$colorSubtitle" fontWeight="600">
-                    {i18n._("settings.userId")}:{" "}
-                  </BodySmall>
-                  <Caption color="$colorSubtitle" flex={1} numberOfLines={1}>
-                    {profile.id}
-                  </Caption>
+                <XStack
+                  paddingHorizontal="$4"
+                  paddingVertical="$3"
+                  gap="$3"
+                  alignItems="center"
+                >
+                  <XStack
+                    width={36}
+                    height={36}
+                    borderRadius={10}
+                    backgroundColor="#F5F5F5"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    <Info size={18} color="#888888" />
+                  </XStack>
+                  <YStack flex={1}>
+                    <BodySmall color="#888888" fontWeight="600">
+                      {i18n._("settings.userId")}
+                    </BodySmall>
+                    <Caption color="#BBBBBB" numberOfLines={1}>
+                      {profile.id}
+                    </Caption>
+                  </YStack>
                 </XStack>
               </>
-            )}
+            ) : null}
 
+            {/* Manage Subscription */}
             <Divider />
-            <SettingsRow
-              icon={<CreditCard size={20} color="$colorSubtitle" />}
+            <Row
+              icon={<CreditCard size={18} color="#888888" />}
               label={i18n._("settings.manageSubscription")}
               onPress={() => router.push("/settings/manage-subscription")}
             />
           </YStack>
         </YStack>
 
-        {/* General section */}
+        {/* ── 2. DISPLAY NAME ────────────────────────────── */}
+        <YStack {...CARD_STYLE}>
+          <XStack
+            paddingHorizontal="$4"
+            paddingVertical="$4"
+            alignItems="center"
+            gap="$3"
+            onPress={handleEditDisplayName}
+            pressStyle={{ opacity: 0.65 }}
+          >
+            <XStack
+              width={36}
+              height={36}
+              borderRadius={10}
+              backgroundColor="#F5F5F5"
+              alignItems="center"
+              justifyContent="center"
+              flexShrink={0}
+            >
+              <User size={18} color="#888888" />
+            </XStack>
+            <YStack flex={1} gap="$0.5">
+              <Caption color="#999999" fontWeight="600" fontSize={12}>
+                {i18n._("settings.displayName")}
+              </Caption>
+              <Label color="#131313" fontWeight="600">
+                {profile?.displayName ?? "—"}
+              </Label>
+            </YStack>
+            <Edit3 size={18} color="#BBBBBB" />
+          </XStack>
+        </YStack>
+
+        {/* ── 3. GENERAL ─────────────────────────────────── */}
         <YStack gap="$2">
-          <Caption
-            color="$colorSubtitle"
-            fontWeight="700"
-            fontSize={12}
-            paddingLeft="$1"
-          >
-            {i18n._("settings.general")}
-          </Caption>
-          <YStack
-            backgroundColor="$background"
-            borderRadius={16}
-            borderWidth={1}
-            borderColor="$borderColor"
-            overflow="hidden"
-          >
-            <SettingsRow
-              icon={<Globe size={20} color="$colorSubtitle" />}
+          <SectionHeader uppercase>{i18n._("settings.general")}</SectionHeader>
+          <YStack {...CARD_STYLE}>
+            <Row
+              icon={<Globe size={18} color="#888888" />}
               label={i18n._("settings.language")}
               onPress={() => router.push("/settings/language")}
-            />
-            <Divider />
-            <SettingsRow
-              icon={<Bell size={20} color="$colorSubtitle" />}
-              label={i18n._("settings.notifications")}
-              onPress={() => router.push("/settings/notifications")}
             />
           </YStack>
         </YStack>
 
-        {/* Delete account */}
+        {/* ── 4. NOTIFICATION SETTINGS ───────────────────── */}
+        <YStack {...CARD_STYLE}>
+          <Row
+            icon={<Bell size={18} color="#888888" />}
+            label={i18n._("settings.notifications")}
+            onPress={() => router.push("/settings/notifications")}
+          />
+        </YStack>
+
+        {/* ── 5. ABOUT US ────────────────────────────────── */}
+        <YStack gap="$2">
+          <SectionHeader>{i18n._("settings.aboutUs")}</SectionHeader>
+          <YStack {...CARD_STYLE}>
+            <Row
+              icon={<Star size={18} color="#888888" />}
+              label={i18n._("settings.rate")}
+              onPress={handleRate}
+            />
+            <Divider />
+            <Row
+              icon={<Share2 size={18} color="#888888" />}
+              label={i18n._("settings.share")}
+              onPress={handleShare}
+            />
+          </YStack>
+        </YStack>
+
+        {/* ── 6. DELETE ACCOUNT ──────────────────────────── */}
         <XStack
-          backgroundColor="#FEF2F2"
+          backgroundColor="#FFF0EF"
           borderRadius={16}
           borderWidth={1}
-          borderColor="#FECACA"
+          borderColor="#FFD0CC"
           padding="$4"
           alignItems="center"
           justifyContent="center"
@@ -207,12 +318,14 @@ export default function SettingsScreen() {
           pressStyle={{ opacity: 0.7 }}
           onPress={handleDeleteAccount}
         >
-          <Trash2 size={18} color="#E5484D" />
-          <Body color="#E5484D" fontWeight="600">
+          <Trash2 size={20} color="#D53F36" />
+          <Body color="#D53F36" fontWeight="600">
             {i18n._("settings.deleteAccount")}
           </Body>
         </XStack>
+
       </YStack>
     </ScrollView>
   );
 }
+

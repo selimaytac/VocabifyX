@@ -65,44 +65,44 @@ function ExploreListCard({
     <YStack
       flexBasis="47%"
       flexGrow={0}
-      backgroundColor={colors.bg}
-      borderRadius={20}
+      backgroundColor="#F8F8F8"
+      borderRadius={12}
       padding="$3"
       gap="$2"
       alignItems="center"
       pressStyle={{ opacity: 0.85 }}
+      onPress={isInLibrary ? undefined : onAdd}
     >
       <Body fontSize={40}>{emoji}</Body>
       <Label
-        fontWeight="700"
+        fontWeight="600"
         textAlign="center"
         numberOfLines={2}
-        color="#0D0D0D"
+        color="#131313"
       >
         {list.name}
       </Label>
-      <Caption color="#6B7280">{list.words.length} words</Caption>
+      <Caption color="#D7D7D7">{list.words.length} words</Caption>
       {isInLibrary ? (
         <XStack
-          backgroundColor="rgba(0,0,0,0.06)"
+          backgroundColor="#E8FFF4"
           paddingHorizontal="$3"
           paddingVertical="$1"
           borderRadius={100}
         >
-          <Caption color={colors.accent} fontWeight="700">
+          <Caption color="#38AD49" fontWeight="600">
             ✓ {inLibraryLabel}
           </Caption>
         </XStack>
       ) : (
         <XStack
-          backgroundColor="$background"
+          backgroundColor="#007AFF"
           paddingHorizontal="$3"
           paddingVertical="$1"
           borderRadius={100}
-          onPress={onAdd}
           pressStyle={{ opacity: 0.7 }}
         >
-          <Caption color={colors.accent} fontWeight="700">
+          <Caption color="#FFFFFF" fontWeight="600">
             + {addLabel}
           </Caption>
         </XStack>
@@ -167,13 +167,13 @@ export default function ExploreScreen() {
 
   return (
     <ScrollView
-      style={{ backgroundColor: "transparent" }}
-      contentContainerStyle={{ paddingBottom: 100 }}
+      style={{ backgroundColor: "#FFFFFF" }}
+      contentContainerStyle={{ paddingBottom: 90 }}
     >
       <YStack padding="$4" gap="$4">
         <YStack>
           <H1>{i18n._("explore.title")}</H1>
-          <Caption color="$colorSubtitle">{i18n._("explore.subtitle")}</Caption>
+          <Caption color="#D7D7D7">{i18n._("explore.subtitle")}</Caption>
         </YStack>
 
         <CategoryChips

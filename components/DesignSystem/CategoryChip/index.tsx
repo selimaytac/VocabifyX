@@ -19,8 +19,8 @@ export function CategoryChips<T extends string>({
   if (variant === "segmented") {
     return (
       <XStack
-        backgroundColor="#F0F2F5"
-        borderRadius={100}
+        backgroundColor="#F8F8F8"
+        borderRadius={10}
         padding="$1"
         gap="$0"
       >
@@ -31,16 +31,16 @@ export function CategoryChips<T extends string>({
               key={category.key}
               flex={1}
               paddingVertical="$2"
-              borderRadius={100}
-              backgroundColor={isSelected ? "#1B2D4F" : "transparent"}
+              borderRadius={8}
+              backgroundColor={isSelected ? "#007AFF" : "transparent"}
               pressStyle={{ opacity: 0.8 }}
               onPress={() => onSelect(category.key)}
               justifyContent="center"
               alignItems="center"
             >
               <Label
-                color={isSelected ? "white" : "#6B7280"}
-                fontWeight={isSelected ? "700" : "500"}
+                color={isSelected ? "#FFFFFF" : "#D7D7D7"}
+                fontWeight={isSelected ? "600" : "500"}
                 textAlign="center"
               >
                 {category.label}
@@ -63,13 +63,13 @@ export function CategoryChips<T extends string>({
               paddingHorizontal="$3"
               paddingVertical="$2"
               borderRadius={100}
-              backgroundColor={isSelected ? "#1B2D4F" : "#F0F2F5"}
+              backgroundColor={isSelected ? "#E5F2FF" : "#F8F8F8"}
               pressStyle={{ opacity: 0.8 }}
               onPress={() => onSelect(category.key)}
             >
               <Label
-                color={isSelected ? "white" : "#6B7280"}
-                fontWeight={isSelected ? "700" : "500"}
+                color={isSelected ? "#007AFF" : "#D7D7D7"}
+                fontWeight={isSelected ? "600" : "500"}
               >
                 {category.label}
               </Label>

@@ -143,7 +143,7 @@ export default function AchievementsScreen() {
   const tierStyle = tierColors[currentLevel.tier] ?? tierColors.Silver;
 
   return (
-    <ScrollView style={{ backgroundColor: "transparent" }}>
+    <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
       <YStack padding="$4" gap="$4" paddingBottom="$8">
         {/* Level header card */}
         <YStack
@@ -181,10 +181,8 @@ export default function AchievementsScreen() {
 
         {/* Summary stats */}
         <YStack
-          backgroundColor="$background"
-          borderRadius={16}
-          borderWidth={1}
-          borderColor="$borderColor"
+          backgroundColor="#F8F8F8"
+          borderRadius={12}
           overflow="hidden"
         >
           <XStack>
@@ -192,25 +190,25 @@ export default function AchievementsScreen() {
               <Body fontWeight="700" fontSize={22}>
                 {unlockedCount}
               </Body>
-              <Caption color="$colorSubtitle" fontSize={11}>
+              <Caption color="#D7D7D7" fontSize={11}>
                 {i18n._("achievements.unlocked")}
               </Caption>
             </YStack>
-            <YStack width={1} backgroundColor="$borderColor" />
+            <YStack width={1} backgroundColor="#F2F2F2" />
             <YStack flex={1} alignItems="center" padding="$3" gap="$1">
               <Body fontWeight="700" fontSize={22}>
                 {ACHIEVEMENTS.length}
               </Body>
-              <Caption color="$colorSubtitle" fontSize={11}>
+              <Caption color="#D7D7D7" fontSize={11}>
                 {i18n._("achievements.total")}
               </Caption>
             </YStack>
-            <YStack width={1} backgroundColor="$borderColor" />
+            <YStack width={1} backgroundColor="#F2F2F2" />
             <YStack flex={1} alignItems="center" padding="$3" gap="$1">
               <Body fontWeight="700" fontSize={22}>
                 {totalXPFromAchievements}
               </Body>
-              <Caption color="$colorSubtitle" fontSize={11}>
+              <Caption color="#D7D7D7" fontSize={11}>
                 {i18n._("achievements.xpEarned")}
               </Caption>
             </YStack>
@@ -240,10 +238,8 @@ export default function AchievementsScreen() {
             return (
               <YStack
                 key={achievement.id}
-                backgroundColor="$background"
-                borderRadius={16}
-                borderWidth={1}
-                borderColor="$borderColor"
+                backgroundColor="#F8F8F8"
+                borderRadius={12}
                 padding="$4"
                 gap="$3"
                 opacity={isUnlocked ? 1 : 0.7}
@@ -254,7 +250,7 @@ export default function AchievementsScreen() {
                     height={52}
                     borderRadius={26}
                     backgroundColor={
-                      isUnlocked ? achievement.badgeColor : "$gray4"
+                      isUnlocked ? achievement.badgeColor : "#E0E0E0"
                     }
                     alignItems="center"
                     justifyContent="center"
@@ -272,12 +268,12 @@ export default function AchievementsScreen() {
                       {isUnlocked ? (
                         <Body fontSize={18}>✅</Body>
                       ) : (
-                        <Caption color="$colorSubtitle" fontSize={11}>
+                        <Caption color="#D7D7D7" fontSize={11}>
                           {current}/{target}
                         </Caption>
                       )}
                     </XStack>
-                    <BodySmall color="$colorSubtitle">
+                    <BodySmall color="#D7D7D7">
                       {i18n._(achievement.descriptionKey)}
                     </BodySmall>
                   </YStack>

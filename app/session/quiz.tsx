@@ -6,7 +6,6 @@ import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
 import { SecondaryButton } from "@/components/DesignSystem/Button";
-import { Card } from "@/components/DesignSystem/Card";
 import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
 import {
   Body,
@@ -211,7 +210,7 @@ export default function QuizScreen() {
   }
 
   return (
-    <YStack flex={1} backgroundColor="$background" padding="$4">
+    <YStack flex={1} backgroundColor="#FFFFFF" padding="$4">
       <XStack
         justifyContent="space-between"
         alignItems="center"
@@ -220,7 +219,7 @@ export default function QuizScreen() {
         <SecondaryButton size="$3" onPress={() => router.back()}>
           {i18n._("common.back")}
         </SecondaryButton>
-        <Caption>
+        <Caption color="#D7D7D7">
           {currentIndex + 1} / {questions.length}
         </Caption>
       </XStack>
@@ -229,17 +228,21 @@ export default function QuizScreen() {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <YStack paddingVertical="$4" gap="$4">
-          <Card elevated>
+          <YStack
+            backgroundColor="#F8F8F8"
+            borderRadius={12}
+            padding="$4"
+          >
             <YStack gap="$2" paddingVertical="$2">
-              <Caption color="$colorSubtitle">
+              <Caption color="#D7D7D7">
                 {i18n._("session.whatIsTranslation")}
               </Caption>
               <H2 textAlign="center">{currentQuestion.word.term}</H2>
-              <BodySmall color="$colorSubtitle" textAlign="center">
+              <BodySmall color="#D7D7D7" textAlign="center">
                 {currentQuestion.word.partOfSpeech}
               </BodySmall>
             </YStack>
-          </Card>
+          </YStack>
 
           <YStack gap="$3">
             {currentQuestion.choices.map((choice, index) => {
@@ -247,27 +250,29 @@ export default function QuizScreen() {
               const isCorrectChoice = index === currentQuestion.correctIndex;
               const choiceKey = `choice-${currentIndex}-${index}`;
 
-              let bg: string = "$gray3";
-              let labelColor: string = "$gray12";
+              let bg = "#F8F8F8";
+              let labelColor = "#131313";
 
               if (answerState !== "idle") {
                 if (isCorrectChoice) {
-                  bg = "$green3";
-                  labelColor = "$green10";
+                  bg = "#E8FFF4";
+                  labelColor = "#38AD49";
                 } else if (isSelected && !isCorrectChoice) {
-                  bg = "$red3";
-                  labelColor = "$red10";
+                  bg = "#FFF0EF";
+                  labelColor = "#D53F36";
                 }
               }
 
               return (
-                <Card
+                <YStack
                   key={choiceKey}
                   pressStyle={
                     answerState === "idle" ? { opacity: 0.8 } : undefined
                   }
                   onPress={() => handleChoice(index)}
                   backgroundColor={bg as never}
+                  borderRadius={12}
+                  padding="$4"
                 >
                   <XStack alignItems="center" gap="$3">
                     <Body fontSize={18} width={24} textAlign="center">
@@ -281,21 +286,21 @@ export default function QuizScreen() {
                       {choice}
                     </Label>
                   </XStack>
-                </Card>
+                </YStack>
               );
             })}
           </YStack>
 
           {answerState !== "idle" && (
-            <Card backgroundColor="$gray2">
+            <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4">
               <BodySmall
-                color="$colorSubtitle"
+                color="#D7D7D7"
                 fontStyle="italic"
                 textAlign="center"
               >
                 {currentQuestion.word.example}
               </BodySmall>
-            </Card>
+            </YStack>
           )}
         </YStack>
       </ScrollView>

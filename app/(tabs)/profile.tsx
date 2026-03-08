@@ -1,12 +1,12 @@
 import { useLingui } from "@lingui/react";
 import { Settings } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
+import { useMemo } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
 import { LevelBadge } from "@/components/DesignSystem/Badge";
 import { OutlineButton } from "@/components/DesignSystem/Button";
-import { Card } from "@/components/DesignSystem/Card";
 import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
 import { StatChip } from "@/components/DesignSystem/StatChip";
 import {
@@ -25,6 +25,7 @@ import {
 import { useAuth } from "@/hooks/useAuth";
 import { useGameStore } from "@/store/gameStore";
 import { useListsStore } from "@/store/listsStore";
+import { useSessionsStore } from "@/store/sessionsStore";
 import { useUserStore } from "@/store/userStore";
 
 export default function ProfileScreen() {
@@ -42,6 +43,8 @@ export default function ProfileScreen() {
   const displayName = profile?.displayName ?? "User";
   const initial = displayName.charAt(0).toUpperCase();
 
+  const sessions = useSessionsStore((state) => state.sessions);
+
   const recentAchievements = [...achievements]
     .sort(
       (a, b) =>
@@ -49,25 +52,48 @@ export default function ProfileScreen() {
     )
     .slice(0, 4);
 
+  const studyDays = useMemo(() => {
+    const set = new Set<string>();
+    sessions.forEach((s) => {
+      if (s.completedAt) set.add(new Date(s.completedAt).toDateString());
+    });
+    return set;
+  }, [sessions]);
+
+  const weekDays = useMemo(() => {
+    const today = new Date();
+    const todayDow = today.getDay(); // 0=Sun
+    const mondayOffset = todayDow === 0 ? -6 : 1 - todayDow;
+    return ["M", "T", "W", "T", "F", "S", "S"].map((label, i) => {
+      const d = new Date(today);
+      d.setDate(today.getDate() + mondayOffset + i);
+      return {
+        label,
+        dateStr: d.toDateString(),
+        isToday: mondayOffset + i === 0,
+      };
+    });
+  }, []);
+
   return (
     <ScrollView
-      style={{ backgroundColor: "transparent" }}
-      contentContainerStyle={{ paddingBottom: 100 }}
+      style={{ backgroundColor: "#FFFFFF" }}
+      contentContainerStyle={{ paddingBottom: 90 }}
     >
-      <YStack padding="$4" gap="$4" paddingTop="$12">
+      <YStack padding="$4" gap="$4">
         {/* Settings gear */}
         <XStack justifyContent="flex-end" alignItems="center">
           <XStack
             onPress={() => router.push("/settings")}
             width={40}
             height={40}
-            backgroundColor="$gray3"
+            backgroundColor="#F8F8F8"
             borderRadius={20}
             alignItems="center"
             justifyContent="center"
             pressStyle={{ opacity: 0.7 }}
           >
-            <Settings size={20} color="$colorSubtitle" />
+            <Settings size={20} color="#D7D7D7" />
           </XStack>
         </XStack>
 
@@ -77,7 +103,7 @@ export default function ProfileScreen() {
             width={64}
             height={64}
             borderRadius={32}
-            backgroundColor="#6B4EFF"
+            backgroundColor="#007AFF"
             alignItems="center"
             justifyContent="center"
           >
@@ -89,39 +115,37 @@ export default function ProfileScreen() {
             <H2 fontWeight="700" fontSize={22}>
               {displayName}
             </H2>
-            <Caption color="$colorSubtitle">{user?.email ?? ""}</Caption>
+            <Caption color="#D7D7D7">{user?.email ?? ""}</Caption>
           </YStack>
           <LevelBadge level={currentLevel} size="sm" />
         </XStack>
 
         {/* XP Progress Card */}
-        <Card elevated>
-          <YStack gap="$2">
-            <XStack justifyContent="space-between" alignItems="center">
-              <BodySmall fontWeight="700">
-                {currentLevel.emoji} {getLevelDisplayName(currentLevel)}
-              </BodySmall>
-              <Caption color="$colorSubtitle">
-                {currentXP} / {nextLevelXP} XP
+        <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4" gap="$2">
+          <XStack justifyContent="space-between" alignItems="center">
+            <BodySmall fontWeight="700" color="#131313">
+              {currentLevel.emoji} {getLevelDisplayName(currentLevel)}
+            </BodySmall>
+            <Caption color="#D7D7D7">
+              {currentXP} / {nextLevelXP} XP
+            </Caption>
+          </XStack>
+          <ProgressBar progress={progress} color="primary" height={8} />
+          <XStack justifyContent="space-between" alignItems="center">
+            <Caption color="#D7D7D7">{totalXP} Total XP</Caption>
+            <XStack
+              gap="$1"
+              alignItems="center"
+              onPress={() => router.push("/achievements")}
+              pressStyle={{ opacity: 0.7 }}
+            >
+              <Caption>🏆</Caption>
+              <Caption color="#007AFF" fontWeight="600">
+                {achievements.length}/14 {i18n._("profile.viewAll")} →
               </Caption>
             </XStack>
-            <ProgressBar progress={progress} color="primary" height={10} />
-            <XStack justifyContent="space-between" alignItems="center">
-              <Caption color="$colorSubtitle">{totalXP} Total XP</Caption>
-              <XStack
-                gap="$1"
-                alignItems="center"
-                onPress={() => router.push("/achievements")}
-                pressStyle={{ opacity: 0.7 }}
-              >
-                <Caption>🏆</Caption>
-                <Caption color="#F5A623" fontWeight="600">
-                  {achievements.length}/14 {i18n._("profile.viewAll")} →
-                </Caption>
-              </XStack>
-            </XStack>
-          </YStack>
-        </Card>
+          </XStack>
+        </YStack>
 
         {/* 4-stat chips */}
         <XStack gap="$2">
@@ -147,34 +171,53 @@ export default function ProfileScreen() {
           />
         </XStack>
 
-        {/* Summary row */}
-        <Card>
-          <XStack justifyContent="space-around" paddingVertical="$2">
-            <YStack alignItems="center" gap="$1" flex={1}>
-              <H3 fontWeight="700">{stats.wordsMastered}</H3>
-              <Caption color="$colorSubtitle" textAlign="center">
-                {i18n._("profile.wordsLearned")}
-              </Caption>
-            </YStack>
-            <YStack width={1} backgroundColor="$borderColor" />
-            <YStack alignItems="center" gap="$1" flex={1}>
-              <H3 fontWeight="700">{stats.sessionsCompleted}</H3>
-              <Caption color="$colorSubtitle" textAlign="center">
-                {i18n._("profile.sessionsCompleted")}
-              </Caption>
-            </YStack>
-            <YStack width={1} backgroundColor="$borderColor" />
-            <YStack alignItems="center" gap="$1" flex={1}>
-              <H3 fontWeight="700">{longestStreak}d</H3>
-              <Caption color="$colorSubtitle" textAlign="center">
-                {i18n._("profile.longestStreak")}
-              </Caption>
-            </YStack>
+        {/* Weekly Study Calendar */}
+        <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4" gap="$3">
+          <Caption fontWeight="600" color="#D7D7D7" letterSpacing={0.5}>
+            {i18n._("profile.thisWeek").toUpperCase()}
+          </Caption>
+          <XStack justifyContent="space-between">
+            {weekDays.map(({ label, dateStr, isToday }, idx) => {
+              const active = studyDays.has(dateStr);
+              return (
+                <YStack key={idx} alignItems="center" gap="$1">
+                  <XStack
+                    width={34}
+                    height={34}
+                    borderRadius={17}
+                    backgroundColor={active ? "#007AFF" : "#FFFFFF"}
+                    borderWidth={isToday && !active ? 1 : 0}
+                    borderColor="#007AFF"
+                    alignItems="center"
+                    justifyContent="center"
+                  >
+                    {active ? (
+                      <Caption color="#FFFFFF" fontWeight="700" fontSize={13}>
+                        ✓
+                      </Caption>
+                    ) : (
+                      <Caption
+                        color={isToday ? "#007AFF" : "#D7D7D7"}
+                        fontSize={13}
+                      >
+                        •
+                      </Caption>
+                    )}
+                  </XStack>
+                  <Caption
+                    color={isToday ? "#007AFF" : "#D7D7D7"}
+                    fontSize={10}
+                  >
+                    {label}
+                  </Caption>
+                </YStack>
+              );
+            })}
           </XStack>
-        </Card>
+        </YStack>
 
         {/* Recent Achievements */}
-        <Card elevated>
+        <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4">
           <XStack
             justifyContent="space-between"
             alignItems="center"
@@ -185,13 +228,13 @@ export default function ProfileScreen() {
               onPress={() => router.push("/achievements")}
               pressStyle={{ opacity: 0.7 }}
             >
-              <Caption color="#6B4EFF" fontWeight="600">
+              <Caption color="#007AFF" fontWeight="600">
                 {i18n._("profile.viewAll")} ›
               </Caption>
             </XStack>
           </XStack>
           {recentAchievements.length === 0 ? (
-            <BodySmall color="$colorSubtitle">
+            <BodySmall color="#D7D7D7">
               {i18n._("profile.noAchievements")}
             </BodySmall>
           ) : (
@@ -211,13 +254,13 @@ export default function ProfileScreen() {
                       width={56}
                       height={56}
                       borderRadius={28}
-                      backgroundColor="#FEF3E2"
+                      backgroundColor="#FFF5EB"
                       alignItems="center"
                       justifyContent="center"
                     >
                       <Body fontSize={28}>{achievement.icon}</Body>
                     </YStack>
-                    <Caption textAlign="center" numberOfLines={1}>
+                    <Caption textAlign="center" numberOfLines={1} color="#131313">
                       {i18n._(achievement.titleKey)}
                     </Caption>
                     <Caption color="#F5A623">+{ua.xpAwarded} XP</Caption>
@@ -226,13 +269,13 @@ export default function ProfileScreen() {
               })}
             </XStack>
           )}
-        </Card>
+        </YStack>
 
         <OutlineButton
           onPress={signOut}
           marginTop="$2"
-          borderColor="$borderColor"
-          color="$colorSubtitle"
+          borderColor="#F2F2F2"
+          color="#D53F36"
         >
           {i18n._("common.logout")}
         </OutlineButton>

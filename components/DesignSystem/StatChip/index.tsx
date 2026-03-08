@@ -13,18 +13,18 @@ export function StatChip({ icon, value, label }: StatChipProps) {
     <YStack
       alignItems="center"
       gap="$1"
-      backgroundColor="#F5F7FA"
-      borderRadius={14}
+      backgroundColor="#F8F8F8"
+      borderRadius={12}
       paddingVertical="$3"
       paddingHorizontal="$2"
       flex={1}
     >
       <Body fontSize={22}>{icon}</Body>
-      <Body fontWeight="700" fontSize={18} color="#0D0D0D">
+      <Body fontWeight="700" fontSize={18} color="#131313">
         {String(value)}
       </Body>
       <Caption
-        color="#9CA3AF"
+        color="#D7D7D7"
         textAlign="center"
         numberOfLines={1}
         fontSize={11}

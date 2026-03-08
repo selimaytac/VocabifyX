@@ -2,26 +2,26 @@ import { Button as TamaguiButton, styled } from "tamagui";
 
 export const PrimaryButton = styled(TamaguiButton, {
   name: "PrimaryButton",
-  backgroundColor: "#F5A623",
-  color: "#1a1a1a",
-  borderRadius: 26,
+  backgroundColor: "#007AFF",
+  color: "#FFFFFF",
+  borderRadius: 12,
   height: 52,
-  fontWeight: "700",
-  fontSize: 17,
+  fontWeight: "600",
+  fontSize: 16,
   pressStyle: {
     opacity: 0.85,
   },
   disabledStyle: {
-    backgroundColor: "#2a2a2a",
+    backgroundColor: "#D7D7D7",
     opacity: 1,
   },
 });
 
 export const SecondaryButton = styled(TamaguiButton, {
   name: "SecondaryButton",
-  backgroundColor: "#2a2a2a",
-  color: "$gray10",
-  borderRadius: 26,
+  backgroundColor: "#F8F8F8",
+  color: "#131313",
+  borderRadius: 12,
   height: 52,
   fontWeight: "600",
   fontSize: 16,
@@ -34,9 +34,9 @@ export const OutlineButton = styled(TamaguiButton, {
   name: "OutlineButton",
   backgroundColor: "transparent",
   borderWidth: 1,
-  borderColor: "#444",
-  color: "$gray11",
-  borderRadius: 26,
+  borderColor: "#F2F2F2",
+  color: "#D53F36",
+  borderRadius: 12,
   height: 52,
   fontWeight: "600",
   fontSize: 16,

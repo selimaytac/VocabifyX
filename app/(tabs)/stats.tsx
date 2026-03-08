@@ -3,7 +3,6 @@ import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
-import { Card } from "@/components/DesignSystem/Card";
 import { CategoryChips } from "@/components/DesignSystem/CategoryChip";
 import {
   Body,
@@ -71,22 +70,22 @@ function SessionRow({
 
   return (
     <XStack
-      paddingVertical="$2"
+      paddingVertical="$3"
       borderBottomWidth={1}
-      borderBottomColor="$gray4"
+      borderBottomColor="#F2F2F2"
       justifyContent="space-between"
       alignItems="center"
     >
       <XStack gap="$3" alignItems="center" flex={1}>
         <Body fontSize={20}>{icon}</Body>
         <YStack flex={1}>
-          <Label>{modeLabel}</Label>
-          <Caption color="$colorSubtitle">{date}</Caption>
+          <Label color="#131313">{modeLabel}</Label>
+          <Caption color="#D7D7D7">{date}</Caption>
         </YStack>
       </XStack>
       <YStack alignItems="flex-end">
-        <BodySmall color="#F5A623">+{session.xpEarned} XP</BodySmall>
-        <Caption color="$colorSubtitle">
+        <BodySmall color="#007AFF" fontWeight="600">+{session.xpEarned} XP</BodySmall>
+        <Caption color="#D7D7D7">
           {durationMin} {minutesLabel}
         </Caption>
       </YStack>
@@ -128,8 +127,8 @@ export default function StatsScreen() {
 
   return (
     <ScrollView
-      style={{ backgroundColor: "transparent" }}
-      contentContainerStyle={{ paddingBottom: 100 }}
+      style={{ backgroundColor: "#FFFFFF" }}
+      contentContainerStyle={{ paddingBottom: 90 }}
     >
       <YStack padding="$4" gap="$4">
         <H1>{i18n._("stats.title")}</H1>
@@ -152,88 +151,95 @@ export default function StatsScreen() {
         ) : (
           <>
             {/* Summary Card */}
-            <Card elevated>
-              <YStack gap="$4">
-                {/* 3-column top row */}
-                <XStack justifyContent="space-between">
-                  <YStack alignItems="center" flex={1} gap="$1">
-                    <Caption
-                      fontWeight="700"
-                      color="#10B981"
-                      letterSpacing={0.5}
-                    >
-                      {i18n._("stats.xpEarned")}
-                    </Caption>
-                    <H3 fontWeight="800">⚡{periodXP}</H3>
-                  </YStack>
-                  <YStack alignItems="center" flex={1} gap="$1">
-                    <Caption
-                      fontWeight="700"
-                      color="#F97316"
-                      letterSpacing={0.5}
-                    >
-                      {i18n._("stats.streakLabel")}
-                    </Caption>
-                    <H3 fontWeight="800">🔥{currentStreak}</H3>
-                    <Caption color="$colorSubtitle">
-                      {i18n._("stats.bestStreak")}: {longestStreak}
-                    </Caption>
-                  </YStack>
-                  <YStack alignItems="center" flex={1} gap="$1">
-                    <Caption
-                      fontWeight="700"
-                      color="#8B5CF6"
-                      letterSpacing={0.5}
-                    >
-                      {i18n._("stats.pointsLabel")}
-                    </Caption>
-                    <H3 fontWeight="800">⭐{totalXP}</H3>
-                  </YStack>
-                </XStack>
-
-                {/* Bottom stats grid */}
-                <XStack
-                  backgroundColor="$gray3"
-                  borderRadius={16}
+            <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4" gap="$4">
+              {/* 3-column top row — Speaker-style colored stat boxes */}
+              <XStack gap="$2">
+                <YStack
+                  flex={1}
+                  alignItems="center"
+                  gap="$1"
+                  backgroundColor="#E5F2FF"
+                  borderRadius={10}
                   padding="$3"
-                  justifyContent="space-around"
                 >
-                  <YStack alignItems="center" gap="$1">
-                    <Caption color="$colorSubtitle" fontWeight="600">
-                      {i18n._("stats.sessions").toUpperCase()}
-                    </Caption>
-                    <H3 fontWeight="700">{periodSessions.length}</H3>
-                  </YStack>
-                  <YStack width={1} backgroundColor="$borderColor" />
-                  <YStack alignItems="center" gap="$1">
-                    <Caption color="$colorSubtitle" fontWeight="600">
-                      {i18n._("stats.wordsLabel")}
-                    </Caption>
-                    <H3 fontWeight="700">{periodWordsStudied}</H3>
-                  </YStack>
-                  <YStack width={1} backgroundColor="$borderColor" />
-                  <YStack alignItems="center" gap="$1">
-                    <Caption color="$colorSubtitle" fontWeight="600">
-                      {i18n._("stats.minutesLabel")}
-                    </Caption>
-                    <H3 fontWeight="700">
-                      {formatDuration(periodStudySeconds)}
-                    </H3>
-                  </YStack>
-                </XStack>
-              </YStack>
-            </Card>
+                  <Caption fontWeight="600" color="#007AFF">
+                    {i18n._("stats.xpEarned")}
+                  </Caption>
+                  <H3 fontWeight="700" color="#007AFF">⚡{periodXP}</H3>
+                </YStack>
+                <YStack
+                  flex={1}
+                  alignItems="center"
+                  gap="$1"
+                  backgroundColor="#FFF5EB"
+                  borderRadius={10}
+                  padding="$3"
+                >
+                  <Caption fontWeight="600" color="#F5A623">
+                    {i18n._("stats.streakLabel")}
+                  </Caption>
+                  <H3 fontWeight="700" color="#F5A623">🔥{currentStreak}</H3>
+                  <Caption color="#D7D7D7">
+                    Best: {longestStreak}
+                  </Caption>
+                </YStack>
+                <YStack
+                  flex={1}
+                  alignItems="center"
+                  gap="$1"
+                  backgroundColor="#E8FFF4"
+                  borderRadius={10}
+                  padding="$3"
+                >
+                  <Caption fontWeight="600" color="#38AD49">
+                    {i18n._("stats.pointsLabel")}
+                  </Caption>
+                  <H3 fontWeight="700" color="#38AD49">⭐{totalXP}</H3>
+                </YStack>
+              </XStack>
+
+              {/* Bottom stats row */}
+              <XStack
+                backgroundColor="#FFFFFF"
+                borderRadius={10}
+                padding="$3"
+                justifyContent="space-around"
+              >
+                <YStack alignItems="center" gap="$1">
+                  <Caption color="#D7D7D7" fontWeight="600">
+                    {i18n._("stats.sessions").toUpperCase()}
+                  </Caption>
+                  <H3 fontWeight="700">{periodSessions.length}</H3>
+                </YStack>
+                <YStack width={1} backgroundColor="#F2F2F2" />
+                <YStack alignItems="center" gap="$1">
+                  <Caption color="#D7D7D7" fontWeight="600">
+                    {i18n._("stats.wordsLabel")}
+                  </Caption>
+                  <H3 fontWeight="700">{periodWordsStudied}</H3>
+                </YStack>
+                <YStack width={1} backgroundColor="#F2F2F2" />
+                <YStack alignItems="center" gap="$1">
+                  <Caption color="#D7D7D7" fontWeight="600">
+                    {i18n._("stats.minutesLabel")}
+                  </Caption>
+                  <H3 fontWeight="700">
+                    {formatDuration(periodStudySeconds)}
+                  </H3>
+                </YStack>
+              </XStack>
+            </YStack>
           </>
         )}
 
         {/* Achievement Progress Card */}
-        <Card elevated>
+        <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4">
           <XStack alignItems="center" gap="$3" marginBottom="$3">
             <YStack
               width={44}
               height={44}
-              borderRadius={12}
-              backgroundColor="#EDE9FE"
+              borderRadius={10}
+              backgroundColor="#E5F2FF"
               alignItems="center"
               justifyContent="center"
             >
@@ -246,12 +252,12 @@ export default function StatsScreen() {
               flex={1}
               alignItems="center"
               gap="$1"
-              backgroundColor="$gray3"
-              borderRadius={16}
+              backgroundColor="#FFFFFF"
+              borderRadius={10}
               padding="$3"
             >
-              <H3 fontWeight="800">{achievements.length}</H3>
-              <Caption color="$colorSubtitle">
+              <H3 fontWeight="700">{achievements.length}</H3>
+              <Caption color="#D7D7D7">
                 {i18n._("stats.totalUnlocked")}
               </Caption>
             </YStack>
@@ -259,23 +265,23 @@ export default function StatsScreen() {
               flex={1}
               alignItems="center"
               gap="$1"
-              backgroundColor="#FEF3E2"
-              borderRadius={16}
+              backgroundColor="#FFF5EB"
+              borderRadius={10}
               padding="$3"
             >
-              <H3 color="#F5A623" fontWeight="800">
+              <H3 color={"#F5A623"} fontWeight="700">
                 ⭐ {totalXP}
               </H3>
-              <Caption color="$colorSubtitle">
+              <Caption color="#D7D7D7">
                 {i18n._("stats.totalXP")}
               </Caption>
             </YStack>
           </XStack>
-        </Card>
+        </YStack>
 
         {/* Recent Sessions */}
         {recentSessions.length > 0 && (
-          <Card elevated>
+          <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4">
             <H3 marginBottom="$3">{i18n._("stats.recentSessions")}</H3>
             <YStack>
               {recentSessions.map((session) => (
@@ -288,7 +294,7 @@ export default function StatsScreen() {
                 />
               ))}
             </YStack>
-          </Card>
+          </YStack>
         )}
       </YStack>
     </ScrollView>

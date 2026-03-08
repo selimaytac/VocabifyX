@@ -70,6 +70,7 @@ export const messages: Record<string, string> = {
   "profile.noAchievements": "Complete sessions to unlock achievements!",
   "profile.days": "days",
   "profile.viewAll": "See All",
+  "profile.thisWeek": "This Week",
   "profile.title": "Your Profile",
   "profile.longestStreak": "Best Streak",
 

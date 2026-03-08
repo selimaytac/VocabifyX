@@ -2,11 +2,9 @@ import { useLingui } from "@lingui/react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { XStack, YStack } from "tamagui";
 
-import {
-  PrimaryButton,
+import { PrimaryButton,
   SecondaryButton,
 } from "@/components/DesignSystem/Button";
-import { Card } from "@/components/DesignSystem/Card";
 import { StatChip } from "@/components/DesignSystem/StatChip";
 import { Body, BodySmall, H1, H3 } from "@/components/DesignSystem/Typography";
 
@@ -40,21 +38,21 @@ export default function SummaryScreen() {
   return (
     <YStack
       flex={1}
-      backgroundColor="$background"
+      backgroundColor="#FFFFFF"
       padding="$4"
       justifyContent="center"
     >
       <YStack alignItems="center" gap="$3" marginBottom="$6">
         <H1>{emoji}</H1>
         <H3 textAlign="center">{i18n._("session.summary.title")}</H3>
-        <Body color="$colorSubtitle" textAlign="center">
+        <Body color="#D7D7D7" textAlign="center">
           {mode === "flashcard"
             ? i18n._("session.summary.flashcardSubtitle")
             : i18n._("session.summary.quizSubtitle")}
         </Body>
       </YStack>
 
-      <Card elevated marginBottom="$4">
+      <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4" marginBottom="$4">
         <XStack gap="$2" flexWrap="wrap" justifyContent="center">
           <StatChip
             icon="✅"
@@ -77,14 +75,14 @@ export default function SummaryScreen() {
             label={i18n._("session.summary.duration")}
           />
         </XStack>
-      </Card>
+      </YStack>
 
       {scorePercent === 100 && (
-        <Card backgroundColor="$green2" marginBottom="$4">
-          <BodySmall color="$green10" textAlign="center" fontWeight="600">
+        <YStack backgroundColor="#E8FFF4" borderRadius={12} padding="$3" marginBottom="$4">
+          <BodySmall color="#38AD49" textAlign="center" fontWeight="600">
             🌟 {i18n._("session.summary.perfectScore")}
           </BodySmall>
-        </Card>
+        </YStack>
       )}
 
       <YStack gap="$3">

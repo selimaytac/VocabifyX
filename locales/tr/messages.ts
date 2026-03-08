@@ -70,6 +70,7 @@ export const messages: Record<string, string> = {
   "profile.noAchievements": "Başarı açmak için oturum tamamla!",
   "profile.days": "gün",
   "profile.viewAll": "Tümünü Gör",
+  "profile.thisWeek": "Bu Hafta",
   "profile.title": "Profilin",
   "profile.longestStreak": "En İyi Seri",
 

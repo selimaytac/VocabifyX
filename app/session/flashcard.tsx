@@ -3,10 +3,9 @@ import * as Haptics from "expo-haptics";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useRef, useState } from "react";
 import { Animated, Pressable, ScrollView, StyleSheet } from "react-native";
-import { useTheme, XStack, YStack } from "tamagui";
+import { XStack, YStack } from "tamagui";
 
 import { SecondaryButton } from "@/components/DesignSystem/Button";
-import { Card } from "@/components/DesignSystem/Card";
 import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
 import {
   Body,
@@ -55,8 +54,6 @@ export default function FlashcardScreen() {
   const { i18n } = useLingui();
   const router = useRouter();
   const { listId } = useLocalSearchParams<{ listId: string }>();
-  const theme = useTheme();
-
   const list = useListsStore((state) =>
     state.lists.find((l) => l.id === listId),
   );
@@ -199,7 +196,7 @@ export default function FlashcardScreen() {
   }
 
   return (
-    <YStack flex={1} backgroundColor="$background" padding="$4">
+    <YStack flex={1} backgroundColor="#FFFFFF" padding="$4">
       <XStack
         justifyContent="space-between"
         alignItems="center"
@@ -208,7 +205,7 @@ export default function FlashcardScreen() {
         <SecondaryButton size="$3" onPress={() => router.back()}>
           {i18n._("common.back")}
         </SecondaryButton>
-        <Caption>
+        <Caption color="#D7D7D7">
           {currentIndex + 1} / {words.length}
         </Caption>
       </XStack>
@@ -216,7 +213,7 @@ export default function FlashcardScreen() {
       <ProgressBar progress={progress} color="primary" />
 
       <YStack flex={1} justifyContent="center" alignItems="center">
-        <Caption color="$colorSubtitle" marginBottom="$2">
+        <Caption color="#D7D7D7" marginBottom="$2">
           {i18n._("session.tapToReveal")}
         </Caption>
 
@@ -227,17 +224,17 @@ export default function FlashcardScreen() {
               styles.cardFront,
               {
                 transform: [{ rotateY: frontInterpolate }],
-                backgroundColor: theme.background.val as string,
+                backgroundColor: "#FFFFFF",
               },
             ]}
           >
             <ScrollView contentContainerStyle={styles.cardContent}>
-              <Caption color="$colorSubtitle" marginBottom="$2">
+              <Caption color="#D7D7D7" marginBottom="$2">
                 {i18n._("session.term")}
               </Caption>
               <H2 textAlign="center">{currentWord.term}</H2>
               <BodySmall
-                color="$colorSubtitle"
+                color="#D7D7D7"
                 marginTop="$2"
                 textAlign="center"
               >
@@ -252,18 +249,18 @@ export default function FlashcardScreen() {
               styles.cardBack,
               {
                 transform: [{ rotateY: backInterpolate }],
-                backgroundColor: theme.background.val as string,
+                backgroundColor: "#FFFFFF",
               },
             ]}
           >
             <ScrollView contentContainerStyle={styles.cardContent}>
-              <Caption color="$colorSubtitle" marginBottom="$2">
+              <Caption color="#D7D7D7" marginBottom="$2">
                 {i18n._("session.translation")}
               </Caption>
               <H2 textAlign="center">{currentWord.translation}</H2>
               {currentWord.example ? (
                 <Body
-                  color="$colorSubtitle"
+                  color="#D7D7D7"
                   marginTop="$3"
                   textAlign="center"
                   fontStyle="italic"
@@ -279,28 +276,36 @@ export default function FlashcardScreen() {
       {isFlipped && (
         <XStack gap="$3" paddingBottom="$4">
           <YStack flex={1}>
-            <Card
+            <YStack
               pressStyle={{ opacity: 0.8 }}
               onPress={() => handleAnswer(false)}
-              backgroundColor="$red3"
+              backgroundColor="#FFF0EF"
+              borderRadius={12}
+              padding="$4"
+              alignItems="center"
+              gap="$1"
             >
               <H3 textAlign="center">😕</H3>
-              <Label textAlign="center" color="$red10">
+              <Label textAlign="center" color="#D53F36">
                 {i18n._("session.didntKnow")}
               </Label>
-            </Card>
+            </YStack>
           </YStack>
           <YStack flex={1}>
-            <Card
+            <YStack
               pressStyle={{ opacity: 0.8 }}
               onPress={() => handleAnswer(true)}
-              backgroundColor="$green3"
+              backgroundColor="#E8FFF4"
+              borderRadius={12}
+              padding="$4"
+              alignItems="center"
+              gap="$1"
             >
               <H3 textAlign="center">✅</H3>
-              <Label textAlign="center" color="$green10">
+              <Label textAlign="center" color="#38AD49">
                 {i18n._("session.knewIt")}
               </Label>
-            </Card>
+            </YStack>
           </YStack>
         </XStack>
       )}

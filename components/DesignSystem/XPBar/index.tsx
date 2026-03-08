@@ -1,4 +1,4 @@
-import { YStack } from "tamagui";
+import { XStack, YStack } from "tamagui";
 
 import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
 import { BodySmall, Caption } from "@/components/DesignSystem/Typography";
@@ -18,15 +18,17 @@ export function XPBar({ totalXP, level }: XPBarProps) {
 
   return (
     <YStack gap="$1.5" width="100%">
-      <BodySmall fontWeight="600">
-        {level.emoji} {displayName}
-      </BodySmall>
-      <ProgressBar progress={progress} color="primary" />
-      <Caption>
-        {isMaxLevel
-          ? `${totalXP} XP — Max Level!`
-          : `${currentXP} / ${nextLevelXP} XP`}
-      </Caption>
+      <XStack justifyContent="space-between" alignItems="center">
+        <BodySmall fontWeight="600" color="#131313">
+          {level.emoji} {displayName}
+        </BodySmall>
+        <Caption color="#D7D7D7">
+          {isMaxLevel
+            ? `${totalXP} XP — Max!`
+            : `${currentXP} / ${nextLevelXP} XP`}
+        </Caption>
+      </XStack>
+      <ProgressBar progress={progress} color="primary" height={6} />
     </YStack>
   );
 }
