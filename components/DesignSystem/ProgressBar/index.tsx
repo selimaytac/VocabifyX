@@ -2,7 +2,7 @@ import { styled, XStack, YStack } from "tamagui";
 
 const ProgressTrack = styled(XStack, {
   name: "ProgressTrack",
-  backgroundColor: "#F8F8F8",
+  backgroundColor: "#E0E0E0",
   borderRadius: 100,
   height: 8,
   overflow: "hidden",
@@ -11,22 +11,23 @@ const ProgressTrack = styled(XStack, {
 
 const ProgressFill = styled(YStack, {
   name: "ProgressFill",
-  backgroundColor: "#007AFF",
+  backgroundColor: "#213448",
   borderRadius: 100,
   height: "100%",
   variants: {
     color: {
-      success: { backgroundColor: "#38AD49" },
-      warning: { backgroundColor: "#F5A623" },
-      primary: { backgroundColor: "#007AFF" },
-      error: { backgroundColor: "#D53F36" },
+      success: { backgroundColor: "#4CAF50" },
+      warning: { backgroundColor: "#FFC107" },
+      primary: { backgroundColor: "#213448" },
+      error: { backgroundColor: "#F44336" },
+      accent: { backgroundColor: "#E17564" },
     },
   } as const,
 });
 
 interface ProgressBarProps {
   progress: number;
-  color?: "success" | "warning" | "primary" | "error";
+  color?: "success" | "warning" | "primary" | "error" | "accent";
   height?: number;
 }
 

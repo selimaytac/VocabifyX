@@ -19,7 +19,7 @@ export function CategoryChips<T extends string>({
   if (variant === "segmented") {
     return (
       <XStack
-        backgroundColor="#F8F8F8"
+        backgroundColor="#F7F8FB"
         borderRadius={10}
         padding="$1"
         gap="$0"
@@ -32,14 +32,14 @@ export function CategoryChips<T extends string>({
               flex={1}
               paddingVertical="$2"
               borderRadius={8}
-              backgroundColor={isSelected ? "#007AFF" : "transparent"}
+              backgroundColor={isSelected ? "#213448" : "transparent"}
               pressStyle={{ opacity: 0.8 }}
               onPress={() => onSelect(category.key)}
               justifyContent="center"
               alignItems="center"
             >
               <Label
-                color={isSelected ? "#FFFFFF" : "#D7D7D7"}
+                color={isSelected ? "#FFFFFF" : "#777777"}
                 fontWeight={isSelected ? "600" : "500"}
                 textAlign="center"
               >
@@ -63,12 +63,12 @@ export function CategoryChips<T extends string>({
               paddingHorizontal="$3"
               paddingVertical="$2"
               borderRadius={100}
-              backgroundColor={isSelected ? "#E5F2FF" : "#F8F8F8"}
+              backgroundColor={isSelected ? "#213448" : "#F7F8FB"}
               pressStyle={{ opacity: 0.8 }}
               onPress={() => onSelect(category.key)}
             >
               <Label
-                color={isSelected ? "#007AFF" : "#D7D7D7"}
+                color={isSelected ? "#FFFFFF" : "#777777"}
                 fontWeight={isSelected ? "600" : "500"}
               >
                 {category.label}

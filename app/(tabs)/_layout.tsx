@@ -13,7 +13,7 @@ function CenterFAB({ onPress }: { onPress: () => void }) {
       activeOpacity={0.82}
     >
       <View style={fabStyles.button}>
-        <Plus size={26} color="white" />
+        <Plus size={28} color="white" />
       </View>
     </TouchableOpacity>
   );
@@ -31,10 +31,10 @@ const fabStyles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    backgroundColor: "#007AFF",
+    backgroundColor: "#213448",
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#007AFF",
+    shadowColor: "#213448",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.35,
     shadowRadius: 8,
@@ -55,13 +55,13 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#007AFF",
-        tabBarInactiveTintColor: "#D7D7D7",
+        tabBarActiveTintColor: "#213448",
+        tabBarInactiveTintColor: "#B0B0B0",
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: "#FFFFFF",
           borderTopWidth: 1,
-          borderTopColor: "#F2F2F2",
+          borderTopColor: "#E0E0E0",
           height: 72,
           paddingBottom: 12,
           paddingTop: 8,
@@ -69,12 +69,12 @@ export default function TabLayout() {
         headerStyle: {
           backgroundColor: "#FFFFFF",
         },
-        headerTintColor: "#131313",
+        headerTintColor: "#09122C",
         headerShadowVisible: false,
         headerTitleStyle: {
           fontWeight: "600",
           fontSize: 18,
-          color: "#131313",
+          color: "#09122C",
         },
       }}
     >

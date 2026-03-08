@@ -19,10 +19,10 @@ export function XPBar({ totalXP, level }: XPBarProps) {
   return (
     <YStack gap="$1.5" width="100%">
       <XStack justifyContent="space-between" alignItems="center">
-        <BodySmall fontWeight="600" color="#131313">
+        <BodySmall fontWeight="600" color="#09122C">
           {level.emoji} {displayName}
         </BodySmall>
-        <Caption color="#D7D7D7">
+        <Caption color="#777777">
           {isMaxLevel
             ? `${totalXP} XP — Max!`
             : `${currentXP} / ${nextLevelXP} XP`}
