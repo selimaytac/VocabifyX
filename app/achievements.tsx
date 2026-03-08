@@ -1,5 +1,4 @@
 import { useLingui } from "@lingui/react";
-import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
@@ -99,7 +98,6 @@ function matchesFilter(
 
 export default function AchievementsScreen() {
   const { i18n } = useLingui();
-  const router = useRouter();
   const [filter, setFilter] = useState<AchievementFilter>("all");
   const {
     achievements: unlockedList,
@@ -145,7 +143,7 @@ export default function AchievementsScreen() {
   const tierStyle = tierColors[currentLevel.tier] ?? tierColors.Silver;
 
   return (
-    <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
+    <ScrollView style={{ backgroundColor: "transparent" }}>
       <YStack padding="$4" gap="$4" paddingBottom="$8">
         {/* Level header card */}
         <YStack
@@ -183,36 +181,36 @@ export default function AchievementsScreen() {
 
         {/* Summary stats */}
         <YStack
-          backgroundColor="#FFFFFF"
+          backgroundColor="$background"
           borderRadius={16}
           borderWidth={1}
-          borderColor="#E5E7EB"
+          borderColor="$borderColor"
           overflow="hidden"
         >
           <XStack>
             <YStack flex={1} alignItems="center" padding="$3" gap="$1">
-              <Body fontWeight="700" fontSize={22} color="#0D0D0D">
+              <Body fontWeight="700" fontSize={22}>
                 {unlockedCount}
               </Body>
-              <Caption color="#9CA3AF" fontSize={11}>
+              <Caption color="$colorSubtitle" fontSize={11}>
                 {i18n._("achievements.unlocked")}
               </Caption>
             </YStack>
-            <YStack width={1} backgroundColor="#E5E7EB" />
+            <YStack width={1} backgroundColor="$borderColor" />
             <YStack flex={1} alignItems="center" padding="$3" gap="$1">
-              <Body fontWeight="700" fontSize={22} color="#0D0D0D">
+              <Body fontWeight="700" fontSize={22}>
                 {ACHIEVEMENTS.length}
               </Body>
-              <Caption color="#9CA3AF" fontSize={11}>
+              <Caption color="$colorSubtitle" fontSize={11}>
                 {i18n._("achievements.total")}
               </Caption>
             </YStack>
-            <YStack width={1} backgroundColor="#E5E7EB" />
+            <YStack width={1} backgroundColor="$borderColor" />
             <YStack flex={1} alignItems="center" padding="$3" gap="$1">
-              <Body fontWeight="700" fontSize={22} color="#0D0D0D">
+              <Body fontWeight="700" fontSize={22}>
                 {totalXPFromAchievements}
               </Body>
-              <Caption color="#9CA3AF" fontSize={11}>
+              <Caption color="$colorSubtitle" fontSize={11}>
                 {i18n._("achievements.xpEarned")}
               </Caption>
             </YStack>
@@ -242,10 +240,10 @@ export default function AchievementsScreen() {
             return (
               <YStack
                 key={achievement.id}
-                backgroundColor="#FFFFFF"
+                backgroundColor="$background"
                 borderRadius={16}
                 borderWidth={1}
-                borderColor="#E5E7EB"
+                borderColor="$borderColor"
                 padding="$4"
                 gap="$3"
                 opacity={isUnlocked ? 1 : 0.7}
@@ -256,7 +254,7 @@ export default function AchievementsScreen() {
                     height={52}
                     borderRadius={26}
                     backgroundColor={
-                      isUnlocked ? achievement.badgeColor : "#E5E7EB"
+                      isUnlocked ? achievement.badgeColor : "$gray4"
                     }
                     alignItems="center"
                     justifyContent="center"
@@ -268,18 +266,18 @@ export default function AchievementsScreen() {
                   </XStack>
                   <YStack flex={1} gap="$1">
                     <XStack justifyContent="space-between" alignItems="center">
-                      <Label fontWeight="700" color="#0D0D0D">
+                      <Label fontWeight="700">
                         {i18n._(achievement.titleKey)}
                       </Label>
                       {isUnlocked ? (
                         <Body fontSize={18}>✅</Body>
                       ) : (
-                        <Caption color="#9CA3AF" fontSize={11}>
+                        <Caption color="$colorSubtitle" fontSize={11}>
                           {current}/{target}
                         </Caption>
                       )}
                     </XStack>
-                    <BodySmall color="#9CA3AF">
+                    <BodySmall color="$colorSubtitle">
                       {i18n._(achievement.descriptionKey)}
                     </BodySmall>
                   </YStack>

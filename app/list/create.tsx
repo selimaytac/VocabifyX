@@ -2,7 +2,7 @@ import { useLingui } from "@lingui/react";
 import { ArrowLeft, Minus, Plus } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { Alert, ScrollView, TextInput } from "react-native";
+import { Alert, ScrollView, TextInput, useColorScheme } from "react-native";
 import { XStack, YStack } from "tamagui";
 
 import { CategoryChips } from "@/components/DesignSystem/CategoryChip";
@@ -49,6 +49,11 @@ export default function CreateListScreen() {
     createEmptyWord(),
     createEmptyWord(),
   ]);
+
+  const colorScheme = useColorScheme();
+  const isDark = colorScheme === "dark";
+  const inputTextColor = isDark ? "#E5E7EB" : "#0D0D0D";
+  const placeholderColor = isDark ? "#6B7280" : "#9CA3AF";
 
   const nonAllCategories = LIST_CATEGORIES.filter((c) => c.key !== "all").map(
     (c) => ({ key: c.key, label: i18n._(c.labelKey) }),
@@ -128,7 +133,7 @@ export default function CreateListScreen() {
 
   return (
     <ScrollView
-      style={{ backgroundColor: "#FFFFFF" }}
+      style={{ backgroundColor: "transparent" }}
       keyboardShouldPersistTaps="handled"
     >
       <YStack padding="$4" gap="$5">
@@ -140,14 +145,14 @@ export default function CreateListScreen() {
             borderRadius={8}
             pressStyle={{ opacity: 0.7 }}
           >
-            <ArrowLeft size={24} color="#0D0D0D" />
+            <ArrowLeft size={24} color="$color" />
           </XStack>
-          <H2 color="#0D0D0D">{i18n._("createList.title")}</H2>
+          <H2>{i18n._("createList.title")}</H2>
         </XStack>
 
         {/* Category chips */}
         <YStack gap="$2">
-          <Body color="#0D0D0D" fontWeight="700" fontSize={15}>
+          <Body fontWeight="700" fontSize={15}>
             {i18n._("createList.category")}
           </Body>
           <CategoryChips
@@ -160,54 +165,39 @@ export default function CreateListScreen() {
 
         {/* LIST NAME */}
         <YStack gap="$2">
-          <Caption
-            color="#9CA3AF"
-            fontWeight="700"
-            fontSize={11}
-            letterSpacing={1}
-          >
+          <Caption fontWeight="700" fontSize={11} letterSpacing={1}>
             {i18n._("createList.listName").toUpperCase()}
           </Caption>
-          <YStack backgroundColor="#F5F7FA" borderRadius={12} padding="$4">
+          <YStack backgroundColor="$gray3" borderRadius={12} padding="$4">
             <TextInput
               value={listName}
               onChangeText={setListName}
               placeholder={i18n._("createList.listNamePlaceholder")}
-              placeholderTextColor="#9CA3AF"
-              style={{ fontSize: 16, color: "#0D0D0D" }}
+              placeholderTextColor={placeholderColor}
+              style={{ fontSize: 16, color: inputTextColor }}
             />
           </YStack>
         </YStack>
 
         {/* TOPIC */}
         <YStack gap="$2">
-          <Caption
-            color="#9CA3AF"
-            fontWeight="700"
-            fontSize={11}
-            letterSpacing={1}
-          >
+          <Caption fontWeight="700" fontSize={11} letterSpacing={1}>
             {i18n._("createList.topic").toUpperCase()}
           </Caption>
-          <YStack backgroundColor="#F5F7FA" borderRadius={12} padding="$4">
+          <YStack backgroundColor="$gray3" borderRadius={12} padding="$4">
             <TextInput
               value={topic}
               onChangeText={setTopic}
               placeholder={i18n._("createList.topicPlaceholder")}
-              placeholderTextColor="#9CA3AF"
-              style={{ fontSize: 16, color: "#0D0D0D" }}
+              placeholderTextColor={placeholderColor}
+              style={{ fontSize: 16, color: inputTextColor }}
             />
           </YStack>
         </YStack>
 
         {/* LANGUAGE */}
         <YStack gap="$2">
-          <Caption
-            color="#9CA3AF"
-            fontWeight="700"
-            fontSize={11}
-            letterSpacing={1}
-          >
+          <Caption fontWeight="700" fontSize={11} letterSpacing={1}>
             {i18n._("createList.language").toUpperCase()}
           </Caption>
           <XStack gap="$2" flexWrap="wrap">
@@ -219,12 +209,12 @@ export default function CreateListScreen() {
                 paddingVertical="$2"
                 borderRadius={100}
                 borderWidth={1.5}
-                borderColor={language === lang ? "#1B2D4F" : "#E5E7EB"}
-                backgroundColor={language === lang ? "#1B2D4F" : "#FFFFFF"}
+                borderColor={language === lang ? "#1B2D4F" : "$borderColor"}
+                backgroundColor={language === lang ? "#1B2D4F" : "$background"}
                 pressStyle={{ opacity: 0.7 }}
               >
                 <Caption
-                  color={language === lang ? "#FFFFFF" : "#6B7280"}
+                  color={language === lang ? "#FFFFFF" : "$colorSubtitle"}
                   fontWeight="600"
                   fontSize={13}
                 >
@@ -238,15 +228,10 @@ export default function CreateListScreen() {
         {/* WORDS */}
         <YStack gap="$3">
           <XStack justifyContent="space-between" alignItems="center">
-            <Caption
-              color="#9CA3AF"
-              fontWeight="700"
-              fontSize={11}
-              letterSpacing={1}
-            >
+            <Caption fontWeight="700" fontSize={11} letterSpacing={1}>
               {i18n._("createList.words").toUpperCase()}
             </Caption>
-            <Caption color="#9CA3AF" fontSize={12}>
+            <Caption color="$colorSubtitle" fontSize={12}>
               {words.filter((w) => w.term.trim()).length}{" "}
               {i18n._("createList.wordCount")}
             </Caption>
@@ -255,13 +240,13 @@ export default function CreateListScreen() {
           {words.map((word, index) => (
             <YStack
               key={word.id}
-              backgroundColor="#F5F7FA"
+              backgroundColor="$gray3"
               borderRadius={12}
               padding="$4"
               gap="$3"
             >
               <XStack justifyContent="space-between" alignItems="center">
-                <Caption color="#9CA3AF" fontSize={12}>
+                <Caption color="$colorSubtitle" fontSize={12}>
                   #{index + 1}
                 </Caption>
                 {words.length > 1 && (
@@ -273,35 +258,47 @@ export default function CreateListScreen() {
                   </XStack>
                 )}
               </XStack>
-              <YStack backgroundColor="#FFFFFF" borderRadius={8} padding="$3">
+              <YStack
+                backgroundColor="$background"
+                borderRadius={8}
+                padding="$3"
+              >
                 <TextInput
                   value={word.term}
                   onChangeText={(val) => handleWordChange(word.id, "term", val)}
                   placeholder={i18n._("createList.termPlaceholder")}
-                  placeholderTextColor="#9CA3AF"
-                  style={{ fontSize: 15, color: "#0D0D0D" }}
+                  placeholderTextColor={placeholderColor}
+                  style={{ fontSize: 15, color: inputTextColor }}
                 />
               </YStack>
-              <YStack backgroundColor="#FFFFFF" borderRadius={8} padding="$3">
+              <YStack
+                backgroundColor="$background"
+                borderRadius={8}
+                padding="$3"
+              >
                 <TextInput
                   value={word.translation}
                   onChangeText={(val) =>
                     handleWordChange(word.id, "translation", val)
                   }
                   placeholder={i18n._("createList.translationPlaceholder")}
-                  placeholderTextColor="#9CA3AF"
-                  style={{ fontSize: 15, color: "#0D0D0D" }}
+                  placeholderTextColor={placeholderColor}
+                  style={{ fontSize: 15, color: inputTextColor }}
                 />
               </YStack>
-              <YStack backgroundColor="#FFFFFF" borderRadius={8} padding="$3">
+              <YStack
+                backgroundColor="$background"
+                borderRadius={8}
+                padding="$3"
+              >
                 <TextInput
                   value={word.example}
                   onChangeText={(val) =>
                     handleWordChange(word.id, "example", val)
                   }
                   placeholder={i18n._("createList.examplePlaceholder")}
-                  placeholderTextColor="#9CA3AF"
-                  style={{ fontSize: 15, color: "#0D0D0D" }}
+                  placeholderTextColor={placeholderColor}
+                  style={{ fontSize: 15, color: inputTextColor }}
                   multiline
                 />
               </YStack>
@@ -317,7 +314,7 @@ export default function CreateListScreen() {
             paddingVertical="$4"
             borderRadius={12}
             borderWidth={1.5}
-            borderColor="#E5E7EB"
+            borderColor="$borderColor"
             pressStyle={{ opacity: 0.7 }}
           >
             <Plus size={18} color="#1B2D4F" />

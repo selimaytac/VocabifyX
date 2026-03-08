@@ -51,7 +51,7 @@ export default function ProfileScreen() {
 
   return (
     <ScrollView
-      style={{ backgroundColor: "#FFFFFF" }}
+      style={{ backgroundColor: "transparent" }}
       contentContainerStyle={{ paddingBottom: 100 }}
     >
       <YStack padding="$4" gap="$4" paddingTop="$12">
@@ -61,13 +61,13 @@ export default function ProfileScreen() {
             onPress={() => router.push("/settings")}
             width={40}
             height={40}
-            backgroundColor="#F5F7FA"
+            backgroundColor="$gray3"
             borderRadius={20}
             alignItems="center"
             justifyContent="center"
             pressStyle={{ opacity: 0.7 }}
           >
-            <Settings size={20} color="#6B7280" />
+            <Settings size={20} color="$colorSubtitle" />
           </XStack>
         </XStack>
 
@@ -86,10 +86,10 @@ export default function ProfileScreen() {
             </H2>
           </XStack>
           <YStack flex={1} gap="$0.5">
-            <H2 color="#0D0D0D" fontWeight="700" fontSize={22}>
+            <H2 fontWeight="700" fontSize={22}>
               {displayName}
             </H2>
-            <Caption color="#9CA3AF">{user?.email ?? ""}</Caption>
+            <Caption color="$colorSubtitle">{user?.email ?? ""}</Caption>
           </YStack>
           <LevelBadge level={currentLevel} size="sm" />
         </XStack>
@@ -98,16 +98,16 @@ export default function ProfileScreen() {
         <Card elevated>
           <YStack gap="$2">
             <XStack justifyContent="space-between" alignItems="center">
-              <BodySmall fontWeight="700" color="#0D0D0D">
+              <BodySmall fontWeight="700">
                 {currentLevel.emoji} {getLevelDisplayName(currentLevel)}
               </BodySmall>
-              <Caption color="#9CA3AF">
+              <Caption color="$colorSubtitle">
                 {currentXP} / {nextLevelXP} XP
               </Caption>
             </XStack>
             <ProgressBar progress={progress} color="primary" height={10} />
             <XStack justifyContent="space-between" alignItems="center">
-              <Caption color="#9CA3AF">{totalXP} Total XP</Caption>
+              <Caption color="$colorSubtitle">{totalXP} Total XP</Caption>
               <XStack
                 gap="$1"
                 alignItems="center"
@@ -151,28 +151,22 @@ export default function ProfileScreen() {
         <Card>
           <XStack justifyContent="space-around" paddingVertical="$2">
             <YStack alignItems="center" gap="$1" flex={1}>
-              <H3 color="#0D0D0D" fontWeight="700">
-                {stats.wordsMastered}
-              </H3>
-              <Caption color="#9CA3AF" textAlign="center">
+              <H3 fontWeight="700">{stats.wordsMastered}</H3>
+              <Caption color="$colorSubtitle" textAlign="center">
                 {i18n._("profile.wordsLearned")}
               </Caption>
             </YStack>
-            <YStack width={1} backgroundColor="#E5E7EB" />
+            <YStack width={1} backgroundColor="$borderColor" />
             <YStack alignItems="center" gap="$1" flex={1}>
-              <H3 color="#0D0D0D" fontWeight="700">
-                {stats.sessionsCompleted}
-              </H3>
-              <Caption color="#9CA3AF" textAlign="center">
+              <H3 fontWeight="700">{stats.sessionsCompleted}</H3>
+              <Caption color="$colorSubtitle" textAlign="center">
                 {i18n._("profile.sessionsCompleted")}
               </Caption>
             </YStack>
-            <YStack width={1} backgroundColor="#E5E7EB" />
+            <YStack width={1} backgroundColor="$borderColor" />
             <YStack alignItems="center" gap="$1" flex={1}>
-              <H3 color="#0D0D0D" fontWeight="700">
-                {longestStreak}d
-              </H3>
-              <Caption color="#9CA3AF" textAlign="center">
+              <H3 fontWeight="700">{longestStreak}d</H3>
+              <Caption color="$colorSubtitle" textAlign="center">
                 {i18n._("profile.longestStreak")}
               </Caption>
             </YStack>
@@ -186,7 +180,7 @@ export default function ProfileScreen() {
             alignItems="center"
             marginBottom="$3"
           >
-            <H3 color="#0D0D0D">{i18n._("profile.recentAchievements")}</H3>
+            <H3>{i18n._("profile.recentAchievements")}</H3>
             <XStack
               onPress={() => router.push("/achievements")}
               pressStyle={{ opacity: 0.7 }}
@@ -197,7 +191,7 @@ export default function ProfileScreen() {
             </XStack>
           </XStack>
           {recentAchievements.length === 0 ? (
-            <BodySmall color="#9CA3AF">
+            <BodySmall color="$colorSubtitle">
               {i18n._("profile.noAchievements")}
             </BodySmall>
           ) : (
@@ -223,11 +217,7 @@ export default function ProfileScreen() {
                     >
                       <Body fontSize={28}>{achievement.icon}</Body>
                     </YStack>
-                    <Caption
-                      textAlign="center"
-                      numberOfLines={1}
-                      color="#374151"
-                    >
+                    <Caption textAlign="center" numberOfLines={1}>
                       {i18n._(achievement.titleKey)}
                     </Caption>
                     <Caption color="#F5A623">+{ua.xpAwarded} XP</Caption>
@@ -241,8 +231,8 @@ export default function ProfileScreen() {
         <OutlineButton
           onPress={signOut}
           marginTop="$2"
-          borderColor="#E5E7EB"
-          color="#6B7280"
+          borderColor="$borderColor"
+          color="$colorSubtitle"
         >
           {i18n._("common.logout")}
         </OutlineButton>

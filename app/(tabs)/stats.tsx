@@ -98,7 +98,7 @@ export default function StatsScreen() {
   const { i18n } = useLingui();
   const [selectedPeriod, setSelectedPeriod] = useState<StatsPeriod>("today");
   const sessions = useSessionsStore((state) => state.sessions);
-  const { totalXP, currentStreak, longestStreak, achievements, stats } =
+  const { totalXP, currentStreak, longestStreak, achievements } =
     useGameStore();
 
   const periodCategories = [
@@ -128,11 +128,11 @@ export default function StatsScreen() {
 
   return (
     <ScrollView
-      style={{ backgroundColor: "#FFFFFF" }}
+      style={{ backgroundColor: "transparent" }}
       contentContainerStyle={{ paddingBottom: 100 }}
     >
       <YStack padding="$4" gap="$4">
-        <H1 color="#0D0D0D">{i18n._("stats.title")}</H1>
+        <H1>{i18n._("stats.title")}</H1>
 
         <CategoryChips
           categories={periodCategories}
@@ -144,10 +144,8 @@ export default function StatsScreen() {
         {periodSessions.length === 0 ? (
           <YStack alignItems="center" paddingVertical="$8" gap="$3">
             <Body fontSize={48}>📊</Body>
-            <H3 textAlign="center" color="#0D0D0D">
-              {i18n._("stats.noSessions")}
-            </H3>
-            <BodySmall color="#9CA3AF" textAlign="center">
+            <H3 textAlign="center">{i18n._("stats.noSessions")}</H3>
+            <BodySmall color="$colorSubtitle" textAlign="center">
               {i18n._("stats.noSessionsSubtitle")}
             </BodySmall>
           </YStack>
@@ -166,9 +164,7 @@ export default function StatsScreen() {
                     >
                       {i18n._("stats.xpEarned")}
                     </Caption>
-                    <H3 color="#0D0D0D" fontWeight="800">
-                      ⚡{periodXP}
-                    </H3>
+                    <H3 fontWeight="800">⚡{periodXP}</H3>
                   </YStack>
                   <YStack alignItems="center" flex={1} gap="$1">
                     <Caption
@@ -178,10 +174,8 @@ export default function StatsScreen() {
                     >
                       {i18n._("stats.streakLabel")}
                     </Caption>
-                    <H3 color="#0D0D0D" fontWeight="800">
-                      🔥{currentStreak}
-                    </H3>
-                    <Caption color="#9CA3AF">
+                    <H3 fontWeight="800">🔥{currentStreak}</H3>
+                    <Caption color="$colorSubtitle">
                       {i18n._("stats.bestStreak")}: {longestStreak}
                     </Caption>
                   </YStack>
@@ -193,42 +187,36 @@ export default function StatsScreen() {
                     >
                       {i18n._("stats.pointsLabel")}
                     </Caption>
-                    <H3 color="#0D0D0D" fontWeight="800">
-                      ⭐{totalXP}
-                    </H3>
+                    <H3 fontWeight="800">⭐{totalXP}</H3>
                   </YStack>
                 </XStack>
 
                 {/* Bottom stats grid */}
                 <XStack
-                  backgroundColor="#F5F7FA"
+                  backgroundColor="$gray3"
                   borderRadius={16}
                   padding="$3"
                   justifyContent="space-around"
                 >
                   <YStack alignItems="center" gap="$1">
-                    <Caption color="#9CA3AF" fontWeight="600">
+                    <Caption color="$colorSubtitle" fontWeight="600">
                       {i18n._("stats.sessions").toUpperCase()}
                     </Caption>
-                    <H3 color="#0D0D0D" fontWeight="700">
-                      {periodSessions.length}
-                    </H3>
+                    <H3 fontWeight="700">{periodSessions.length}</H3>
                   </YStack>
-                  <YStack width={1} backgroundColor="#E5E7EB" />
+                  <YStack width={1} backgroundColor="$borderColor" />
                   <YStack alignItems="center" gap="$1">
-                    <Caption color="#9CA3AF" fontWeight="600">
+                    <Caption color="$colorSubtitle" fontWeight="600">
                       {i18n._("stats.wordsLabel")}
                     </Caption>
-                    <H3 color="#0D0D0D" fontWeight="700">
-                      {periodWordsStudied}
-                    </H3>
+                    <H3 fontWeight="700">{periodWordsStudied}</H3>
                   </YStack>
-                  <YStack width={1} backgroundColor="#E5E7EB" />
+                  <YStack width={1} backgroundColor="$borderColor" />
                   <YStack alignItems="center" gap="$1">
-                    <Caption color="#9CA3AF" fontWeight="600">
+                    <Caption color="$colorSubtitle" fontWeight="600">
                       {i18n._("stats.minutesLabel")}
                     </Caption>
-                    <H3 color="#0D0D0D" fontWeight="700">
+                    <H3 fontWeight="700">
                       {formatDuration(periodStudySeconds)}
                     </H3>
                   </YStack>
@@ -251,21 +239,21 @@ export default function StatsScreen() {
             >
               <Body fontSize={22}>🏆</Body>
             </YStack>
-            <H3 color="#0D0D0D">{i18n._("stats.achievementProgress")}</H3>
+            <H3>{i18n._("stats.achievementProgress")}</H3>
           </XStack>
           <XStack gap="$3">
             <YStack
               flex={1}
               alignItems="center"
               gap="$1"
-              backgroundColor="#F5F7FA"
+              backgroundColor="$gray3"
               borderRadius={16}
               padding="$3"
             >
-              <H3 color="#0D0D0D" fontWeight="800">
-                {achievements.length}
-              </H3>
-              <Caption color="#9CA3AF">{i18n._("stats.totalUnlocked")}</Caption>
+              <H3 fontWeight="800">{achievements.length}</H3>
+              <Caption color="$colorSubtitle">
+                {i18n._("stats.totalUnlocked")}
+              </Caption>
             </YStack>
             <YStack
               flex={1}
@@ -278,7 +266,9 @@ export default function StatsScreen() {
               <H3 color="#F5A623" fontWeight="800">
                 ⭐ {totalXP}
               </H3>
-              <Caption color="#9CA3AF">{i18n._("stats.totalXP")}</Caption>
+              <Caption color="$colorSubtitle">
+                {i18n._("stats.totalXP")}
+              </Caption>
             </YStack>
           </XStack>
         </Card>
@@ -286,9 +276,7 @@ export default function StatsScreen() {
         {/* Recent Sessions */}
         {recentSessions.length > 0 && (
           <Card elevated>
-            <H3 color="#0D0D0D" marginBottom="$3">
-              {i18n._("stats.recentSessions")}
-            </H3>
+            <H3 marginBottom="$3">{i18n._("stats.recentSessions")}</H3>
             <YStack>
               {recentSessions.map((session) => (
                 <SessionRow

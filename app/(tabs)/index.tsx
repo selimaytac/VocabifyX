@@ -8,6 +8,7 @@ import { XStack, YStack } from "tamagui";
 import { PrimaryButton } from "@/components/DesignSystem/Button";
 import { Card } from "@/components/DesignSystem/Card";
 import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
+import { Skeleton } from "@/components/DesignSystem/Skeleton";
 import { StatChip } from "@/components/DesignSystem/StatChip";
 import {
   Body,
@@ -24,6 +25,30 @@ import {
 } from "@/store/listsStore";
 import { useSessionsStore } from "@/store/sessionsStore";
 import { useUserStore } from "@/store/userStore";
+
+function ListCardSkeleton() {
+  return (
+    <Card elevated marginBottom="$3">
+      <YStack gap="$3">
+        <XStack justifyContent="space-between" alignItems="flex-start">
+          <YStack flex={1} marginRight="$2" gap="$2">
+            <Skeleton height={20} width="60%" borderRadius={6} />
+            <Skeleton height={12} width="40%" borderRadius={6} />
+          </YStack>
+          <Skeleton height={22} width={60} borderRadius={100} />
+        </XStack>
+        <YStack gap="$1">
+          <Skeleton height={6} borderRadius={3} />
+          <Skeleton height={12} width="15%" borderRadius={6} />
+        </YStack>
+        <XStack gap="$2" marginTop="$1">
+          <Skeleton height={32} borderRadius={100} />
+          <Skeleton height={32} borderRadius={100} />
+        </XStack>
+      </YStack>
+    </Card>
+  );
+}
 
 function ListCard({
   list,
@@ -51,19 +76,17 @@ function ListCard({
       <YStack gap="$3">
         <XStack justifyContent="space-between" alignItems="flex-start">
           <YStack flex={1} marginRight="$2">
-            <H3 numberOfLines={1} color="#0D0D0D">
-              {list.name}
-            </H3>
+            <H3 numberOfLines={1}>{list.name}</H3>
             <Caption>{list.topic}</Caption>
           </YStack>
           <XStack
-            backgroundColor={completion === 100 ? "#D1FAE5" : "#F5F7FA"}
+            backgroundColor={completion === 100 ? "$green3" : "$gray3"}
             paddingHorizontal="$2"
             paddingVertical="$1"
             borderRadius={100}
           >
             <Caption
-              color={completion === 100 ? "#059669" : "#6B7280"}
+              color={completion === 100 ? "$green10" : "$colorSubtitle"}
               fontWeight="600"
             >
               {list.words.length} {wordsLabel}
@@ -77,7 +100,7 @@ function ListCard({
             color={completion === 100 ? "success" : "primary"}
             height={6}
           />
-          <Caption color="#9CA3AF">{completion}%</Caption>
+          <Caption color="$colorSubtitle">{completion}%</Caption>
         </YStack>
 
         <XStack gap="$2" marginTop="$1">
@@ -103,7 +126,7 @@ function ListCard({
           </XStack>
           <XStack
             flex={1}
-            backgroundColor="#F5F7FA"
+            backgroundColor="$gray3"
             borderRadius={100}
             paddingVertical="$2"
             justifyContent="center"
@@ -117,7 +140,7 @@ function ListCard({
               });
             }}
           >
-            <Caption color="#374151" fontWeight="700">
+            <Caption color="$color" fontWeight="700">
               🧠 {quizLabel}
             </Caption>
           </XStack>
@@ -132,6 +155,7 @@ export default function HomeScreen() {
   const router = useRouter();
   const profile = useUserStore((state) => state.profile);
   const lists = useListsStore((state) => state.lists);
+  const hasHydrated = useListsStore((state) => state._hasHydrated);
   const { currentStreak } = useGameStore();
   const getSessionsToday = useSessionsStore((state) => state.getSessionsToday);
 
@@ -141,12 +165,12 @@ export default function HomeScreen() {
   const displayName = profile?.displayName ?? "Learner";
 
   return (
-    <YStack flex={1} backgroundColor="#FFFFFF">
+    <YStack flex={1} backgroundColor="$background">
       <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <YStack padding="$4" gap="$4">
           {/* Greeting */}
           <YStack paddingTop="$2" gap="$1">
-            <H1 color="#0D0D0D" fontSize={28} fontWeight="700">
+            <H1 fontSize={28} fontWeight="700">
               {i18n._("home.greeting")}, {displayName}! 👋
             </H1>
           </YStack>
@@ -172,9 +196,9 @@ export default function HomeScreen() {
 
           {/* My Lists header */}
           <XStack justifyContent="space-between" alignItems="center">
-            <H3 color="#0D0D0D">{i18n._("home.myLists")}</H3>
+            <H3>{i18n._("home.myLists")}</H3>
             <XStack gap="$2" alignItems="center">
-              <Caption color="#9CA3AF">{lists.length} lists</Caption>
+              <Caption color="$colorSubtitle">{lists.length} lists</Caption>
               <XStack
                 onPress={() => router.push("/list/create")}
                 backgroundColor="#1B2D4F"
@@ -190,13 +214,17 @@ export default function HomeScreen() {
             </XStack>
           </XStack>
 
-          {lists.length === 0 ? (
+          {!hasHydrated ? (
+            <>
+              <ListCardSkeleton />
+              <ListCardSkeleton />
+              <ListCardSkeleton />
+            </>
+          ) : lists.length === 0 ? (
             <YStack alignItems="center" paddingVertical="$8" gap="$3">
               <Body fontSize={48}>📚</Body>
-              <H3 textAlign="center" color="#0D0D0D">
-                {i18n._("home.emptyTitle")}
-              </H3>
-              <BodySmall color="#9CA3AF" textAlign="center">
+              <H3 textAlign="center">{i18n._("home.emptyTitle")}</H3>
+              <BodySmall color="$colorSubtitle" textAlign="center">
                 {i18n._("home.emptySubtitle")}
               </BodySmall>
               <PrimaryButton onPress={() => router.push("/list/create")}>
