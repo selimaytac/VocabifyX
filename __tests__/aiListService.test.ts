@@ -1,5 +1,4 @@
-import type { AIListRequest } from "../services/api/ai-list.service";
-
+/* eslint-disable import/first */
 // Mock supabase before importing the module
 const mockInvoke = jest.fn();
 jest.mock("@/utils/supabase", () => ({
@@ -10,7 +9,7 @@ jest.mock("@/utils/supabase", () => ({
   },
 }));
 
-// Import after mock setup
+import type { AIListRequest } from "../services/api/ai-list.service";
 import { generateAIList } from "../services/api/ai-list.service";
 
 describe("generateAIList", () => {
@@ -120,9 +119,7 @@ describe("generateAIList", () => {
       data: {
         name: "Test List",
         topic: "Test",
-        words: [
-          { term: "hello", translation: "merhaba" },
-        ],
+        words: [{ term: "hello", translation: "merhaba" }],
       },
       error: null,
     });
@@ -148,9 +145,7 @@ describe("generateAIList", () => {
       data: {
         name: "Minimal",
         topic: "Test",
-        words: [
-          { term: "hello" },
-        ],
+        words: [{ term: "hello" }],
       },
       error: null,
     });

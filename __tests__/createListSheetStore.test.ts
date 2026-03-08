@@ -2,7 +2,7 @@ import { useCreateListSheetStore } from "../store/createListSheetStore";
 
 describe("createListSheetStore", () => {
   beforeEach(() => {
-    useCreateListSheetStore.setState({ isOpen: false });
+    useCreateListSheetStore.getState().reset();
   });
 
   it("initialises with isOpen false", () => {
@@ -34,5 +34,13 @@ describe("createListSheetStore", () => {
 
     store.getState().open();
     expect(store.getState().isOpen).toBe(true);
+  });
+
+  it("reset() restores initial state", () => {
+    useCreateListSheetStore.getState().open();
+    expect(useCreateListSheetStore.getState().isOpen).toBe(true);
+
+    useCreateListSheetStore.getState().reset();
+    expect(useCreateListSheetStore.getState().isOpen).toBe(false);
   });
 });
