@@ -11,14 +11,14 @@ const ProgressTrack = styled(XStack, {
 
 const ProgressFill = styled(YStack, {
   name: "ProgressFill",
-  backgroundColor: "$blue10",
+  backgroundColor: "#F5A623",
   borderRadius: 100,
   height: "100%",
   variants: {
     color: {
       success: { backgroundColor: "$green10" },
       warning: { backgroundColor: "$yellow10" },
-      primary: { backgroundColor: "$blue10" },
+      primary: { backgroundColor: "#F5A623" },
     },
   } as const,
 });

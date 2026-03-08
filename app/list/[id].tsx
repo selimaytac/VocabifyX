@@ -33,7 +33,7 @@ function wordStatusColor(status: WordStatus): string {
     case "mastered":
       return "$green10";
     case "learned":
-      return "$blue10";
+      return "#F5A623";
     case "learning":
       return "$yellow10";
     default:

@@ -5,7 +5,6 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { useColorScheme } from "react-native";
 import { TamaguiProvider } from "tamagui";
 
 import { AchievementUnlockModal } from "@/components/AchievementUnlockModal";
@@ -26,7 +25,6 @@ const localeMessages: Record<string, Record<string, string>> = {
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const locale = useLanguageStore((state) => state.locale);
 
   useEffect(() => {
@@ -50,7 +48,7 @@ export default function RootLayout() {
     <I18nProvider i18n={i18n}>
       <TamaguiProvider
         config={tamaguiConfig}
-        defaultTheme={colorScheme === "dark" ? "dark" : "light"}
+        defaultTheme="dark"
       >
         <QueryClientProvider client={queryClient}>
           <Stack screenOptions={{ headerShown: false }}>
@@ -65,7 +63,7 @@ export default function RootLayout() {
           </Stack>
           <AchievementUnlockModal />
           <LevelUpModal />
-          <StatusBar style="auto" />
+          <StatusBar style="light" />
         </QueryClientProvider>
       </TamaguiProvider>
     </I18nProvider>

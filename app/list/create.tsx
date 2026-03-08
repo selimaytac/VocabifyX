@@ -208,12 +208,12 @@ export default function CreateListScreen() {
                   paddingVertical="$2"
                   borderRadius={8}
                   borderWidth={1}
-                  borderColor={language === lang ? "$blue10" : "$gray6"}
-                  backgroundColor={language === lang ? "$blue3" : "$background"}
+                  borderColor={language === lang ? "#F5A623" : "$gray6"}
+                  backgroundColor={language === lang ? "#3d2d0a" : "$background"}
                   pressStyle={{ opacity: 0.7 }}
                 >
                   <Caption
-                    color={language === lang ? "$blue10" : "$colorSubtitle"}
+                    color={language === lang ? "#F5A623" : "$colorSubtitle"}
                   >
                     {lang}
                   </Caption>
@@ -282,8 +282,8 @@ export default function CreateListScreen() {
 
           <SecondaryButton onPress={handleAddWord}>
             <XStack alignItems="center" gap="$2">
-              <Plus size={16} color="$blue10" />
-              <Body color="$blue10">{i18n._("createList.addWord")}</Body>
+              <Plus size={16} color="#F5A623" />
+              <Body color="#F5A623">{i18n._("createList.addWord")}</Body>
             </XStack>
           </SecondaryButton>
         </YStack>
