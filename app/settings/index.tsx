@@ -49,7 +49,7 @@ function SettingsRow({
       </XStack>
       {trailing ??
         (showChevron && onPress ? (
-          <ChevronRight size={18} color="#9CA3AF" />
+          <ChevronRight size={18} color="$colorSubtitle" />
         ) : null)}
     </XStack>
   );
