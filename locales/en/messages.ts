@@ -174,29 +174,102 @@ export const messages: Record<string, string> = {
   "createList.turkish": "Turkish",
   "createList.wordCount": "words",
 
-  // Onboarding (full flow)
+  // Onboarding – hero / welcome screen
+  "onboarding.heroTitle": "Welcome to VocabifyX! 🎓",
+  "onboarding.heroSubtitle":
+    "Master vocabulary faster with AI-powered personalization.",
+  "onboarding.letsGetStarted": "Let's Get Started! 🚀",
+
+  // Onboarding – legacy keys kept for back-compat
   "onboarding.welcome": "Welcome to VocabifyX! 🎓",
   "onboarding.welcomeSubtitle":
     "Learn vocabulary through smart flashcards and quizzes.",
-  "onboarding.yourName": "What's your name?",
-  "onboarding.namePlaceholder": "Enter your name (optional)",
-  "onboarding.chooseLanguage": "Choose your interface language",
-  "onboarding.english": "🇬🇧 English",
-  "onboarding.englishDesc": "Interface in English",
-  "onboarding.turkish": "🇹🇷 Turkish",
-  "onboarding.turkishDesc": "Interface in Turkish",
-  "onboarding.firstList": "Start with a list",
-  "onboarding.firstListSubtitle":
-    "Pick a vocabulary pack to begin your journey.",
-  "onboarding.pickCategory": "Browse by category",
-  "onboarding.addAndStart": "Add & Get Started",
-  "onboarding.addListAndStart": "Add & Continue",
-  "onboarding.selectListFirst": "Select a list to continue",
-  "onboarding.skipList": "Skip for now",
-  "onboarding.allSet": "You're all set! 🚀",
-  "onboarding.allSetSubtitle": "Your account is ready. Let's start learning!",
-  "onboarding.allSetWithList":
-    "Your first list is ready. Let's start learning!",
+  "onboarding.back": "← Back",
+
+  // Step 1 – Name & language
+  "onboarding.name.title": "What's your name?",
+  "onboarding.name.placeholder": "Enter your name...",
+  "onboarding.name.languageTitle": "What language do you want to learn?",
+  "onboarding.name.english": "🇬🇧 English",
+  "onboarding.name.englishDesc": "Learn English vocabulary",
+  "onboarding.name.turkish": "🇹🇷 Turkish",
+  "onboarding.name.turkishDesc": "Learn Turkish vocabulary",
+
+  // Step 2 – Purpose
+  "onboarding.purpose.title": "Why are you learning?",
+  "onboarding.purpose.subtitle": "We'll tailor your vocabulary to your goals",
+  "onboarding.purpose.work": "Work & Career",
+  "onboarding.purpose.workEmoji": "💼",
+  "onboarding.purpose.travel": "Travel & Culture",
+  "onboarding.purpose.travelEmoji": "✈️",
+  "onboarding.purpose.education": "Education & Study",
+  "onboarding.purpose.educationEmoji": "📚",
+  "onboarding.purpose.personal": "Personal Enrichment",
+  "onboarding.purpose.personalEmoji": "🌟",
+
+  // Step 3 – Level
+  "onboarding.level.title": "What's your current level?",
+  "onboarding.level.subtitle": "Be honest – we'll meet you where you are",
+  "onboarding.level.beginner": "Complete Beginner",
+  "onboarding.level.beginnerDesc": "I know very few words",
+  "onboarding.level.beginnerEmoji": "🌱",
+  "onboarding.level.elementary": "Elementary",
+  "onboarding.level.elementaryDesc": "I know basic phrases",
+  "onboarding.level.elementaryEmoji": "📖",
+  "onboarding.level.intermediate": "Intermediate",
+  "onboarding.level.intermediateDesc": "I can hold simple conversations",
+  "onboarding.level.intermediateEmoji": "🎯",
+  "onboarding.level.advanced": "Advanced",
+  "onboarding.level.advancedDesc": "I want to fine-tune my vocabulary",
+  "onboarding.level.advancedEmoji": "🚀",
+
+  // Step 4 – Daily goal
+  "onboarding.dailyGoal.title": "How many words per day?",
+  "onboarding.dailyGoal.subtitle": "Start small and build the habit",
+  "onboarding.dailyGoal.5": "5 words / day",
+  "onboarding.dailyGoal.5desc": "Just getting started",
+  "onboarding.dailyGoal.5emoji": "🐣",
+  "onboarding.dailyGoal.10": "10 words / day",
+  "onboarding.dailyGoal.10desc": "Casual learner",
+  "onboarding.dailyGoal.10emoji": "📘",
+  "onboarding.dailyGoal.20": "20 words / day",
+  "onboarding.dailyGoal.20desc": "Dedicated learner",
+  "onboarding.dailyGoal.20emoji": "🔥",
+  "onboarding.dailyGoal.30": "30 words / day",
+  "onboarding.dailyGoal.30desc": "Power learner",
+  "onboarding.dailyGoal.30emoji": "⚡",
+
+  // Step 5 – Topics
+  "onboarding.topics.title": "Pick your favorite topics!",
+  "onboarding.topics.subtitle": "Choose topics you'd like to master",
+  "onboarding.topics.travel": "Travel",
+  "onboarding.topics.travelEmoji": "✈️",
+  "onboarding.topics.business": "Business",
+  "onboarding.topics.businessEmoji": "💼",
+  "onboarding.topics.technology": "Technology",
+  "onboarding.topics.technologyEmoji": "💻",
+  "onboarding.topics.dailyLife": "Daily Life",
+  "onboarding.topics.dailyLifeEmoji": "🏠",
+  "onboarding.topics.academic": "Academic",
+  "onboarding.topics.academicEmoji": "🎓",
+  "onboarding.topics.startWith": "Start with {n} topic(s)!",
+
+  // Step 6 – Loading
+  "onboarding.loading.title": "Building your personalized plan...",
+  "onboarding.loading.analyzing": "Analyzing your preferences...",
+  "onboarding.loading.matching": "Matching vocabulary to your level...",
+  "onboarding.loading.building": "Building your personalized list...",
+  "onboarding.loading.almostReady": "Almost ready...",
+
+  // Step 7 – Plan reveal
+  "onboarding.plan.title": "Your plan is ready! 🎯",
+  "onboarding.plan.subtitle": "Here's your personalized learning journey",
+  "onboarding.plan.dailyGoalLabel": "Daily Goal",
+  "onboarding.plan.levelLabel": "Level",
+  "onboarding.plan.topicsLabel": "Topics",
+  "onboarding.plan.firstListLabel": "Your First List",
+  "onboarding.plan.estimatedDays": "~{days} days to complete your first list",
+  "onboarding.plan.commit": "I'm Ready! Let's Go! 💪",
 
   // Notification settings
   "notifications.title": "Notifications",

@@ -8,6 +8,10 @@ interface UserProfile {
   email: string;
   displayName: string;
   avatarUrl: string | null;
+  learningPurpose?: "work" | "travel" | "education" | "personal";
+  proficiencyLevel?: "beginner" | "elementary" | "intermediate" | "advanced";
+  dailyWordGoal?: number;
+  interestedTopics?: string[];
 }
 
 interface UserState {
