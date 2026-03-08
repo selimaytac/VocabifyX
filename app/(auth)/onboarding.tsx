@@ -463,7 +463,7 @@ export default function OnboardingScreen() {
             <YStack
               height={4}
               borderRadius={2}
-              backgroundColor="#F5A623"
+              backgroundColor="#FFB400"
               width={`${Math.round(progress * 100)}%`}
             />
           </YStack>
@@ -598,7 +598,7 @@ export default function OnboardingScreen() {
                       paddingHorizontal="$4"
                       paddingVertical="$4"
                       borderWidth={1}
-                      borderColor={isSelected ? "#F5A623" : "#333333"}
+                      borderColor={isSelected ? "#FFB400" : "#333333"}
                       backgroundColor={isSelected ? "#3d2d0a" : "#1e1e1e"}
                       pressStyle={{ opacity: 0.8 }}
                       onPress={() => handlePurposeSelect(key)}
@@ -618,7 +618,7 @@ export default function OnboardingScreen() {
                             width={26}
                             height={26}
                             borderRadius={13}
-                            backgroundColor="#F5A623"
+                            backgroundColor="#FFB400"
                             alignItems="center"
                             justifyContent="center"
                           >
@@ -696,7 +696,7 @@ export default function OnboardingScreen() {
                   padding: 16,
                   borderRadius: 14,
                   borderWidth: 1,
-                  borderColor: topic.length >= 2 ? "#F5A623" : "#333333",
+                  borderColor: topic.length >= 2 ? "#FFB400" : "#333333",
                   backgroundColor: "#1e1e1e",
                   color: "#ffffff",
                 }}
@@ -718,14 +718,14 @@ export default function OnboardingScreen() {
                         paddingVertical="$2"
                         borderRadius={20}
                         borderWidth={1}
-                        borderColor={isSelected ? "#F5A623" : "#333333"}
+                        borderColor={isSelected ? "#FFB400" : "#333333"}
                         backgroundColor={isSelected ? "#3d2d0a" : "#1e1e1e"}
                         pressStyle={{ opacity: 0.8 }}
                         onPress={() =>
                           setTopicCategory(isSelected ? null : key)
                         }
                       >
-                        <Caption color={isSelected ? "#F5A623" : "#9ca3af"}>
+                        <Caption color={isSelected ? "#FFB400" : "#9ca3af"}>
                           {i18n._(labelKey)}
                         </Caption>
                       </YStack>
@@ -747,15 +747,15 @@ export default function OnboardingScreen() {
                         key={wc}
                         flex={1}
                         paddingVertical="$3"
-                        borderRadius={12}
+                        borderRadius={16}
                         borderWidth={1}
-                        borderColor={isSelected ? "#F5A623" : "#333333"}
+                        borderColor={isSelected ? "#FFB400" : "#333333"}
                         backgroundColor={isSelected ? "#3d2d0a" : "#1e1e1e"}
                         alignItems="center"
                         pressStyle={{ opacity: 0.8 }}
                         onPress={() => setWordCount(wc)}
                       >
-                        <Label color={isSelected ? "#F5A623" : "#9ca3af"}>
+                        <Label color={isSelected ? "#FFB400" : "#9ca3af"}>
                           {wc}
                         </Label>
                       </YStack>
@@ -825,7 +825,7 @@ export default function OnboardingScreen() {
                   pressStyle={{ opacity: 0.7 }}
                   onPress={() => setDescriptionExpanded((v) => !v)}
                 >
-                  <Caption color="#F5A623">
+                  <Caption color="#FFB400">
                     {i18n._("onboarding.topic.descriptionToggle")}
                   </Caption>
                 </YStack>
@@ -891,7 +891,7 @@ export default function OnboardingScreen() {
                   <YStack
                     height={4}
                     borderRadius={2}
-                    backgroundColor="#F5A623"
+                    backgroundColor="#FFB400"
                     width={`${Math.round(
                       ((loadingMicrocopyIndex + 1) /
                         LOADING_MICROCOPY_KEYS.length) *
@@ -906,7 +906,7 @@ export default function OnboardingScreen() {
               {showFunFact && (
                 <Card
                   backgroundColor="#1e1e1e"
-                  borderColor="#F5A623"
+                  borderColor="#FFB400"
                   borderWidth={1}
                 >
                   <BodySmall color="#9ca3af" textAlign="center">
