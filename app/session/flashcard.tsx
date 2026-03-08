@@ -68,6 +68,12 @@ export default function FlashcardScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [correctCount, setCorrectCount] = useState(0);
   const [startTime] = useState(() => Date.now());
+  const [initialMasteredCount] = useState(
+    () =>
+      (
+        useListsStore.getState().lists.find((l) => l.id === listId)?.words ?? []
+      ).filter((w) => w.status === "mastered").length,
+  );
 
   const { flip, isFlipped, frontInterpolate, backInterpolate } =
     useFlipAnimation();
@@ -112,6 +118,15 @@ export default function FlashcardScreen() {
         incrementStat("sessionsCompleted");
         if (finalCorrect === words.length) {
           incrementStat("listsCompleted");
+        }
+        const updatedWords =
+          useListsStore.getState().lists.find((l) => l.id === list.id)?.words ??
+          [];
+        const newlyMastered =
+          updatedWords.filter((w) => w.status === "mastered").length -
+          initialMasteredCount;
+        if (newlyMastered > 0) {
+          incrementStat("wordsMastered", newlyMastered);
         }
         checkAndUnlockAchievements();
 
@@ -167,6 +182,7 @@ export default function FlashcardScreen() {
       checkAndUnlockAchievements,
       addSession,
       router,
+      initialMasteredCount,
     ],
   );
 

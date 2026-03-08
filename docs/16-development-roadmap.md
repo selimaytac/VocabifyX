@@ -144,7 +144,7 @@ Week 8:     Polish, QA, Submission
 
 ### List Management
 - [x] List Detail screen: word list + progress stats + delete
-- [x] Create Custom List screen (manual entry: name, topic, category, words)
+- [x] Create Custom List screen (manual entry: name, topic, category, words, optional example sentence per word)
 - [x] Home screen: list cards clickable → detail; plus button → create
 
 ---
@@ -167,7 +167,7 @@ Week 8:     Polish, QA, Submission
 - [x] Personalized subtitle with word count + topic (paywall.subtitleTopic)
 - [x] Annual plan pre-selected by default
 - [x] `useEntitlement` hook integration across gated features
-- [ ] Lapsed subscriber paywall (`app/(modals)/paywall.tsx`)
+- [x] Lapsed subscriber paywall (`app/(modals)/paywall.tsx`)
 - [x] Restore Purchase functionality
 
 ### Notifications
@@ -188,7 +188,7 @@ Week 8:     Polish, QA, Submission
 - [x] Empty states for all screens
 - [ ] Error states (network, AI fail, RC fail)
 - [ ] Loading skeletons
-- [ ] Haptic feedback on key actions (level up, achievement)
+- [x] Haptic feedback on key actions (level up, achievement, flashcard answers, quiz answers)
 - [ ] App icon + splash screen final assets
 - [ ] Dark mode safe (avoid hardcoded white bg)
 
@@ -227,3 +227,20 @@ Week 8:     Polish, QA, Submission
 | Word pronunciation audio | Low | v2.0 |
 | Community shared lists | Low | v2.0 |
 | Additional languages | Medium | v2.0 |
+
+---
+
+## Bug Fixes & Improvements Log
+
+### Consolidation Pass (March 2026)
+
+#### Bug Fixes
+- **`wordsMastered` stat never incremented** – `flashcard.tsx` and `quiz.tsx` now compare mastered-word counts before and after each session and call `incrementStat("wordsMastered", newlyMastered)`. This unblocks the `words_50`, `words_200`, and `words_500` achievements.
+
+#### Learning Process Improvements
+- **Example sentence field in Create List** – Word entries in the manual create-list screen now include an optional example sentence (`createList.example` / `createList.examplePlaceholder` i18n keys added for EN + TR). The example is stored on `VocabWord.example` and displayed on flashcard back-face and quiz answer reveal.
+
+#### Test Coverage
+- Added `__tests__/predefinedLists.test.ts` – 16 tests covering `LIST_CATEGORIES`, `PREDEFINED_LISTS_EN`, `PREDEFINED_LISTS_TR`, and `getPredefinedListsByLocale`.
+- Added `__tests__/listsStoreExtended.test.ts` – 14 tests covering word status edge cases (learning → learned transition, mastery persistence) and `wordsMastered` stat integration with `gameStore`.
+- Total unit tests: **126** (up from 93).

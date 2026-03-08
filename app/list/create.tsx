@@ -20,10 +20,16 @@ interface WordEntry {
   id: string;
   term: string;
   translation: string;
+  example: string;
 }
 
 function createEmptyWord(): WordEntry {
-  return { id: `w-${Date.now()}-${Math.random()}`, term: "", translation: "" };
+  return {
+    id: `w-${Date.now()}-${Math.random()}`,
+    term: "",
+    translation: "",
+    example: "",
+  };
 }
 
 const LANGUAGE_OPTIONS = ["English", "Turkish", "Spanish", "French", "German"];
@@ -58,7 +64,7 @@ export default function CreateListScreen() {
 
   const handleWordChange = (
     id: string,
-    field: "term" | "translation",
+    field: "term" | "translation" | "example",
     value: string,
   ) => {
     setWords((prev) =>
@@ -87,7 +93,7 @@ export default function CreateListScreen() {
       id: `${Date.now()}-${idx}`,
       term: w.term.trim(),
       translation: w.translation.trim(),
-      example: "",
+      example: w.example.trim(),
       difficulty: "beginner" as const,
       partOfSpeech: "word",
       status: "not_started" as const,
@@ -270,9 +276,7 @@ export default function CreateListScreen() {
               <YStack backgroundColor="#FFFFFF" borderRadius={8} padding="$3">
                 <TextInput
                   value={word.term}
-                  onChangeText={(val) =>
-                    handleWordChange(word.id, "term", val)
-                  }
+                  onChangeText={(val) => handleWordChange(word.id, "term", val)}
                   placeholder={i18n._("createList.termPlaceholder")}
                   placeholderTextColor="#9CA3AF"
                   style={{ fontSize: 15, color: "#0D0D0D" }}
@@ -287,6 +291,18 @@ export default function CreateListScreen() {
                   placeholder={i18n._("createList.translationPlaceholder")}
                   placeholderTextColor="#9CA3AF"
                   style={{ fontSize: 15, color: "#0D0D0D" }}
+                />
+              </YStack>
+              <YStack backgroundColor="#FFFFFF" borderRadius={8} padding="$3">
+                <TextInput
+                  value={word.example}
+                  onChangeText={(val) =>
+                    handleWordChange(word.id, "example", val)
+                  }
+                  placeholder={i18n._("createList.examplePlaceholder")}
+                  placeholderTextColor="#9CA3AF"
+                  style={{ fontSize: 15, color: "#0D0D0D" }}
+                  multiline
                 />
               </YStack>
             </YStack>

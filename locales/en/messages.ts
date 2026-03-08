@@ -196,6 +196,8 @@ export const messages: Record<string, string> = {
   "createList.english": "English",
   "createList.turkish": "Turkish",
   "createList.wordCount": "words",
+  "createList.example": "Example Sentence (optional)",
+  "createList.examplePlaceholder": "e.g. Please show me your boarding pass.",
 
   // Onboarding – hero / welcome screen
   "onboarding.heroTitle": "Welcome to VocabifyX! 🎓",

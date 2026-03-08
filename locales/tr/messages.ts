@@ -196,6 +196,8 @@ export const messages: Record<string, string> = {
   "createList.english": "İngilizce",
   "createList.turkish": "Türkçe",
   "createList.wordCount": "kelime",
+  "createList.example": "Örnek Cümle (isteğe bağlı)",
+  "createList.examplePlaceholder": "örn. Lütfen biniş kartınızı gösterin.",
 
   // Onboarding – kahraman / karşılama ekranı
   "onboarding.heroTitle": "VocabifyX'e Hoş Geldiniz! 🎓",
