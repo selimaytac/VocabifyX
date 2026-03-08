@@ -119,13 +119,12 @@ const LIST_LANGUAGES: { code: string; label: string }[] = [
   { code: "Arabic", label: "🇸🇦 Arabic" },
 ];
 
-const CATEGORY_TO_TOPIC_CATEGORY: Record<TopicCategory, string> = {
+const CATEGORY_TO_TOPIC_CATEGORY: Partial<Record<TopicCategory, string>> = {
   travel: "travel",
   business: "business",
   technology: "technology",
   health: "health",
   academic: "academic",
-  other: "travel",
 };
 
 function resolveInitialStep(stored: string | null): OnboardingStep {
@@ -268,9 +267,11 @@ export default function OnboardingScreen() {
                 id: `list-${Date.now()}`,
                 name: topic.trim() || best.name,
                 topic: topic.trim() || best.topic,
-                topicCategory: topicCategory
-                  ? CATEGORY_TO_TOPIC_CATEGORY[topicCategory]
-                  : best.topicCategory,
+                topicCategory:
+                  topicCategory && topicCategory !== "other"
+                    ? (CATEGORY_TO_TOPIC_CATEGORY[topicCategory] ??
+                      best.topicCategory)
+                    : best.topicCategory,
                 description: description.trim() || best.description,
                 listLanguage,
                 wordCount: words.length,
