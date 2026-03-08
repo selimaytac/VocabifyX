@@ -153,25 +153,25 @@ Week 8:     Polish, QA, Submission
 
 ### Onboarding
 - [x] Step 1: Welcome + Name input (optional)
-- [x] Step 2: Language selector (EN / TR) with locale switching
-- [x] Step 3: First list picker (category filter + predefined lists)
-- [x] Step 4: All Set screen
-- [ ] Step 3b: AI generation loading → list preview (requires Supabase Edge Function)
-- [ ] Paywall screen (hard gate – requires RevenueCat)
+- [x] Step 2: Purpose selector + push notification pre-prompt (value-framed)
+- [x] Step 3: Topic input + category chips + word count selector + list language + optional description
+- [x] Step 4: Loading (Phase A: animation + micro-copy + fun fact) → List Preview (Phase B: first 5 words + blurred remaining)
+- [x] App language auto-detected from device locale (no language step in onboarding)
 - [x] Progress dots indicator (4 steps)
 - [x] Resumable onboarding (pick up where user left off on reopen)
 
 ### Paywall
 - [ ] RevenueCat offerings fetch + display (runtime prices, no hardcoded values)
 - [x] Custom paywall screen (`app/paywall.tsx`)
-- [x] Personalized headline using user's topic + name
+- [x] Personalized headline using user's topic + name (paywall.headlineTopic)
+- [x] Personalized subtitle with word count + topic (paywall.subtitleTopic)
 - [x] Annual plan pre-selected by default
 - [x] `useEntitlement` hook integration across gated features
 - [ ] Lapsed subscriber paywall (`app/(modals)/paywall.tsx`)
 - [x] Restore Purchase functionality
 
 ### Notifications
-- [ ] Expo Notifications permission request (Step 2, with value-framing pre-prompt)
+- [x] Expo Notifications permission request (Step 2, with value-framing pre-prompt)
 - [x] `scheduleReminders()` on onboarding complete
 - [x] Morning / Afternoon / Evening / Night slots (settings UI)
 - [x] Streak protection notification (conditional on streak ≥ 3)

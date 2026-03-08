@@ -27,6 +27,7 @@ const FEATURE_KEYS = [
   "paywall.feature2",
   "paywall.feature3",
   "paywall.feature4",
+  "paywall.feature5",
 ] as const;
 
 function isAnnualPackage(pkg: PurchasesPackage): boolean {
@@ -41,6 +42,8 @@ export default function PaywallScreen() {
   const { i18n } = useLingui();
   const router = useRouter();
   const profile = useUserStore((s) => s.profile);
+  const onboardingTopic = useUserStore((s) => s.onboardingTopic);
+  const onboardingWordCount = useUserStore((s) => s.onboardingWordCount);
   const {
     offerings,
     loading,
@@ -106,9 +109,22 @@ export default function PaywallScreen() {
     }
   };
 
-  const headline = profile?.displayName
-    ? i18n._("paywall.headlinePersonal").replace("{name}", profile.displayName)
-    : i18n._("paywall.headlineDefault");
+  const displayName = profile?.displayName ?? "";
+  const headline = onboardingTopic
+    ? i18n
+        ._("paywall.headlineTopic")
+        .replace("{name}", displayName || i18n._("onboarding.name.placeholder"))
+    : displayName
+      ? i18n._("paywall.headlinePersonal").replace("{name}", displayName)
+      : i18n._("paywall.headlineDefault");
+
+  const subtitle =
+    onboardingTopic && onboardingWordCount
+      ? i18n
+          ._("paywall.subtitleTopic")
+          .replace("{wordCount}", String(onboardingWordCount))
+          .replace("{topic}", onboardingTopic)
+      : null;
 
   if (loading) {
     return (
@@ -134,6 +150,11 @@ export default function PaywallScreen() {
             <BodySmall color="$colorSubtitle" textAlign="center">
               {headline}
             </BodySmall>
+            {subtitle && (
+              <BodySmall color="$colorSubtitle" textAlign="center">
+                {subtitle}
+              </BodySmall>
+            )}
           </YStack>
 
           {/* Feature list */}

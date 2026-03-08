@@ -9,9 +9,7 @@ interface UserProfile {
   displayName: string;
   avatarUrl: string | null;
   learningPurpose?: "work" | "travel" | "education" | "personal";
-  proficiencyLevel?: "beginner" | "elementary" | "intermediate" | "advanced";
   dailyWordGoal?: number;
-  interestedTopics?: string[];
 }
 
 interface UserState {
@@ -19,9 +17,20 @@ interface UserState {
   hasCompletedOnboarding: boolean;
   /** Persists the current onboarding step so the flow is resumable on reopen. */
   onboardingStep: string | null;
+  /** Topic entered by the user during onboarding — used for paywall personalisation. */
+  onboardingTopic: string | null;
+  /** Category selected during onboarding — used for paywall personalisation. */
+  onboardingCategory: string | null;
+  /** Word count chosen during onboarding — used for paywall personalisation. */
+  onboardingWordCount: number;
   setProfile: (profile: UserProfile | null) => void;
   setHasCompletedOnboarding: (value: boolean) => void;
   setOnboardingStep: (step: string | null) => void;
+  setOnboardingPersonalization: (data: {
+    topic: string;
+    category: string;
+    wordCount: number;
+  }) => void;
   reset: () => void;
 }
 
@@ -29,6 +38,9 @@ const initialState = {
   profile: null,
   hasCompletedOnboarding: false,
   onboardingStep: null,
+  onboardingTopic: null,
+  onboardingCategory: null,
+  onboardingWordCount: 15,
 };
 
 export const useUserStore = create<UserState>()(
@@ -39,6 +51,12 @@ export const useUserStore = create<UserState>()(
       setHasCompletedOnboarding: (value) =>
         set({ hasCompletedOnboarding: value }),
       setOnboardingStep: (step) => set({ onboardingStep: step }),
+      setOnboardingPersonalization: ({ topic, category, wordCount }) =>
+        set({
+          onboardingTopic: topic,
+          onboardingCategory: category,
+          onboardingWordCount: wordCount,
+        }),
       reset: () => set(initialState),
     }),
     {
