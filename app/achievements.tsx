@@ -1,5 +1,4 @@
 import { useLingui } from "@lingui/react";
-import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
@@ -14,15 +13,15 @@ import {
   Label,
 } from "@/components/DesignSystem/Typography";
 import {
-  ACHIEVEMENTS,
   type AchievementCondition,
+  ACHIEVEMENTS,
 } from "@/constants/achievements";
 import {
   getLevelDisplayName,
   getLevelForXP,
   getXPForNextLevel,
 } from "@/constants/levels";
-import { useGameStore, type GameStats } from "@/store/gameStore";
+import { type GameStats, useGameStore } from "@/store/gameStore";
 
 type AchievementFilter = "all" | "streak" | "words" | "sessions";
 
@@ -34,47 +33,87 @@ function getConditionProgress(
 ): { current: number; target: number } {
   switch (condition.type) {
     case "lists_created":
-      return { current: Math.min(stats.listsCreated, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.listsCreated, condition.count),
+        target: condition.count,
+      };
     case "words_mastered":
-      return { current: Math.min(stats.wordsMastered, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.wordsMastered, condition.count),
+        target: condition.count,
+      };
     case "sessions_completed":
-      return { current: Math.min(stats.sessionsCompleted, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.sessionsCompleted, condition.count),
+        target: condition.count,
+      };
     case "streak_days":
-      return { current: Math.min(currentStreak, condition.count), target: condition.count };
+      return {
+        current: Math.min(currentStreak, condition.count),
+        target: condition.count,
+      };
     case "lists_completed":
-      return { current: Math.min(stats.listsCompleted, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.listsCompleted, condition.count),
+        target: condition.count,
+      };
     case "explore_added":
-      return { current: Math.min(stats.exploreAdded, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.exploreAdded, condition.count),
+        target: condition.count,
+      };
     case "quiz_perfect":
-      return { current: Math.min(stats.quizPerfectScores, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.quizPerfectScores, condition.count),
+        target: condition.count,
+      };
     case "level_reached":
-      return { current: Math.min(levelNum, condition.level), target: condition.level };
+      return {
+        current: Math.min(levelNum, condition.level),
+        target: condition.level,
+      };
   }
 }
 
-function matchesFilter(condition: AchievementCondition, filter: AchievementFilter): boolean {
+function matchesFilter(
+  condition: AchievementCondition,
+  filter: AchievementFilter,
+): boolean {
   if (filter === "all") return true;
   if (filter === "streak") return condition.type === "streak_days";
-  if (filter === "words") return condition.type === "words_mastered" || condition.type === "quiz_perfect";
-  if (filter === "sessions") return (
-    condition.type === "sessions_completed" ||
-    condition.type === "lists_created" ||
-    condition.type === "explore_added" ||
-    condition.type === "lists_completed" ||
-    condition.type === "level_reached"
-  );
+  if (filter === "words")
+    return (
+      condition.type === "words_mastered" || condition.type === "quiz_perfect"
+    );
+  if (filter === "sessions")
+    return (
+      condition.type === "sessions_completed" ||
+      condition.type === "lists_created" ||
+      condition.type === "explore_added" ||
+      condition.type === "lists_completed" ||
+      condition.type === "level_reached"
+    );
   return true;
 }
 
 export default function AchievementsScreen() {
   const { i18n } = useLingui();
-  const router = useRouter();
   const [filter, setFilter] = useState<AchievementFilter>("all");
-  const { achievements: unlockedList, totalXP, currentStreak, stats } = useGameStore();
+  const {
+    achievements: unlockedList,
+    totalXP,
+    currentStreak,
+    stats,
+  } = useGameStore();
 
   const unlockedIds = new Set(unlockedList.map((a) => a.achievementId));
-  const unlockedCount = ACHIEVEMENTS.filter((a) => unlockedIds.has(a.id)).length;
-  const totalXPFromAchievements = unlockedList.reduce((sum, a) => sum + a.xpAwarded, 0);
+  const unlockedCount = ACHIEVEMENTS.filter((a) =>
+    unlockedIds.has(a.id),
+  ).length;
+  const totalXPFromAchievements = unlockedList.reduce(
+    (sum, a) => sum + a.xpAwarded,
+    0,
+  );
 
   const currentLevel = getLevelForXP(totalXP);
   const levelName = getLevelDisplayName(currentLevel);
@@ -104,9 +143,8 @@ export default function AchievementsScreen() {
   const tierStyle = tierColors[currentLevel.tier] ?? tierColors.Silver;
 
   return (
-    <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
+    <ScrollView style={{ backgroundColor: "transparent" }}>
       <YStack padding="$4" gap="$4" paddingBottom="$8">
-
         {/* Level header card */}
         <YStack
           backgroundColor={tierStyle.bg}
@@ -143,36 +181,36 @@ export default function AchievementsScreen() {
 
         {/* Summary stats */}
         <YStack
-          backgroundColor="#FFFFFF"
+          backgroundColor="$background"
           borderRadius={16}
           borderWidth={1}
-          borderColor="#E5E7EB"
+          borderColor="$borderColor"
           overflow="hidden"
         >
           <XStack>
             <YStack flex={1} alignItems="center" padding="$3" gap="$1">
-              <Body fontWeight="700" fontSize={22} color="#0D0D0D">
+              <Body fontWeight="700" fontSize={22}>
                 {unlockedCount}
               </Body>
-              <Caption color="#9CA3AF" fontSize={11}>
+              <Caption color="$colorSubtitle" fontSize={11}>
                 {i18n._("achievements.unlocked")}
               </Caption>
             </YStack>
-            <YStack width={1} backgroundColor="#E5E7EB" />
+            <YStack width={1} backgroundColor="$borderColor" />
             <YStack flex={1} alignItems="center" padding="$3" gap="$1">
-              <Body fontWeight="700" fontSize={22} color="#0D0D0D">
+              <Body fontWeight="700" fontSize={22}>
                 {ACHIEVEMENTS.length}
               </Body>
-              <Caption color="#9CA3AF" fontSize={11}>
+              <Caption color="$colorSubtitle" fontSize={11}>
                 {i18n._("achievements.total")}
               </Caption>
             </YStack>
-            <YStack width={1} backgroundColor="#E5E7EB" />
+            <YStack width={1} backgroundColor="$borderColor" />
             <YStack flex={1} alignItems="center" padding="$3" gap="$1">
-              <Body fontWeight="700" fontSize={22} color="#0D0D0D">
+              <Body fontWeight="700" fontSize={22}>
                 {totalXPFromAchievements}
               </Body>
-              <Caption color="#9CA3AF" fontSize={11}>
+              <Caption color="$colorSubtitle" fontSize={11}>
                 {i18n._("achievements.xpEarned")}
               </Caption>
             </YStack>
@@ -202,10 +240,10 @@ export default function AchievementsScreen() {
             return (
               <YStack
                 key={achievement.id}
-                backgroundColor="#FFFFFF"
+                backgroundColor="$background"
                 borderRadius={16}
                 borderWidth={1}
-                borderColor="#E5E7EB"
+                borderColor="$borderColor"
                 padding="$4"
                 gap="$3"
                 opacity={isUnlocked ? 1 : 0.7}
@@ -215,7 +253,9 @@ export default function AchievementsScreen() {
                     width={52}
                     height={52}
                     borderRadius={26}
-                    backgroundColor={isUnlocked ? achievement.badgeColor : "#E5E7EB"}
+                    backgroundColor={
+                      isUnlocked ? achievement.badgeColor : "$gray4"
+                    }
                     alignItems="center"
                     justifyContent="center"
                     flexShrink={0}
@@ -226,18 +266,18 @@ export default function AchievementsScreen() {
                   </XStack>
                   <YStack flex={1} gap="$1">
                     <XStack justifyContent="space-between" alignItems="center">
-                      <Label fontWeight="700" color="#0D0D0D">
+                      <Label fontWeight="700">
                         {i18n._(achievement.titleKey)}
                       </Label>
                       {isUnlocked ? (
                         <Body fontSize={18}>✅</Body>
                       ) : (
-                        <Caption color="#9CA3AF" fontSize={11}>
+                        <Caption color="$colorSubtitle" fontSize={11}>
                           {current}/{target}
                         </Caption>
                       )}
                     </XStack>
-                    <BodySmall color="#9CA3AF">
+                    <BodySmall color="$colorSubtitle">
                       {i18n._(achievement.descriptionKey)}
                     </BodySmall>
                   </YStack>

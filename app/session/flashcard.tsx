@@ -3,7 +3,7 @@ import * as Haptics from "expo-haptics";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useRef, useState } from "react";
 import { Animated, Pressable, ScrollView, StyleSheet } from "react-native";
-import { XStack, YStack } from "tamagui";
+import { useTheme, XStack, YStack } from "tamagui";
 
 import { SecondaryButton } from "@/components/DesignSystem/Button";
 import { Card } from "@/components/DesignSystem/Card";
@@ -55,6 +55,7 @@ export default function FlashcardScreen() {
   const { i18n } = useLingui();
   const router = useRouter();
   const { listId } = useLocalSearchParams<{ listId: string }>();
+  const theme = useTheme();
 
   const list = useListsStore((state) =>
     state.lists.find((l) => l.id === listId),
@@ -224,7 +225,10 @@ export default function FlashcardScreen() {
             style={[
               styles.card,
               styles.cardFront,
-              { transform: [{ rotateY: frontInterpolate }] },
+              {
+                transform: [{ rotateY: frontInterpolate }],
+                backgroundColor: theme.background.val as string,
+              },
             ]}
           >
             <ScrollView contentContainerStyle={styles.cardContent}>
@@ -246,7 +250,10 @@ export default function FlashcardScreen() {
             style={[
               styles.card,
               styles.cardBack,
-              { transform: [{ rotateY: backInterpolate }] },
+              {
+                transform: [{ rotateY: backInterpolate }],
+                backgroundColor: theme.background.val as string,
+              },
             ]}
           >
             <ScrollView contentContainerStyle={styles.cardContent}>
@@ -318,7 +325,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.12,
     shadowRadius: 12,
     elevation: 6,
-    backgroundColor: "#fff",
   },
   cardFront: {},
   cardBack: {},

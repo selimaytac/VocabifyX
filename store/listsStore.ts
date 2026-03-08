@@ -48,6 +48,9 @@ export function getMasteredCount(list: UserVocabList): number {
 
 interface ListsState {
   lists: UserVocabList[];
+  /** True once the persist middleware has finished rehydrating from AsyncStorage. */
+  _hasHydrated: boolean;
+  setHasHydrated: (val: boolean) => void;
   addList: (list: UserVocabList) => void;
   updateList: (id: string, updates: Partial<UserVocabList>) => void;
   deleteList: (id: string) => void;
@@ -77,12 +80,15 @@ function getNextWordStatus(
 
 const initialState = {
   lists: [] as UserVocabList[],
+  _hasHydrated: false,
 };
 
 export const useListsStore = create<ListsState>()(
   persist(
     (set, get) => ({
       ...initialState,
+
+      setHasHydrated: (val) => set({ _hasHydrated: val }),
 
       addList: (list) =>
         set((state) => ({
@@ -145,6 +151,9 @@ export const useListsStore = create<ListsState>()(
     {
       name: "vocabifyx-lists",
       storage: createJSONStorage(createZustandStorage),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
     },
   ),
 );

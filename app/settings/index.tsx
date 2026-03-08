@@ -45,18 +45,19 @@ function SettingsRow({
     >
       <XStack alignItems="center" gap="$3" flex={1}>
         {icon}
-        <Label color="#0D0D0D">{label}</Label>
+        <Label color="$color">{label}</Label>
       </XStack>
-      {trailing ?? (showChevron && onPress ? (
-        <ChevronRight size={18} color="#9CA3AF" />
-      ) : null)}
+      {trailing ??
+        (showChevron && onPress ? (
+          <ChevronRight size={18} color="$colorSubtitle" />
+        ) : null)}
     </XStack>
   );
 }
 
 function Divider() {
   return (
-    <YStack height={1} backgroundColor="#F5F7FA" marginHorizontal="$4" />
+    <YStack height={1} backgroundColor="$borderColor" marginHorizontal="$4" />
   );
 }
 
@@ -66,8 +67,10 @@ export default function SettingsScreen() {
   const { signOut } = useAuth();
   const profile = useUserStore((state) => state.profile);
 
-  const initial = profile?.displayName?.[0]?.toUpperCase() ??
-    profile?.email?.[0]?.toUpperCase() ?? "U";
+  const initial =
+    profile?.displayName?.[0]?.toUpperCase() ??
+    profile?.email?.[0]?.toUpperCase() ??
+    "U";
 
   const handleDeleteAccount = () => {
     Alert.alert(
@@ -85,19 +88,23 @@ export default function SettingsScreen() {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
+    <ScrollView style={{ backgroundColor: "transparent" }}>
       <YStack padding="$4" gap="$5" paddingBottom="$8">
-
         {/* Account section */}
         <YStack gap="$2">
-          <Caption color="#9CA3AF" fontWeight="700" fontSize={12} paddingLeft="$1">
+          <Caption
+            color="$colorSubtitle"
+            fontWeight="700"
+            fontSize={12}
+            paddingLeft="$1"
+          >
             {i18n._("settings.account")}
           </Caption>
           <YStack
-            backgroundColor="#FFFFFF"
+            backgroundColor="$background"
             borderRadius={16}
             borderWidth={1}
-            borderColor="#E5E7EB"
+            borderColor="$borderColor"
             overflow="hidden"
           >
             {/* Profile row */}
@@ -116,18 +123,18 @@ export default function SettingsScreen() {
                 </Body>
               </XStack>
               <YStack flex={1} gap="$1">
-                <Label color="#0D0D0D" fontWeight="700">
-                  {profile?.displayName ?? "—"}
-                </Label>
-                <Caption color="#9CA3AF">{profile?.email ?? "—"}</Caption>
+                <Label fontWeight="700">{profile?.displayName ?? "—"}</Label>
+                <Caption color="$colorSubtitle">
+                  {profile?.email ?? "—"}
+                </Caption>
               </YStack>
               <XStack
-                backgroundColor="#F5F7FA"
+                backgroundColor="$gray3"
                 paddingHorizontal="$3"
                 paddingVertical="$1"
                 borderRadius={100}
               >
-                <Caption color="#6B7280" fontWeight="600">
+                <Caption color="$colorSubtitle" fontWeight="600">
                   {i18n._("settings.free")}
                 </Caption>
               </XStack>
@@ -137,10 +144,10 @@ export default function SettingsScreen() {
               <>
                 <Divider />
                 <XStack padding="$4" gap="$3" alignItems="center">
-                  <BodySmall color="#9CA3AF" fontWeight="600">
+                  <BodySmall color="$colorSubtitle" fontWeight="600">
                     {i18n._("settings.userId")}:{" "}
                   </BodySmall>
-                  <Caption color="#9CA3AF" flex={1} numberOfLines={1}>
+                  <Caption color="$colorSubtitle" flex={1} numberOfLines={1}>
                     {profile.id}
                   </Caption>
                 </XStack>
@@ -149,7 +156,7 @@ export default function SettingsScreen() {
 
             <Divider />
             <SettingsRow
-              icon={<CreditCard size={20} color="#9CA3AF" />}
+              icon={<CreditCard size={20} color="$colorSubtitle" />}
               label={i18n._("settings.manageSubscription")}
               onPress={() => router.push("/settings/manage-subscription")}
             />
@@ -158,24 +165,29 @@ export default function SettingsScreen() {
 
         {/* General section */}
         <YStack gap="$2">
-          <Caption color="#9CA3AF" fontWeight="700" fontSize={12} paddingLeft="$1">
+          <Caption
+            color="$colorSubtitle"
+            fontWeight="700"
+            fontSize={12}
+            paddingLeft="$1"
+          >
             {i18n._("settings.general")}
           </Caption>
           <YStack
-            backgroundColor="#FFFFFF"
+            backgroundColor="$background"
             borderRadius={16}
             borderWidth={1}
-            borderColor="#E5E7EB"
+            borderColor="$borderColor"
             overflow="hidden"
           >
             <SettingsRow
-              icon={<Globe size={20} color="#6B7280" />}
+              icon={<Globe size={20} color="$colorSubtitle" />}
               label={i18n._("settings.language")}
               onPress={() => router.push("/settings/language")}
             />
             <Divider />
             <SettingsRow
-              icon={<Bell size={20} color="#6B7280" />}
+              icon={<Bell size={20} color="$colorSubtitle" />}
               label={i18n._("settings.notifications")}
               onPress={() => router.push("/settings/notifications")}
             />
@@ -204,4 +216,3 @@ export default function SettingsScreen() {
     </ScrollView>
   );
 }
-

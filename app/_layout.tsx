@@ -46,10 +46,7 @@ export default function RootLayout() {
 
   return (
     <I18nProvider i18n={i18n}>
-      <TamaguiProvider
-        config={tamaguiConfig}
-        defaultTheme="dark"
-      >
+      <TamaguiProvider config={tamaguiConfig} defaultTheme="dark">
         <QueryClientProvider client={queryClient}>
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(auth)" />

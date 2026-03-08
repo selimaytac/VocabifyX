@@ -161,7 +161,7 @@ Week 8:     Polish, QA, Submission
 - [x] Resumable onboarding (pick up where user left off on reopen)
 
 ### Paywall
-- [ ] RevenueCat offerings fetch + display (runtime prices, no hardcoded values)
+- [x] RevenueCat offerings fetch + display (runtime prices, no hardcoded values)
 - [x] Custom paywall screen (`app/paywall.tsx`)
 - [x] Personalized headline using user's topic + name (paywall.headlineTopic)
 - [x] Personalized subtitle with word count + topic (paywall.subtitleTopic)
@@ -187,10 +187,10 @@ Week 8:     Polish, QA, Submission
 - [ ] All animations smooth (60fps check)
 - [x] Empty states for all screens
 - [ ] Error states (network, AI fail, RC fail)
-- [ ] Loading skeletons
+- [x] Loading skeletons (Home screen: animated skeleton cards while Zustand store hydrates from AsyncStorage)
 - [x] Haptic feedback on key actions (level up, achievement, flashcard answers, quiz answers)
 - [ ] App icon + splash screen final assets
-- [ ] Dark mode safe (avoid hardcoded white bg)
+- [x] Dark mode safe (hardcoded `#FFFFFF`/`#0D0D0D` replaced with `$background`/`$color`/`$gray3`/`$borderColor` tokens across all screens)
 
 ### QA
 - [ ] Manual test: Onboarding → Paywall → Home full flow
@@ -220,7 +220,7 @@ Week 8:     Polish, QA, Submission
 | Feature | Priority | Sprint |
 |---------|----------|--------|
 | Supabase sync (sign-in to sync) | High | v1.1 |
-| Dark mode | Medium | v1.1 |
+| Dark mode | Medium | v1.1 → **Done (Sprint 6)** |
 | SM-2 spaced repetition | High | v1.2 |
 | AI list extension | Medium | v1.2 |
 | AppsFlyer attribution | High (if paid UA) | v1.2 |
@@ -232,7 +232,30 @@ Week 8:     Polish, QA, Submission
 
 ## Bug Fixes & Improvements Log
 
-### Consolidation Pass (March 2026)
+### Dark Mode & Polish Pass (March 2026)
+
+#### Dark Mode Fixes
+- **Hardcoded white/dark backgrounds removed** – All screens now use Tamagui semantic tokens (`$background`, `$gray3`, `$borderColor`, `$color`, `$colorSubtitle`) instead of hardcoded hex values. Affected files: `index.tsx`, `explore.tsx`, `stats.tsx`, `profile.tsx`, `settings/index.tsx`, `achievements.tsx`, `list/create.tsx`, `session/flashcard.tsx`.
+- **TextInput colours in Create List** – Uses `useColorScheme()` to pick appropriate text/placeholder colours in dark mode.
+- **Flashcard card background** – `Animated.View` now uses `useTheme().background.val` instead of hardcoded `"#fff"` so card surfaces adapt to dark mode.
+
+#### Loading Skeletons
+- **`Skeleton` component** added at `components/DesignSystem/Skeleton/index.tsx` – animated pulse (opacity oscillation), uses `theme.gray5` for background colour.
+- **Home screen skeleton** – Shows 3 `ListCardSkeleton` placeholder cards while the `listsStore` is hydrating from AsyncStorage.
+- **`_hasHydrated` in `listsStore`** – `onRehydrateStorage` callback sets `_hasHydrated: true` once Zustand persist finishes loading. The Home screen gates on this flag.
+
+#### RevenueCat Offerings
+- Offerings are already fetched at runtime via `useSubscription()` hook (both `app/paywall.tsx` and `app/(modals)/paywall.tsx` display `pkg.product.priceString`). Marked as `[x]` in roadmap.
+
+#### Bug / Warning Fixes
+- **Unused variable `stats`** in `app/(tabs)/stats.tsx` – removed from destructure.
+- **Unused variable `router`** in `app/achievements.tsx` – removed import and declaration.
+
+#### Roadmap Update
+- `[ ] RevenueCat offerings fetch` → `[x]`
+- `[ ] Loading skeletons` → `[x]`
+- `[ ] Dark mode safe` → `[x]`
+
 
 #### Bug Fixes
 - **`wordsMastered` stat never incremented** – `flashcard.tsx` and `quiz.tsx` now compare mastered-word counts before and after each session and call `incrementStat("wordsMastered", newlyMastered)`. This unblocks the `words_50`, `words_200`, and `words_500` achievements.

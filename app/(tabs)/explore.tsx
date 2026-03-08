@@ -4,12 +4,7 @@ import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
 import { CategoryChips } from "@/components/DesignSystem/CategoryChip";
-import {
-  Body,
-  Caption,
-  H1,
-  Label,
-} from "@/components/DesignSystem/Typography";
+import { Body, Caption, H1, Label } from "@/components/DesignSystem/Typography";
 import {
   getPredefinedListsByLocale,
   LIST_CATEGORIES,
@@ -100,7 +95,7 @@ function ExploreListCard({
         </XStack>
       ) : (
         <XStack
-          backgroundColor="white"
+          backgroundColor="$background"
           paddingHorizontal="$3"
           paddingVertical="$1"
           borderRadius={100}
@@ -171,11 +166,14 @@ export default function ExploreScreen() {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: "#FFFFFF" }} contentContainerStyle={{ paddingBottom: 100 }}>
+    <ScrollView
+      style={{ backgroundColor: "transparent" }}
+      contentContainerStyle={{ paddingBottom: 100 }}
+    >
       <YStack padding="$4" gap="$4">
         <YStack>
-          <H1 color="#0D0D0D">{i18n._("explore.title")}</H1>
-          <Caption color="#9CA3AF">{i18n._("explore.subtitle")}</Caption>
+          <H1>{i18n._("explore.title")}</H1>
+          <Caption color="$colorSubtitle">{i18n._("explore.subtitle")}</Caption>
         </YStack>
 
         <CategoryChips
@@ -200,5 +198,3 @@ export default function ExploreScreen() {
     </ScrollView>
   );
 }
-
-

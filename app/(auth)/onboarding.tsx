@@ -440,10 +440,7 @@ export default function OnboardingScreen() {
         <YStack paddingHorizontal="$5" paddingTop="$12" gap="$2">
           <XStack justifyContent="space-between" alignItems="center">
             {showBack ? (
-              <YStack
-                pressStyle={{ opacity: 0.7 }}
-                onPress={goBack}
-              >
+              <YStack pressStyle={{ opacity: 0.7 }} onPress={goBack}>
                 <Body color="#ffffff" fontSize={15} fontWeight="500">
                   {i18n._("onboarding.back")}
                 </Body>
@@ -608,7 +605,12 @@ export default function OnboardingScreen() {
                     >
                       <XStack gap="$4" alignItems="center">
                         <Body fontSize={32}>{emoji}</Body>
-                        <Body flex={1} color="#ffffff" fontSize={16} fontWeight="500">
+                        <Body
+                          flex={1}
+                          color="#ffffff"
+                          fontSize={16}
+                          fontWeight="500"
+                        >
                           {i18n._(labelKey)}
                         </Body>
                         {isSelected && (
@@ -620,7 +622,11 @@ export default function OnboardingScreen() {
                             alignItems="center"
                             justifyContent="center"
                           >
-                            <Caption color="#1a1a1a" fontWeight="700" fontSize={13}>
+                            <Caption
+                              color="#1a1a1a"
+                              fontWeight="700"
+                              fontSize={13}
+                            >
                               ✓
                             </Caption>
                           </YStack>
@@ -719,9 +725,7 @@ export default function OnboardingScreen() {
                           setTopicCategory(isSelected ? null : key)
                         }
                       >
-                        <Caption
-                          color={isSelected ? "#F5A623" : "#9ca3af"}
-                        >
+                        <Caption color={isSelected ? "#F5A623" : "#9ca3af"}>
                           {i18n._(labelKey)}
                         </Caption>
                       </YStack>
@@ -955,7 +959,11 @@ export default function OnboardingScreen() {
                         borderWidth={1}
                         borderColor="#333333"
                       >
-                        <Label textAlign="center" numberOfLines={2} color="#ffffff">
+                        <Label
+                          textAlign="center"
+                          numberOfLines={2}
+                          color="#ffffff"
+                        >
                           {word.term}
                         </Label>
                         <Caption
