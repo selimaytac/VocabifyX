@@ -144,7 +144,7 @@ export default function HomeScreen() {
 
   return (
     <YStack flex={1} backgroundColor="#FFFFFF">
-      <ScrollView>
+      <ScrollView contentContainerStyle={{ paddingBottom: 100 }}>
         <YStack padding="$4" gap="$4">
           {/* Greeting */}
           <YStack paddingTop="$2" gap="$1">

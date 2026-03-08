@@ -50,8 +50,8 @@ export default function ProfileScreen() {
     .slice(0, 4);
 
   return (
-    <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
-      <YStack padding="$4" gap="$4" paddingBottom="$8" paddingTop="$12">
+    <ScrollView style={{ backgroundColor: "#FFFFFF" }} contentContainerStyle={{ paddingBottom: 100 }}>
+      <YStack padding="$4" gap="$4" paddingTop="$12">
         {/* Settings gear */}
         <XStack justifyContent="flex-end" alignItems="center">
           <XStack
