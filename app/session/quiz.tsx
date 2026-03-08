@@ -219,7 +219,7 @@ export default function QuizScreen() {
         <SecondaryButton size="$3" onPress={() => router.back()}>
           {i18n._("common.back")}
         </SecondaryButton>
-        <Caption color="#D7D7D7">
+        <Caption color="#777777">
           {currentIndex + 1} / {questions.length}
         </Caption>
       </XStack>
@@ -229,16 +229,16 @@ export default function QuizScreen() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <YStack paddingVertical="$4" gap="$4">
           <YStack
-            backgroundColor="#F8F8F8"
-            borderRadius={12}
+            backgroundColor="#F7F8FB"
+            borderRadius={16}
             padding="$4"
           >
             <YStack gap="$2" paddingVertical="$2">
-              <Caption color="#D7D7D7">
+              <Caption color="#777777">
                 {i18n._("session.whatIsTranslation")}
               </Caption>
               <H2 textAlign="center">{currentQuestion.word.term}</H2>
-              <BodySmall color="#D7D7D7" textAlign="center">
+              <BodySmall color="#777777" textAlign="center">
                 {currentQuestion.word.partOfSpeech}
               </BodySmall>
             </YStack>
@@ -250,16 +250,16 @@ export default function QuizScreen() {
               const isCorrectChoice = index === currentQuestion.correctIndex;
               const choiceKey = `choice-${currentIndex}-${index}`;
 
-              let bg = "#F8F8F8";
-              let labelColor = "#131313";
+              let bg = "#F7F8FB";
+              let labelColor = "#09122C";
 
               if (answerState !== "idle") {
                 if (isCorrectChoice) {
-                  bg = "#E8FFF4";
-                  labelColor = "#38AD49";
+                  bg = "#E8F5E9";
+                  labelColor = "#4CAF50";
                 } else if (isSelected && !isCorrectChoice) {
-                  bg = "#FFF0EF";
-                  labelColor = "#D53F36";
+                  bg = "#FFEBEE";
+                  labelColor = "#F44336";
                 }
               }
 
@@ -271,7 +271,7 @@ export default function QuizScreen() {
                   }
                   onPress={() => handleChoice(index)}
                   backgroundColor={bg as never}
-                  borderRadius={12}
+                  borderRadius={16}
                   padding="$4"
                 >
                   <XStack alignItems="center" gap="$3">
@@ -292,9 +292,9 @@ export default function QuizScreen() {
           </YStack>
 
           {answerState !== "idle" && (
-            <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4">
+            <YStack backgroundColor="#F7F8FB" borderRadius={16} padding="$4">
               <BodySmall
-                color="#D7D7D7"
+                color="#777777"
                 fontStyle="italic"
                 textAlign="center"
               >

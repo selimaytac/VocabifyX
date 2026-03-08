@@ -45,14 +45,14 @@ export default function SummaryScreen() {
       <YStack alignItems="center" gap="$3" marginBottom="$6">
         <H1>{emoji}</H1>
         <H3 textAlign="center">{i18n._("session.summary.title")}</H3>
-        <Body color="#D7D7D7" textAlign="center">
+        <Body color="#777777" textAlign="center">
           {mode === "flashcard"
             ? i18n._("session.summary.flashcardSubtitle")
             : i18n._("session.summary.quizSubtitle")}
         </Body>
       </YStack>
 
-      <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4" marginBottom="$4">
+      <YStack backgroundColor="#F7F8FB" borderRadius={16} padding="$4" marginBottom="$4">
         <XStack gap="$2" flexWrap="wrap" justifyContent="center">
           <StatChip
             icon="✅"
@@ -78,8 +78,8 @@ export default function SummaryScreen() {
       </YStack>
 
       {scorePercent === 100 && (
-        <YStack backgroundColor="#E8FFF4" borderRadius={12} padding="$3" marginBottom="$4">
-          <BodySmall color="#38AD49" textAlign="center" fontWeight="600">
+        <YStack backgroundColor="#E8F5E9" borderRadius={16} padding="$3" marginBottom="$4">
+          <BodySmall color="#4CAF50" textAlign="center" fontWeight="600">
             🌟 {i18n._("session.summary.perfectScore")}
           </BodySmall>
         </YStack>

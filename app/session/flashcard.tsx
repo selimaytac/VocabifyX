@@ -205,7 +205,7 @@ export default function FlashcardScreen() {
         <SecondaryButton size="$3" onPress={() => router.back()}>
           {i18n._("common.back")}
         </SecondaryButton>
-        <Caption color="#D7D7D7">
+        <Caption color="#777777">
           {currentIndex + 1} / {words.length}
         </Caption>
       </XStack>
@@ -213,7 +213,7 @@ export default function FlashcardScreen() {
       <ProgressBar progress={progress} color="primary" />
 
       <YStack flex={1} justifyContent="center" alignItems="center">
-        <Caption color="#D7D7D7" marginBottom="$2">
+        <Caption color="#777777" marginBottom="$2">
           {i18n._("session.tapToReveal")}
         </Caption>
 
@@ -229,12 +229,12 @@ export default function FlashcardScreen() {
             ]}
           >
             <ScrollView contentContainerStyle={styles.cardContent}>
-              <Caption color="#D7D7D7" marginBottom="$2">
+              <Caption color="#777777" marginBottom="$2">
                 {i18n._("session.term")}
               </Caption>
               <H2 textAlign="center">{currentWord.term}</H2>
               <BodySmall
-                color="#D7D7D7"
+                color="#777777"
                 marginTop="$2"
                 textAlign="center"
               >
@@ -254,13 +254,13 @@ export default function FlashcardScreen() {
             ]}
           >
             <ScrollView contentContainerStyle={styles.cardContent}>
-              <Caption color="#D7D7D7" marginBottom="$2">
+              <Caption color="#777777" marginBottom="$2">
                 {i18n._("session.translation")}
               </Caption>
               <H2 textAlign="center">{currentWord.translation}</H2>
               {currentWord.example ? (
                 <Body
-                  color="#D7D7D7"
+                  color="#777777"
                   marginTop="$3"
                   textAlign="center"
                   fontStyle="italic"
@@ -279,14 +279,14 @@ export default function FlashcardScreen() {
             <YStack
               pressStyle={{ opacity: 0.8 }}
               onPress={() => handleAnswer(false)}
-              backgroundColor="#FFF0EF"
-              borderRadius={12}
+              backgroundColor="#FFEBEE"
+              borderRadius={16}
               padding="$4"
               alignItems="center"
               gap="$1"
             >
               <H3 textAlign="center">😕</H3>
-              <Label textAlign="center" color="#D53F36">
+              <Label textAlign="center" color="#F44336">
                 {i18n._("session.didntKnow")}
               </Label>
             </YStack>
@@ -295,14 +295,14 @@ export default function FlashcardScreen() {
             <YStack
               pressStyle={{ opacity: 0.8 }}
               onPress={() => handleAnswer(true)}
-              backgroundColor="#E8FFF4"
-              borderRadius={12}
+              backgroundColor="#E8F5E9"
+              borderRadius={16}
               padding="$4"
               alignItems="center"
               gap="$1"
             >
               <H3 textAlign="center">✅</H3>
-              <Label textAlign="center" color="#38AD49">
+              <Label textAlign="center" color="#4CAF50">
                 {i18n._("session.knewIt")}
               </Label>
             </YStack>
