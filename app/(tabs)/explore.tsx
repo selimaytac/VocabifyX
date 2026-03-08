@@ -65,8 +65,8 @@ function ExploreListCard({
     <YStack
       flexBasis="47%"
       flexGrow={0}
-      backgroundColor="#F8F8F8"
-      borderRadius={12}
+      backgroundColor="#F7F8FB"
+      borderRadius={16}
       padding="$3"
       gap="$2"
       alignItems="center"
@@ -78,11 +78,11 @@ function ExploreListCard({
         fontWeight="600"
         textAlign="center"
         numberOfLines={2}
-        color="#131313"
+        color="#09122C"
       >
         {list.name}
       </Label>
-      <Caption color="#D7D7D7">{list.words.length} words</Caption>
+      <Caption color="#777777">{list.words.length} words</Caption>
       {isInLibrary ? (
         <XStack
           backgroundColor="#E8FFF4"
@@ -90,13 +90,13 @@ function ExploreListCard({
           paddingVertical="$1"
           borderRadius={100}
         >
-          <Caption color="#38AD49" fontWeight="600">
+          <Caption color="#4CAF50" fontWeight="600">
             ✓ {inLibraryLabel}
           </Caption>
         </XStack>
       ) : (
         <XStack
-          backgroundColor="#007AFF"
+          backgroundColor="#213448"
           paddingHorizontal="$3"
           paddingVertical="$1"
           borderRadius={100}
@@ -173,7 +173,7 @@ export default function ExploreScreen() {
       <YStack padding="$4" gap="$4">
         <YStack>
           <H1>{i18n._("explore.title")}</H1>
-          <Caption color="#D7D7D7">{i18n._("explore.subtitle")}</Caption>
+          <Caption color="#777777">{i18n._("explore.subtitle")}</Caption>
         </YStack>
 
         <CategoryChips

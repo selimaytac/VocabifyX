@@ -1,5 +1,5 @@
 import { useLingui } from "@lingui/react";
-import { ArrowLeft } from "@tamagui/lucide-icons";
+import { X } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
 import { useCallback } from "react";
 import { ScrollView, Switch } from "react-native";
@@ -106,16 +106,20 @@ export default function NotificationsScreen() {
   return (
     <ScrollView>
       <YStack padding="$4" gap="$4">
-        <XStack alignItems="center" gap="$3">
+        <XStack alignItems="center" justifyContent="space-between">
+          <H2>{i18n._("notifications.title")}</H2>
           <XStack
             onPress={() => router.back()}
-            padding="$2"
-            borderRadius={8}
+            backgroundColor="#F7F8FB"
+            borderRadius={20}
+            width={36}
+            height={36}
+            alignItems="center"
+            justifyContent="center"
             pressStyle={{ opacity: 0.7 }}
           >
-            <ArrowLeft size={24} color="$color" />
+            <X size={18} color="#777777" />
           </XStack>
-          <H2>{i18n._("notifications.title")}</H2>
         </XStack>
 
         <Card elevated>
@@ -181,11 +185,11 @@ export default function NotificationsScreen() {
                   paddingHorizontal="$2"
                   borderRadius={10}
                   backgroundColor={
-                    selectedReminderTime === time ? "#3d2d0a" : "$background"
+                    selectedReminderTime === time ? "#213448" : "$background"
                   }
                   borderWidth={1}
                   borderColor={
-                    selectedReminderTime === time ? "#F5A623" : "$borderColor"
+                    selectedReminderTime === time ? "#FFB400" : "$borderColor"
                   }
                   alignItems="center"
                   gap="$3"
@@ -193,13 +197,13 @@ export default function NotificationsScreen() {
                 >
                   <Caption fontSize={20}>{timeEmoji(time)}</Caption>
                   <Body
-                    color={selectedReminderTime === time ? "#F5A623" : "$color"}
+                    color={selectedReminderTime === time ? "#FFB400" : "$color"}
                   >
                     {timeLabels[time]}
                   </Body>
                   {selectedReminderTime === time && (
                     <XStack flex={1} justifyContent="flex-end">
-                      <Caption color="#F5A623">✓</Caption>
+                      <Caption color="#FFB400">✓</Caption>
                     </XStack>
                   )}
                 </XStack>

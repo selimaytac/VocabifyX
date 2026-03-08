@@ -184,7 +184,7 @@ export default function LapsedPaywallScreen() {
           <YStack gap="$2">
             {FEATURE_KEYS.map((key) => (
               <XStack key={key} gap="$3" alignItems="center">
-                <Label color="#F5A623">✓</Label>
+                <Label color="#FFB400">✓</Label>
                 <Body>{i18n._(key)}</Body>
               </XStack>
             ))}
@@ -202,7 +202,7 @@ export default function LapsedPaywallScreen() {
                     pressStyle={{ opacity: 0.8 }}
                     onPress={() => setSelectedPkgId(pkg.identifier)}
                     borderWidth={1}
-                    borderColor={isSelected ? "#F5A623" : "#333333"}
+                    borderColor={isSelected ? "#FFB400" : "#333333"}
                     backgroundColor={isSelected ? "#3d2d0a" : "#1e1e1e"}
                   >
                     <XStack justifyContent="space-between" alignItems="center">
@@ -216,7 +216,7 @@ export default function LapsedPaywallScreen() {
                           </Label>
                           {isAnnual && (
                             <XStack
-                              backgroundColor="#F5A623"
+                              backgroundColor="#FFB400"
                               paddingHorizontal="$2"
                               paddingVertical="$1"
                               borderRadius={8}
@@ -234,7 +234,7 @@ export default function LapsedPaywallScreen() {
                             : ` ${i18n._("paywall.perMonth")}`}
                         </Caption>
                       </YStack>
-                      {isSelected && <Caption color="#F5A623">✓</Caption>}
+                      {isSelected && <Caption color="#FFB400">✓</Caption>}
                     </XStack>
                   </Card>
                 );

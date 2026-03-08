@@ -88,7 +88,7 @@ export function AchievementUnlockModal() {
         {/* Description card */}
         <YStack
           backgroundColor="#FFFFFF"
-          borderRadius={12}
+          borderRadius={16}
           padding="$4"
           width="100%"
           alignItems="center"
@@ -107,7 +107,7 @@ export function AchievementUnlockModal() {
         {/* Progress card */}
         <YStack
           backgroundColor="$background"
-          borderRadius={12}
+          borderRadius={16}
           padding="$4"
           width="100%"
           gap="$3"
@@ -115,7 +115,7 @@ export function AchievementUnlockModal() {
         >
           <Label fontWeight="600">Progress</Label>
           <YStack
-            backgroundColor="#1B2D4F"
+            backgroundColor="#213448"
             borderRadius={100}
             height={8}
             width="100%"
@@ -135,9 +135,9 @@ export function AchievementUnlockModal() {
           paddingVertical="$2"
           borderRadius={100}
           borderWidth={1}
-          borderColor="#F5A623"
+          borderColor="#FFB400"
         >
-          <BodySmall color="#F5A623" fontWeight="700">
+          <BodySmall color="#FFB400" fontWeight="700">
             ⚡ +{achievement.xpReward} XP
           </BodySmall>
         </XStack>
@@ -152,7 +152,7 @@ export function AchievementUnlockModal() {
 
         {/* CTA button */}
         <XStack
-          backgroundColor="#1B2D4F"
+          backgroundColor="#213448"
           borderRadius={100}
           height={52}
           width="100%"

@@ -10,9 +10,10 @@ import {
   Star,
   Trash2,
   User,
+  X,
 } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
-import { Alert, Linking, Share, ScrollView } from "react-native";
+import { Alert, Linking, ScrollView, Share } from "react-native";
 import { XStack, YStack } from "tamagui";
 
 import {
@@ -81,17 +82,18 @@ function Row({ icon, label, onPress, trailing }: RowProps) {
         width={36}
         height={36}
         borderRadius={10}
-        backgroundColor="#F5F5F5"
+        backgroundColor="#F7F8FB"
         alignItems="center"
         justifyContent="center"
         flexShrink={0}
       >
         {icon}
       </XStack>
-      <Label color="#131313" flex={1}>
+      <Label color="#09122C" flex={1}>
         {label}
       </Label>
-      {trailing ?? (onPress ? <ChevronRight size={18} color="#BBBBBB" /> : null)}
+      {trailing ??
+        (onPress ? <ChevronRight size={18} color="#BBBBBB" /> : null)}
     </XStack>
   );
 }
@@ -152,19 +154,34 @@ export default function SettingsScreen() {
   return (
     <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
       <YStack padding="$4" gap="$5" paddingBottom="$10">
+        {/* ── Modal handle & close ───────────────────── */}
+        <XStack justifyContent="space-between" alignItems="center">
+          <H3>{i18n._("common.settings")}</H3>
+          <XStack
+            onPress={() => router.back()}
+            backgroundColor="#F7F8FB"
+            borderRadius={20}
+            width={36}
+            height={36}
+            alignItems="center"
+            justifyContent="center"
+            pressStyle={{ opacity: 0.7 }}
+          >
+            <X size={18} color="#777777" />
+          </XStack>
+        </XStack>
 
         {/* ── 1. ACCOUNT ─────────────────────────────────── */}
         <YStack gap="$2">
           <SectionHeader>{i18n._("settings.account")}</SectionHeader>
           <YStack {...CARD_STYLE}>
-
             {/* Profile row */}
             <XStack padding="$4" alignItems="center" gap="$3">
               <XStack
                 width={56}
                 height={56}
                 borderRadius={28}
-                backgroundColor="#007AFF"
+                backgroundColor="#213448"
                 alignItems="center"
                 justifyContent="center"
                 flexShrink={0}
@@ -174,7 +191,7 @@ export default function SettingsScreen() {
                 </H3>
               </XStack>
               <YStack flex={1} gap="$0.5">
-                <Label fontWeight="700" fontSize={16} color="#131313">
+                <Label fontWeight="700" fontSize={16} color="#09122C">
                   {profile?.displayName ?? "—"}
                 </Label>
                 <Caption color="#888888">{profile?.email ?? "—"}</Caption>
@@ -205,7 +222,7 @@ export default function SettingsScreen() {
                     width={36}
                     height={36}
                     borderRadius={10}
-                    backgroundColor="#F5F5F5"
+                    backgroundColor="#F7F8FB"
                     alignItems="center"
                     justifyContent="center"
                   >
@@ -247,7 +264,7 @@ export default function SettingsScreen() {
               width={36}
               height={36}
               borderRadius={10}
-              backgroundColor="#F5F5F5"
+              backgroundColor="#F7F8FB"
               alignItems="center"
               justifyContent="center"
               flexShrink={0}
@@ -258,7 +275,7 @@ export default function SettingsScreen() {
               <Caption color="#999999" fontWeight="600" fontSize={12}>
                 {i18n._("settings.displayName")}
               </Caption>
-              <Label color="#131313" fontWeight="600">
+              <Label color="#09122C" fontWeight="600">
                 {profile?.displayName ?? "—"}
               </Label>
             </YStack>
@@ -307,7 +324,7 @@ export default function SettingsScreen() {
 
         {/* ── 6. DELETE ACCOUNT ──────────────────────────── */}
         <XStack
-          backgroundColor="#FFF0EF"
+          backgroundColor="#FFEEED"
           borderRadius={16}
           borderWidth={1}
           borderColor="#FFD0CC"
@@ -318,14 +335,12 @@ export default function SettingsScreen() {
           pressStyle={{ opacity: 0.7 }}
           onPress={handleDeleteAccount}
         >
-          <Trash2 size={20} color="#D53F36" />
-          <Body color="#D53F36" fontWeight="600">
+          <Trash2 size={20} color="#BE3144" />
+          <Body color="#BE3144" fontWeight="600">
             {i18n._("settings.deleteAccount")}
           </Body>
         </XStack>
-
       </YStack>
     </ScrollView>
   );
 }
-
