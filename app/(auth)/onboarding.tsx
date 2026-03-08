@@ -217,7 +217,6 @@ export default function OnboardingScreen() {
   );
   const setProfile = useUserStore((s) => s.setProfile);
   const locale = useLanguageStore((s) => s.locale);
-  const setLocale = useLanguageStore((s) => s.setLocale);
   const addList = useListsStore((s) => s.addList);
   const { incrementStat, checkAndUnlockAchievements } = useGameStore();
 
@@ -225,7 +224,6 @@ export default function OnboardingScreen() {
     resolveInitialStep(storedStep),
   );
   const [name, setName] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState<"en" | "tr">(locale);
   const [purpose, setPurpose] = useState<LearningPurpose | null>(null);
   const [level, setLevel] = useState<ProficiencyLevel | null>(null);
   const [dailyGoal, setDailyGoal] = useState<number | null>(null);
@@ -268,7 +266,7 @@ export default function OnboardingScreen() {
               ? selectedTopics
               : ["travel", "daily_life", "business"];
 
-          const allLists = getPredefinedListsByLocale(selectedLanguage);
+          const allLists = getPredefinedListsByLocale(locale);
           const best = selectBestList(allLists, topicsToUse);
 
           if (best) {
@@ -315,7 +313,7 @@ export default function OnboardingScreen() {
   }, [
     step,
     selectedTopics,
-    selectedLanguage,
+    locale,
     dailyGoal,
     addList,
     incrementStat,
@@ -345,7 +343,6 @@ export default function OnboardingScreen() {
         avatarUrl: null,
       });
     }
-    setLocale(selectedLanguage);
     setStep("purpose");
   };
 
@@ -455,20 +452,22 @@ export default function OnboardingScreen() {
                   </BodySmall>
                 </YStack>
                 <YStack gap="$2" width="100%">
-                  {[
-                    "🤖  AI-powered vocabulary personalization",
-                    "📊  Smart progress tracking",
-                    "🔥  Daily streaks & achievements",
-                  ].map((item) => (
+                  {(
+                    [
+                      "onboarding.hero.feature1",
+                      "onboarding.hero.feature2",
+                      "onboarding.hero.feature3",
+                    ] as const
+                  ).map((key) => (
                     <XStack
-                      key={item}
+                      key={key}
                       alignItems="center"
                       backgroundColor="$gray3"
                       paddingHorizontal="$4"
                       paddingVertical="$3"
                       borderRadius={12}
                     >
-                      <BodySmall>{item}</BodySmall>
+                      <BodySmall>{i18n._(key)}</BodySmall>
                     </XStack>
                   ))}
                 </YStack>
@@ -501,52 +500,6 @@ export default function OnboardingScreen() {
                     autoFocus
                     returnKeyType="done"
                   />
-                </YStack>
-              </YStack>
-
-              <YStack gap="$3">
-                <H2>{i18n._("onboarding.name.languageTitle")}</H2>
-                <YStack gap="$3">
-                  {(["en", "tr"] as const).map((lang) => {
-                    const isSelected = selectedLanguage === lang;
-                    return (
-                      <Card
-                        key={lang}
-                        pressStyle={{ opacity: 0.8 }}
-                        onPress={() => setSelectedLanguage(lang)}
-                        borderWidth={2}
-                        borderColor={isSelected ? "$blue10" : "$borderColor"}
-                        backgroundColor={isSelected ? "$blue2" : "$background"}
-                      >
-                        <XStack
-                          justifyContent="space-between"
-                          alignItems="center"
-                        >
-                          <YStack>
-                            <Label>
-                              {i18n._(
-                                lang === "en"
-                                  ? "onboarding.name.english"
-                                  : "onboarding.name.turkish",
-                              )}
-                            </Label>
-                            <Caption color="$colorSubtitle">
-                              {i18n._(
-                                lang === "en"
-                                  ? "onboarding.name.englishDesc"
-                                  : "onboarding.name.turkishDesc",
-                              )}
-                            </Caption>
-                          </YStack>
-                          {isSelected && (
-                            <Body color="$blue10" fontSize={18}>
-                              ✓
-                            </Body>
-                          )}
-                        </XStack>
-                      </Card>
-                    );
-                  })}
                 </YStack>
               </YStack>
 

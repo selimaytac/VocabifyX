@@ -177,27 +177,25 @@ export const messages: Record<string, string> = {
   // Onboarding – kahraman / karşılama ekranı
   "onboarding.heroTitle": "VocabifyX'e Hoş Geldiniz! 🎓",
   "onboarding.heroSubtitle":
-    "Yapay zeka destekli kişiselleştirme ile daha hızlı kelime öğrenin.",
+    "Her konu ve alanda kelime haznenizi geliştirin — istediğiniz dilde.",
   "onboarding.letsGetStarted": "Hadi Başlayalım! 🚀",
+  "onboarding.hero.feature1": "🤖  Her konu ve alan için kelime uzmanlaşması",
+  "onboarding.hero.feature2": "📊  Akıllı ilerleme takibi ve aralıklı tekrar",
+  "onboarding.hero.feature3": "🔥  Günlük seriler, XP ve başarımlar",
 
   // Onboarding – geriye dönük uyumluluk için tutulan eski anahtarlar
   "onboarding.welcome": "VocabifyX'e Hoş Geldiniz! 🎓",
-  "onboarding.welcomeSubtitle": "Akıllı kartlar ve quizlerle kelime öğrenin.",
+  "onboarding.welcomeSubtitle": "Akıllı kartlar ve quizlerle uzmanlık kazan.",
   "onboarding.back": "← Geri",
 
-  // Adım 1 – Ad ve dil
+  // Adım 1 – Ad
   "onboarding.name.title": "Adın nedir?",
   "onboarding.name.placeholder": "Adını gir...",
-  "onboarding.name.languageTitle": "Hangi dili öğrenmek istiyorsun?",
-  "onboarding.name.english": "🇬🇧 İngilizce",
-  "onboarding.name.englishDesc": "İngilizce kelime öğren",
-  "onboarding.name.turkish": "🇹🇷 Türkçe",
-  "onboarding.name.turkishDesc": "Türkçe kelime öğren",
 
   // Adım 2 – Amaç
-  "onboarding.purpose.title": "Neden öğreniyorsun?",
+  "onboarding.purpose.title": "Neden buradasın?",
   "onboarding.purpose.subtitle":
-    "Kelime hazneni hedeflerine göre kişiselleştireceğiz",
+    "Kelime hazneni özel hedeflerine göre kişiselleştireceğiz",
   "onboarding.purpose.work": "İş & Kariyer",
   "onboarding.purpose.workEmoji": "💼",
   "onboarding.purpose.travel": "Seyahat & Kültür",
@@ -211,16 +209,16 @@ export const messages: Record<string, string> = {
   "onboarding.level.title": "Mevcut seviyeniz nedir?",
   "onboarding.level.subtitle": "Dürüst ol – seni olduğun yerde karşılayacağız",
   "onboarding.level.beginner": "Tam Başlangıç",
-  "onboarding.level.beginnerDesc": "Çok az kelime biliyorum",
+  "onboarding.level.beginnerDesc": "Bu konuya yeni başlıyorum",
   "onboarding.level.beginnerEmoji": "🌱",
   "onboarding.level.elementary": "Temel",
-  "onboarding.level.elementaryDesc": "Temel ifadeleri biliyorum",
+  "onboarding.level.elementaryDesc": "Temel bilgileri biliyorum",
   "onboarding.level.elementaryEmoji": "📖",
   "onboarding.level.intermediate": "Orta",
-  "onboarding.level.intermediateDesc": "Basit konuşmalar yapabiliyorum",
+  "onboarding.level.intermediateDesc": "Sağlam bir temele sahibim",
   "onboarding.level.intermediateEmoji": "🎯",
   "onboarding.level.advanced": "İleri",
-  "onboarding.level.advancedDesc": "Kelime haznemi ince ayar yapmak istiyorum",
+  "onboarding.level.advancedDesc": "Uzmanlığımı derinleştirmek istiyorum",
   "onboarding.level.advancedEmoji": "🚀",
 
   // Adım 4 – Günlük hedef

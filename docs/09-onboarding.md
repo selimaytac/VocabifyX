@@ -25,11 +25,13 @@ App language is **automatically detected from device locale** at first launch.
 - Device locale `tr-*` → Turkish
 - Everything else → English
 
-No language selection step in onboarding. The user can change the app language at any time in Settings. This keeps onboarding shorter and removes a decision that doesn't affect the core experience.
+No language selection step in onboarding. The user can change the app language at any time in **Settings → Language**. This keeps onboarding shorter and removes a decision that adds no value — the user is here to master vocabulary for a topic, not to configure a UI language.
 
 ---
 
 ## Onboarding Flow
+
+VocabifyX is a **general vocabulary specialization tool**. Users can master vocabulary for any topic or domain (biology, software, travel, finance, greetings…) in any language they choose. Onboarding collects the minimum data needed to personalise their first list.
 
 ### Progress Indicator
 All screens show: `● ● ○ ○` dots + "Step 2 of 4" text at the top. This reassures users they're not in an infinite flow (VWO: reinforce progress).
@@ -55,6 +57,7 @@ Notes:
   - Keyboard opens automatically.
   - No password, no email, no friction.
   - Single CTA, no skip link needed.
+  - No language selection — app language auto-detected from device.
 ```
 
 **Data collected:** `displayName`  
@@ -62,16 +65,18 @@ Notes:
 
 ---
 
-### Step 2 – Native Language + Push Permission
+### Step 2 – Purpose + Push Permission
 
 ```
 Visual:
   Clean screen
-  "What's your native language?"
-  Subtitle: "We'll translate new words into this language for you."
+  "Why are you here?"
+  Subtitle: "We'll tailor your vocabulary to your specific goals."
 
-  [ 🇹🇷  Turkish   ]   ← large card, tappable
-  [ 🇬🇧  English   ]   ← large card, tappable
+  [ 💼 Work & Career      ]
+  [ ✈️  Travel & Culture  ]
+  [ 📚 Education & Study  ]
+  [ 🌟 Personal Enrichment]
 
   Immediately after selection → OS Push Notification prompt appears.
   Our pre-prompt screen before the OS dialog:
@@ -89,11 +94,10 @@ Visual:
 Notes:
   - If user taps "Not now" → skip, don't ask again for 7 days.
   - If user enables → schedule reminders after onboarding completion.
-  - "Other" language option maps to English translations in MVP.
 ```
 
-**Data collected:** `nativeLanguage`, `notificationsEnabled`  
-**Research basis:** Adapty — push notifications reduce onboarding drop-offs; opt-in rates are highest when asked with a clear value proposition. Best timing: early, contextual, not as first screen.
+**Data collected:** `learningPurpose`, `notificationsEnabled`  
+**Research basis:** Adapty — push notifications reduce onboarding drop-offs; opt-in rates are highest when asked with a clear value proposition.
 
 ---
 
@@ -268,7 +272,7 @@ On trial start:
 type OnboardingState =
   | 'not_started'
   | 'step_1_done'       // name entered
-  | 'step_2_done'       // native language selected, push notif handled
+  | 'step_2_done'       // purpose selected, push notif handled
   | 'step_3_done'       // topic/list settings submitted
   | 'list_generating'   // AI call in progress
   | 'list_ready'        // Preview shown, user looking at list
@@ -276,6 +280,8 @@ type OnboardingState =
   | 'complete'          // Trial started, app unlocked
 
 // Persisted: @vocabifyx/onboarding_state
+// App language is NOT collected in onboarding — it is auto-detected from
+// device locale (tr-* → Turkish, else English) and can be changed in Settings.
 ```
 
 ---
@@ -313,7 +319,7 @@ If list was already generated (state: `list_ready`) → go directly to preview, 
 ## Analytics Events
 
 ```typescript
-track('onboarding_started', { appLanguage })
+track('onboarding_started', { detectedLocale })
 track('onboarding_step_completed', { step: 1 | 2 | 3, stepName })
 track('onboarding_notification_permission', { granted: boolean })
 track('onboarding_topic_set', { topic, topicCategory, wordCount, listLanguage, hasDescription })
