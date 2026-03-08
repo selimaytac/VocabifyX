@@ -46,8 +46,8 @@ type TopicCategory =
   | "other";
 type WordCount = 15 | 30 | 50;
 
-// loading sub-phases: "A" = generating animation, "B" = list preview
-type LoadingPhase = "A" | "B";
+// loading sub-phases: "A" = generating animation, "B" = list preview, "error" = failed
+type LoadingPhase = "A" | "B" | "error";
 
 const TOTAL_STEPS = 4;
 
@@ -289,10 +289,17 @@ export default function OnboardingScreen() {
                 topic: topic.trim() || best.topic,
                 wordCount: words.length,
               });
+
+              setLoadingPhase("B");
+            } else {
+              // No matching predefined list found — show the error phase
+              analyticsService.track("onboarding_list_selection_failed", {
+                topic: topic.trim(),
+                topicCategory,
+              });
+              setLoadingPhase("error");
             }
           }
-
-          setLoadingPhase("B");
         },
         LOADING_MICROCOPY_KEYS.length * 2000 + 1000,
       ),
@@ -941,6 +948,37 @@ export default function OnboardingScreen() {
                   {i18n._("onboarding.preview.trialCta")}
                 </PrimaryButton>
               </YStack>
+            </YStack>
+          )}
+
+          {/* Step 4: Loading - Error state (no list found) */}
+          {step === "loading" && loadingPhase === "error" && (
+            <YStack
+              flex={1}
+              justifyContent="center"
+              alignItems="center"
+              gap="$5"
+              padding="$4"
+            >
+              <Body fontSize={64} textAlign="center">
+                😕
+              </Body>
+              <YStack alignItems="center" gap="$2">
+                <H2 textAlign="center">{i18n._("onboarding.error.title")}</H2>
+                <BodySmall color="$colorSubtitle" textAlign="center">
+                  {i18n._("onboarding.error.subtitle")}
+                </BodySmall>
+              </YStack>
+              <PrimaryButton
+                onPress={() => {
+                  hasCreatedList.current = false;
+                  setLoadingPhase("A");
+                  setLoadingMicrocopyIndex(0);
+                  setShowFunFact(false);
+                }}
+              >
+                {i18n._("onboarding.error.retry")}
+              </PrimaryButton>
             </YStack>
           )}
         </YStack>

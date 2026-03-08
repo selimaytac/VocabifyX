@@ -1,4 +1,6 @@
 import { useLingui } from "@lingui/react";
+import * as Haptics from "expo-haptics";
+import { useEffect } from "react";
 import { Sheet, XStack, YStack } from "tamagui";
 
 import { LevelBadge } from "@/components/DesignSystem/Badge";
@@ -12,6 +14,15 @@ export function LevelUpModal() {
   const clearPendingLevelUp = useGameStore((s) => s.clearPendingLevelUp);
 
   const isOpen = pendingLevelUp !== null;
+
+  // Haptic feedback when level-up modal opens
+  useEffect(() => {
+    if (isOpen) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(
+        () => undefined,
+      );
+    }
+  }, [isOpen]);
 
   if (!pendingLevelUp) return null;
 

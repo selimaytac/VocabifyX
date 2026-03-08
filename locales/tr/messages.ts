@@ -400,4 +400,16 @@ export const messages: Record<string, string> = {
     "Abonelik otomatik yenilenir. Ayarlar'dan istediğiniz zaman iptal edebilirsiniz.",
   "paywall.noOfferings":
     "Fiyatlandırma mevcut değil. Lütfen daha sonra tekrar deneyin.",
+
+  // Süresi dolmuş abone ödeme ekranı
+  "paywall.lapsed.headline": "Aboneliğinizin süresi doldu",
+  "paywall.lapsed.subtitle":
+    "İlerlemenizi korumak ve öğrenmeye devam etmek için planınızı yenileyin.",
+  "paywall.lapsed.renewCta": "Aboneliği Yenile",
+
+  // Alım hatası (liste oluşturma / arama başarısız olduğunda)
+  "onboarding.error.title": "Bir şeyler ters gitti",
+  "onboarding.error.subtitle":
+    "Şu anda listenizi hazırlayamadık. Lütfen tekrar deneyin.",
+  "onboarding.error.retry": "Tekrar Dene",
 };
