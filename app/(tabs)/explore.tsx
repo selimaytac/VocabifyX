@@ -171,7 +171,7 @@ export default function ExploreScreen() {
   };
 
   return (
-    <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
+    <ScrollView style={{ backgroundColor: "#FFFFFF" }} contentContainerStyle={{ paddingBottom: 100 }}>
       <YStack padding="$4" gap="$4">
         <YStack>
           <H1 color="#0D0D0D">{i18n._("explore.title")}</H1>

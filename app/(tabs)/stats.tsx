@@ -127,7 +127,7 @@ export default function StatsScreen() {
     .slice(0, 10);
 
   return (
-    <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
+    <ScrollView style={{ backgroundColor: "#FFFFFF" }} contentContainerStyle={{ paddingBottom: 100 }}>
       <YStack padding="$4" gap="$4">
         <H1 color="#0D0D0D">{i18n._("stats.title")}</H1>
 
