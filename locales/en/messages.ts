@@ -270,6 +270,48 @@ export const messages: Record<string, string> = {
   "onboarding.plan.estimatedDays": "~{days} days to complete your first list",
   "onboarding.plan.commit": "I'm Ready! Let's Go! 💪",
 
+  // Onboarding – topic input step (Step 3 of new flow)
+  "onboarding.topic.title": "What do you want to learn about?",
+  "onboarding.topic.subtitle":
+    "Pick a topic — AI will build your list instantly.",
+  "onboarding.topic.categoryLabel": "Category",
+  "onboarding.topic.wordCountLabel": "How many words?",
+  "onboarding.topic.languageLabel": "List language",
+  "onboarding.topic.descriptionToggle":
+    "+ Add description (optional — improves accuracy)",
+  "onboarding.topic.descriptionPlaceholder":
+    "Describe your goal or context… (max 500 chars)",
+  "onboarding.topic.buildCta": "✨ Build My List",
+  "onboarding.topic.category.travel": "✈️ Travel",
+  "onboarding.topic.category.business": "💼 Business",
+  "onboarding.topic.category.technology": "💻 Tech",
+  "onboarding.topic.category.health": "🏥 Health",
+  "onboarding.topic.category.academic": "🎓 Academic",
+  "onboarding.topic.category.other": "🌍 Other",
+
+  // Onboarding – push notification pre-prompt (shown after purpose selection)
+  "onboarding.notif.preTitle": "Stay on track 🔔",
+  "onboarding.notif.preBody":
+    "We'll remind you to study at the right time — no spam, just smart nudges.",
+  "onboarding.notif.enable": "Enable Notifications",
+  "onboarding.notif.notNow": "Not now",
+
+  // Onboarding – loading Phase A micro-copy
+  "onboarding.loading.generatingTitle": "Building your personalised list…",
+  "onboarding.loading.microcopy1": "Picking the most relevant words…",
+  "onboarding.loading.microcopy2": "Filtering for your goal…",
+  "onboarding.loading.microcopy3": "Almost there — nearly ready…",
+  "onboarding.loading.microcopy4": "Adding context and examples…",
+  "onboarding.loading.funFact":
+    "💡 Did you know? Learning 1,000 words covers ~85% of everyday conversation.",
+
+  // Onboarding – loading Phase B (list preview)
+  "onboarding.preview.title": "Your list is ready! 🎉",
+  "onboarding.preview.meta": "{wordCount} words · {category}",
+  "onboarding.preview.locked": "🔒 {count} more words",
+  "onboarding.preview.lockedCta": "Start your free trial to unlock them all",
+  "onboarding.preview.trialCta": "Start My Free Trial →",
+
   // Notification settings
   "notifications.title": "Notifications",
   "notifications.studyReminders": "Study Reminders",
@@ -333,11 +375,15 @@ export const messages: Record<string, string> = {
   // Paywall screen
   "paywall.title": "Unlock Premium ⭐",
   "paywall.headlinePersonal": "Start learning, {name}!",
+  "paywall.headlineTopic": "{name}, your list is waiting.",
   "paywall.headlineDefault": "Unlock all features with Premium",
-  "paywall.feature1": "Unlimited flashcard & quiz sessions",
-  "paywall.feature2": "AI-powered vocabulary generation",
-  "paywall.feature3": "Detailed progress tracking & stats",
-  "paywall.feature4": "Streak protection notifications",
+  "paywall.subtitleTopic":
+    "Start your free trial to access all {wordCount} words and begin learning {topic}.",
+  "paywall.feature1": "Access your full vocabulary list",
+  "paywall.feature2": "Unlimited AI-generated vocabulary lists",
+  "paywall.feature3": "Flashcards & Quiz learning modes",
+  "paywall.feature4": "XP, Levels & Achievement system",
+  "paywall.feature5": "Track your progress list-by-list",
   "paywall.annualPlan": "Annual Plan",
   "paywall.monthlyPlan": "Monthly Plan",
   "paywall.perYear": "/ year",

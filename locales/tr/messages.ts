@@ -269,6 +269,50 @@ export const messages: Record<string, string> = {
   "onboarding.plan.estimatedDays": "İlk listeni tamamlamak için ~{days} gün",
   "onboarding.plan.commit": "Hazırım! Hadi Gidelim! 💪",
 
+  // Onboarding – konu girişi adımı (Yeni akışın 3. adımı)
+  "onboarding.topic.title": "Ne hakkında öğrenmek istiyorsun?",
+  "onboarding.topic.subtitle":
+    "Bir konu seç — Yapay zeka listeni anında oluşturacak.",
+  "onboarding.topic.categoryLabel": "Kategori",
+  "onboarding.topic.wordCountLabel": "Kaç kelime?",
+  "onboarding.topic.languageLabel": "Liste dili",
+  "onboarding.topic.descriptionToggle":
+    "+ Açıklama ekle (isteğe bağlı — doğruluğu artırır)",
+  "onboarding.topic.descriptionPlaceholder":
+    "Amacını veya bağlamını açıkla… (maks. 500 karakter)",
+  "onboarding.topic.buildCta": "✨ Listemi Oluştur",
+  "onboarding.topic.category.travel": "✈️ Seyahat",
+  "onboarding.topic.category.business": "💼 İş",
+  "onboarding.topic.category.technology": "💻 Teknoloji",
+  "onboarding.topic.category.health": "🏥 Sağlık",
+  "onboarding.topic.category.academic": "🎓 Akademik",
+  "onboarding.topic.category.other": "🌍 Diğer",
+
+  // Onboarding – bildirim ön bildirimi (amaç seçiminden sonra gösterilir)
+  "onboarding.notif.preTitle": "Yolunda kal 🔔",
+  "onboarding.notif.preBody":
+    "Seni doğru zamanda çalışmaya hatırlatacağız — spam yok, sadece akıllı hatırlatıcılar.",
+  "onboarding.notif.enable": "Bildirimleri Etkinleştir",
+  "onboarding.notif.notNow": "Şimdi değil",
+
+  // Onboarding – yükleme Aşama A mikro-metni
+  "onboarding.loading.generatingTitle":
+    "Kişiselleştirilmiş listen oluşturuluyor…",
+  "onboarding.loading.microcopy1": "En alakalı kelimeler seçiliyor…",
+  "onboarding.loading.microcopy2": "Hedefe göre filtreleniyor…",
+  "onboarding.loading.microcopy3": "Neredeyse hazır — az kaldı…",
+  "onboarding.loading.microcopy4": "Bağlam ve örnekler ekleniyor…",
+  "onboarding.loading.funFact":
+    "💡 Biliyor muydun? 1.000 kelime öğrenmek günlük konuşmaların ~%85'ini kapsıyor.",
+
+  // Onboarding – yükleme Aşama B (liste önizlemesi)
+  "onboarding.preview.title": "Listen hazır! 🎉",
+  "onboarding.preview.meta": "{wordCount} kelime · {category}",
+  "onboarding.preview.locked": "🔒 {count} kelime daha",
+  "onboarding.preview.lockedCta":
+    "Tümünün kilidini açmak için ücretsiz denemeyi başlat",
+  "onboarding.preview.trialCta": "Ücretsiz Denememi Başlat →",
+
   // Bildirim ayarları
   "notifications.title": "Bildirimler",
   "notifications.studyReminders": "Çalışma Hatırlatıcıları",
@@ -334,11 +378,15 @@ export const messages: Record<string, string> = {
   // Ödeme ekranı
   "paywall.title": "Premium'u Aç ⭐",
   "paywall.headlinePersonal": "Öğrenmeye başla, {name}!",
+  "paywall.headlineTopic": "{name}, listen seni bekliyor.",
   "paywall.headlineDefault": "Premium ile tüm özelliklerin kilidini aç",
-  "paywall.feature1": "Sınırsız kart ve quiz oturumları",
-  "paywall.feature2": "Yapay zeka destekli kelime üretimi",
-  "paywall.feature3": "Ayrıntılı ilerleme takibi ve istatistikler",
-  "paywall.feature4": "Seri koruma bildirimleri",
+  "paywall.subtitleTopic":
+    "Tüm {wordCount} kelimeye erişmek ve {topic} öğrenmeye başlamak için ücretsiz deneme başlat.",
+  "paywall.feature1": "Tam kelime listene eriş",
+  "paywall.feature2": "Sınırsız yapay zeka destekli kelime listesi",
+  "paywall.feature3": "Kart ve quiz öğrenme modları",
+  "paywall.feature4": "XP, Seviye ve Başarım sistemi",
+  "paywall.feature5": "Liste bazında ilerlemenizi takip et",
   "paywall.annualPlan": "Yıllık Plan",
   "paywall.monthlyPlan": "Aylık Plan",
   "paywall.perYear": "/ yıl",
