@@ -181,11 +181,11 @@ export default function NotificationsScreen() {
                   paddingHorizontal="$2"
                   borderRadius={10}
                   backgroundColor={
-                    selectedReminderTime === time ? "#3d2d0a" : "$background"
+                    selectedReminderTime === time ? "#213448" : "$background"
                   }
                   borderWidth={1}
                   borderColor={
-                    selectedReminderTime === time ? "#F5A623" : "$borderColor"
+                    selectedReminderTime === time ? "#FFB400" : "$borderColor"
                   }
                   alignItems="center"
                   gap="$3"
@@ -193,13 +193,13 @@ export default function NotificationsScreen() {
                 >
                   <Caption fontSize={20}>{timeEmoji(time)}</Caption>
                   <Body
-                    color={selectedReminderTime === time ? "#F5A623" : "$color"}
+                    color={selectedReminderTime === time ? "#FFB400" : "$color"}
                   >
                     {timeLabels[time]}
                   </Body>
                   {selectedReminderTime === time && (
                     <XStack flex={1} justifyContent="flex-end">
-                      <Caption color="#F5A623">✓</Caption>
+                      <Caption color="#FFB400">✓</Caption>
                     </XStack>
                   )}
                 </XStack>

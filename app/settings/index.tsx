@@ -81,14 +81,14 @@ function Row({ icon, label, onPress, trailing }: RowProps) {
         width={36}
         height={36}
         borderRadius={10}
-        backgroundColor="#F5F5F5"
+        backgroundColor="#F7F8FB"
         alignItems="center"
         justifyContent="center"
         flexShrink={0}
       >
         {icon}
       </XStack>
-      <Label color="#131313" flex={1}>
+      <Label color="#09122C" flex={1}>
         {label}
       </Label>
       {trailing ?? (onPress ? <ChevronRight size={18} color="#BBBBBB" /> : null)}
@@ -164,7 +164,7 @@ export default function SettingsScreen() {
                 width={56}
                 height={56}
                 borderRadius={28}
-                backgroundColor="#007AFF"
+                backgroundColor="#213448"
                 alignItems="center"
                 justifyContent="center"
                 flexShrink={0}
@@ -174,7 +174,7 @@ export default function SettingsScreen() {
                 </H3>
               </XStack>
               <YStack flex={1} gap="$0.5">
-                <Label fontWeight="700" fontSize={16} color="#131313">
+                <Label fontWeight="700" fontSize={16} color="#09122C">
                   {profile?.displayName ?? "—"}
                 </Label>
                 <Caption color="#888888">{profile?.email ?? "—"}</Caption>
@@ -205,7 +205,7 @@ export default function SettingsScreen() {
                     width={36}
                     height={36}
                     borderRadius={10}
-                    backgroundColor="#F5F5F5"
+                    backgroundColor="#F7F8FB"
                     alignItems="center"
                     justifyContent="center"
                   >
@@ -247,7 +247,7 @@ export default function SettingsScreen() {
               width={36}
               height={36}
               borderRadius={10}
-              backgroundColor="#F5F5F5"
+              backgroundColor="#F7F8FB"
               alignItems="center"
               justifyContent="center"
               flexShrink={0}
@@ -258,7 +258,7 @@ export default function SettingsScreen() {
               <Caption color="#999999" fontWeight="600" fontSize={12}>
                 {i18n._("settings.displayName")}
               </Caption>
-              <Label color="#131313" fontWeight="600">
+              <Label color="#09122C" fontWeight="600">
                 {profile?.displayName ?? "—"}
               </Label>
             </YStack>
@@ -307,7 +307,7 @@ export default function SettingsScreen() {
 
         {/* ── 6. DELETE ACCOUNT ──────────────────────────── */}
         <XStack
-          backgroundColor="#FFF0EF"
+          backgroundColor="#FFEEED"
           borderRadius={16}
           borderWidth={1}
           borderColor="#FFD0CC"
@@ -318,8 +318,8 @@ export default function SettingsScreen() {
           pressStyle={{ opacity: 0.7 }}
           onPress={handleDeleteAccount}
         >
-          <Trash2 size={20} color="#D53F36" />
-          <Body color="#D53F36" fontWeight="600">
+          <Trash2 size={20} color="#BE3144" />
+          <Body color="#BE3144" fontWeight="600">
             {i18n._("settings.deleteAccount")}
           </Body>
         </XStack>
