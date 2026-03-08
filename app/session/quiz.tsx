@@ -72,6 +72,12 @@ export default function QuizScreen() {
   const [answerState, setAnswerState] = useState<AnswerState>("idle");
   const [selectedChoice, setSelectedChoice] = useState<number | null>(null);
   const [startTime] = useState(() => Date.now());
+  const [initialMasteredCount] = useState(
+    () =>
+      (
+        useListsStore.getState().lists.find((l) => l.id === listId)?.words ?? []
+      ).filter((w) => w.status === "mastered").length,
+  );
   const advanceTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const currentQuestion = questions[currentIndex];
@@ -120,6 +126,15 @@ export default function QuizScreen() {
           incrementStat("sessionsCompleted");
           if (isPerfect) {
             incrementStat("quizPerfectScores");
+          }
+          const updatedWords =
+            useListsStore.getState().lists.find((l) => l.id === list.id)
+              ?.words ?? [];
+          const newlyMastered =
+            updatedWords.filter((w) => w.status === "mastered").length -
+            initialMasteredCount;
+          if (newlyMastered > 0) {
+            incrementStat("wordsMastered", newlyMastered);
           }
           checkAndUnlockAchievements();
 
@@ -180,6 +195,7 @@ export default function QuizScreen() {
       checkAndUnlockAchievements,
       addSession,
       router,
+      initialMasteredCount,
     ],
   );
 
