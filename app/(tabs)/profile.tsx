@@ -47,7 +47,7 @@ export default function ProfileScreen() {
       <YStack padding="$4" gap="$4">
         <YStack alignItems="center" paddingVertical="$6" gap="$3">
           <Avatar circular size="$8" marginBottom="$1">
-            <Avatar.Fallback backgroundColor="$blue5" />
+            <Avatar.Fallback backgroundColor="#3d2d0a" />
           </Avatar>
           <H2>{profile?.displayName ?? "User"}</H2>
           <Body color="$colorSubtitle">{user?.email ?? ""}</Body>
@@ -105,7 +105,7 @@ export default function ProfileScreen() {
               onPress={() => router.push("/achievements")}
               pressStyle={{ opacity: 0.7 }}
             >
-              <Caption color="$blue10">{i18n._("profile.viewAll")}</Caption>
+              <Caption color="#F5A623">{i18n._("profile.viewAll")}</Caption>
             </XStack>
           </XStack>
           {recentAchievements.length === 0 ? (

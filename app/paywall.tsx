@@ -161,7 +161,7 @@ export default function PaywallScreen() {
           <YStack gap="$2">
             {FEATURE_KEYS.map((key) => (
               <XStack key={key} gap="$3" alignItems="center">
-                <Label color="$blue10">✓</Label>
+                <Label color="#F5A623">✓</Label>
                 <Body>{i18n._(key)}</Body>
               </XStack>
             ))}
@@ -178,9 +178,9 @@ export default function PaywallScreen() {
                     key={pkg.identifier}
                     pressStyle={{ opacity: 0.8 }}
                     onPress={() => setSelectedPkgId(pkg.identifier)}
-                    borderWidth={2}
-                    borderColor={isSelected ? "$blue10" : "$borderColor"}
-                    backgroundColor={isSelected ? "$blue2" : "$background"}
+                    borderWidth={1}
+                    borderColor={isSelected ? "#F5A623" : "#333333"}
+                    backgroundColor={isSelected ? "#3d2d0a" : "#1e1e1e"}
                   >
                     <XStack justifyContent="space-between" alignItems="center">
                       <YStack flex={1}>
@@ -193,12 +193,12 @@ export default function PaywallScreen() {
                           </Label>
                           {isAnnual && (
                             <XStack
-                              backgroundColor="$blue10"
+                              backgroundColor="#F5A623"
                               paddingHorizontal="$2"
                               paddingVertical="$1"
                               borderRadius={8}
                             >
-                              <Caption color="$white1" fontSize={10}>
+                              <Caption color="#1a1a1a" fontSize={10} fontWeight="700">
                                 {i18n._("paywall.mostPopular")}
                               </Caption>
                             </XStack>
@@ -211,7 +211,7 @@ export default function PaywallScreen() {
                             : ` ${i18n._("paywall.perMonth")}`}
                         </Caption>
                       </YStack>
-                      {isSelected && <Caption color="$blue10">✓</Caption>}
+                      {isSelected && <Caption color="#F5A623" fontSize={18}>✓</Caption>}
                     </XStack>
                   </Card>
                 );

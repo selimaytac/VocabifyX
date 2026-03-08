@@ -144,7 +144,7 @@ export default function HomeScreen() {
               <Caption>{lists.length} lists</Caption>
               <XStack
                 onPress={() => router.push("/list/create")}
-                backgroundColor="$blue10"
+                backgroundColor="#F5A623"
                 borderRadius={20}
                 width={32}
                 height={32}

@@ -435,36 +435,38 @@ export default function OnboardingScreen() {
     : "";
 
   return (
-    <YStack flex={1} backgroundColor="$background">
+    <YStack flex={1} backgroundColor="#111111">
       {showProgress && (
         <YStack paddingHorizontal="$5" paddingTop="$12" gap="$2">
           <XStack justifyContent="space-between" alignItems="center">
             {showBack ? (
-              <SecondaryButton
-                height={32}
-                paddingHorizontal="$3"
+              <YStack
+                pressStyle={{ opacity: 0.7 }}
                 onPress={goBack}
-                fontSize={14}
               >
-                {i18n._("onboarding.back")}
-              </SecondaryButton>
+                <Body color="#ffffff" fontSize={15} fontWeight="500">
+                  {i18n._("onboarding.back")}
+                </Body>
+              </YStack>
             ) : (
-              <YStack width={80} />
+              <Body color="#9ca3af" fontSize={13}>
+                Step {stepNum} / {TOTAL_STEPS}
+              </Body>
             )}
-            <Caption color="$colorSubtitle">
-              {stepNum} / {TOTAL_STEPS}
-            </Caption>
+            <Body color="#9ca3af" fontSize={13} fontWeight="500">
+              {Math.round(progress * 100)}%
+            </Body>
           </XStack>
           <YStack
-            height={6}
-            borderRadius={3}
-            backgroundColor="$gray5"
+            height={4}
+            borderRadius={2}
+            backgroundColor="#2a2a2a"
             overflow="hidden"
           >
             <YStack
-              height={6}
-              borderRadius={3}
-              backgroundColor="$blue10"
+              height={4}
+              borderRadius={2}
+              backgroundColor="#F5A623"
               width={`${Math.round(progress * 100)}%`}
             />
           </YStack>
@@ -486,31 +488,47 @@ export default function OnboardingScreen() {
                 justifyContent="center"
                 gap="$6"
               >
-                <Body fontSize={96} textAlign="center">
-                  🎓
-                </Body>
+                <YStack
+                  width={200}
+                  height={200}
+                  borderRadius={100}
+                  backgroundColor="#1e1e1e"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Body fontSize={96} textAlign="center">
+                    🎓
+                  </Body>
+                </YStack>
                 <YStack gap="$3" alignItems="center">
-                  <H2 textAlign="center">{i18n._("onboarding.heroTitle")}</H2>
-                  <BodySmall color="$colorSubtitle" textAlign="center">
+                  <H2
+                    textAlign="center"
+                    color="#ffffff"
+                    fontSize={28}
+                    fontWeight="700"
+                  >
+                    ✨ {i18n._("onboarding.heroTitle")}
+                  </H2>
+                  <BodySmall color="#9ca3af" textAlign="center">
                     {i18n._("onboarding.heroSubtitle")}
                   </BodySmall>
                 </YStack>
-                <YStack gap="$2" width="100%">
+                <YStack gap="$3" width="100%">
                   <XStack gap="$3" alignItems="center">
-                    <Caption fontSize={18}>🤖</Caption>
-                    <BodySmall flex={1}>
+                    <Body fontSize={22}>🤖</Body>
+                    <BodySmall flex={1} color="#e5e7eb">
                       {i18n._("onboarding.hero.feature1")}
                     </BodySmall>
                   </XStack>
                   <XStack gap="$3" alignItems="center">
-                    <Caption fontSize={18}>📊</Caption>
-                    <BodySmall flex={1}>
+                    <Body fontSize={22}>📊</Body>
+                    <BodySmall flex={1} color="#e5e7eb">
                       {i18n._("onboarding.hero.feature2")}
                     </BodySmall>
                   </XStack>
                   <XStack gap="$3" alignItems="center">
-                    <Caption fontSize={18}>🔥</Caption>
-                    <BodySmall flex={1}>
+                    <Body fontSize={22}>🔥</Body>
+                    <BodySmall flex={1} color="#e5e7eb">
                       {i18n._("onboarding.hero.feature3")}
                     </BodySmall>
                   </XStack>
@@ -528,8 +546,10 @@ export default function OnboardingScreen() {
           {step === "name" && (
             <YStack flex={1} gap="$5">
               <YStack gap="$2">
-                <H2>{i18n._("onboarding.name.title")}</H2>
-                <BodySmall color="$colorSubtitle">
+                <H2 color="#ffffff" fontWeight="700" fontSize={26}>
+                  {i18n._("onboarding.name.title")}
+                </H2>
+                <BodySmall color="#9ca3af">
                   {i18n._("onboarding.heroSubtitle")}
                 </BodySmall>
               </YStack>
@@ -538,19 +558,23 @@ export default function OnboardingScreen() {
                 onChangeText={setName}
                 placeholder={i18n._("onboarding.name.placeholder")}
                 autoFocus
+                placeholderTextColor="#6b7280"
                 style={{
-                  fontSize: 18,
+                  fontSize: 17,
                   padding: 16,
-                  borderRadius: 12,
+                  borderRadius: 14,
                   borderWidth: 1,
-                  borderColor: "#e2e8f0",
-                  backgroundColor: "#f8fafc",
-                  color: "#0f172a",
+                  borderColor: "#333333",
+                  backgroundColor: "#1e1e1e",
+                  color: "#ffffff",
                 }}
               />
               <YStack flex={1} justifyContent="flex-end" paddingBottom="$4">
-                <PrimaryButton onPress={handleNameContinue}>
-                  {i18n._("onboarding.next")} →
+                <PrimaryButton
+                  onPress={handleNameContinue}
+                  disabled={!name.trim()}
+                >
+                  {i18n._("onboarding.next")}
                 </PrimaryButton>
               </YStack>
             </YStack>
@@ -560,34 +584,51 @@ export default function OnboardingScreen() {
           {step === "purpose" && !showNotifPrePrompt && (
             <YStack flex={1} gap="$5">
               <YStack gap="$2">
-                <H2>{i18n._("onboarding.purpose.title")}</H2>
-                <BodySmall color="$colorSubtitle">
+                <H2 color="#ffffff" fontWeight="700" fontSize={26}>
+                  {i18n._("onboarding.purpose.title")}
+                </H2>
+                <BodySmall color="#9ca3af">
                   {i18n._("onboarding.purpose.subtitle")}
                 </BodySmall>
               </YStack>
-              <YStack gap="$3">
-                {PURPOSE_OPTIONS.map(({ key, emoji, labelKey }) => (
-                  <YStack
-                    key={key}
-                    borderRadius={16}
-                    padding="$4"
-                    borderWidth={2}
-                    borderColor={purpose === key ? "$blue10" : "$borderColor"}
-                    backgroundColor={purpose === key ? "$blue2" : "$gray2"}
-                    pressStyle={{ opacity: 0.8 }}
-                    onPress={() => handlePurposeSelect(key)}
-                  >
-                    <XStack gap="$3" alignItems="center">
-                      <Body fontSize={28}>{emoji}</Body>
-                      <Label flex={1}>{i18n._(labelKey)}</Label>
-                      {purpose === key && (
-                        <Caption color="$blue10" fontSize={18}>
-                          ✓
-                        </Caption>
-                      )}
-                    </XStack>
-                  </YStack>
-                ))}
+              <YStack gap="$3" flex={1}>
+                {PURPOSE_OPTIONS.map(({ key, emoji, labelKey }) => {
+                  const isSelected = purpose === key;
+                  return (
+                    <YStack
+                      key={key}
+                      borderRadius={16}
+                      paddingHorizontal="$4"
+                      paddingVertical="$4"
+                      borderWidth={1}
+                      borderColor={isSelected ? "#F5A623" : "#333333"}
+                      backgroundColor={isSelected ? "#3d2d0a" : "#1e1e1e"}
+                      pressStyle={{ opacity: 0.8 }}
+                      onPress={() => handlePurposeSelect(key)}
+                    >
+                      <XStack gap="$4" alignItems="center">
+                        <Body fontSize={32}>{emoji}</Body>
+                        <Body flex={1} color="#ffffff" fontSize={16} fontWeight="500">
+                          {i18n._(labelKey)}
+                        </Body>
+                        {isSelected && (
+                          <YStack
+                            width={26}
+                            height={26}
+                            borderRadius={13}
+                            backgroundColor="#F5A623"
+                            alignItems="center"
+                            justifyContent="center"
+                          >
+                            <Caption color="#1a1a1a" fontWeight="700" fontSize={13}>
+                              ✓
+                            </Caption>
+                          </YStack>
+                        )}
+                      </XStack>
+                    </YStack>
+                  );
+                })}
               </YStack>
             </YStack>
           )}
@@ -596,21 +637,21 @@ export default function OnboardingScreen() {
           {step === "purpose" && showNotifPrePrompt && (
             <YStack flex={1} justifyContent="center" gap="$5">
               <YStack
-                backgroundColor="$gray2"
+                backgroundColor="#1e1e1e"
                 borderRadius={24}
                 padding="$6"
                 gap="$4"
                 borderWidth={1}
-                borderColor="$borderColor"
+                borderColor="#333333"
               >
                 <YStack gap="$3" alignItems="center">
                   <Body fontSize={48} textAlign="center">
                     🔔
                   </Body>
-                  <H3 textAlign="center">
+                  <H3 textAlign="center" color="#ffffff">
                     {i18n._("onboarding.notif.preTitle")}
                   </H3>
-                  <BodySmall color="$colorSubtitle" textAlign="center">
+                  <BodySmall color="#9ca3af" textAlign="center">
                     {i18n._("onboarding.notif.preBody")}
                   </BodySmall>
                 </YStack>
@@ -630,8 +671,10 @@ export default function OnboardingScreen() {
           {step === "topic" && (
             <YStack flex={1} gap="$4">
               <YStack gap="$2">
-                <H2>{i18n._("onboarding.topic.title")}</H2>
-                <BodySmall color="$colorSubtitle">
+                <H2 color="#ffffff" fontWeight="700" fontSize={26}>
+                  {i18n._("onboarding.topic.title")}
+                </H2>
+                <BodySmall color="#9ca3af">
                   {i18n._("onboarding.topic.subtitle")}
                 </BodySmall>
               </YStack>
@@ -641,21 +684,22 @@ export default function OnboardingScreen() {
                 value={topic}
                 onChangeText={setTopic}
                 placeholder={TOPIC_PLACEHOLDERS[placeholderIndex]}
+                placeholderTextColor="#6b7280"
                 style={{
                   fontSize: 16,
                   padding: 16,
-                  borderRadius: 12,
-                  borderWidth: 2,
-                  borderColor: topic.length >= 2 ? "#3b82f6" : "#e2e8f0",
-                  backgroundColor: "#f8fafc",
-                  color: "#0f172a",
+                  borderRadius: 14,
+                  borderWidth: 1,
+                  borderColor: topic.length >= 2 ? "#F5A623" : "#333333",
+                  backgroundColor: "#1e1e1e",
+                  color: "#ffffff",
                 }}
                 maxLength={120}
               />
 
               {/* Category chips */}
               <YStack gap="$2">
-                <Caption color="$colorSubtitle">
+                <Caption color="#9ca3af">
                   {i18n._("onboarding.topic.categoryLabel")}
                 </Caption>
                 <XStack flexWrap="wrap" gap="$2">
@@ -667,16 +711,16 @@ export default function OnboardingScreen() {
                         paddingHorizontal="$3"
                         paddingVertical="$2"
                         borderRadius={20}
-                        borderWidth={2}
-                        borderColor={isSelected ? "$blue10" : "$borderColor"}
-                        backgroundColor={isSelected ? "$blue2" : "$gray2"}
+                        borderWidth={1}
+                        borderColor={isSelected ? "#F5A623" : "#333333"}
+                        backgroundColor={isSelected ? "#3d2d0a" : "#1e1e1e"}
                         pressStyle={{ opacity: 0.8 }}
                         onPress={() =>
                           setTopicCategory(isSelected ? null : key)
                         }
                       >
                         <Caption
-                          color={isSelected ? "$blue10" : "$colorSubtitle"}
+                          color={isSelected ? "#F5A623" : "#9ca3af"}
                         >
                           {i18n._(labelKey)}
                         </Caption>
@@ -688,7 +732,7 @@ export default function OnboardingScreen() {
 
               {/* Word count toggle */}
               <YStack gap="$2">
-                <Caption color="$colorSubtitle">
+                <Caption color="#9ca3af">
                   {i18n._("onboarding.topic.wordCountLabel")}
                 </Caption>
                 <XStack gap="$2">
@@ -700,14 +744,14 @@ export default function OnboardingScreen() {
                         flex={1}
                         paddingVertical="$3"
                         borderRadius={12}
-                        borderWidth={2}
-                        borderColor={isSelected ? "$blue10" : "$borderColor"}
-                        backgroundColor={isSelected ? "$blue2" : "$gray2"}
+                        borderWidth={1}
+                        borderColor={isSelected ? "#F5A623" : "#333333"}
+                        backgroundColor={isSelected ? "#3d2d0a" : "#1e1e1e"}
                         alignItems="center"
                         pressStyle={{ opacity: 0.8 }}
                         onPress={() => setWordCount(wc)}
                       >
-                        <Label color={isSelected ? "$blue10" : "$gray11"}>
+                        <Label color={isSelected ? "#F5A623" : "#9ca3af"}>
                           {wc}
                         </Label>
                       </YStack>
@@ -718,14 +762,14 @@ export default function OnboardingScreen() {
 
               {/* List language */}
               <YStack gap="$2">
-                <Caption color="$colorSubtitle">
+                <Caption color="#9ca3af">
                   {i18n._("onboarding.topic.languageLabel")}
                 </Caption>
                 <YStack
                   borderWidth={1}
-                  borderColor="$borderColor"
-                  borderRadius={12}
-                  backgroundColor="$gray2"
+                  borderColor="#333333"
+                  borderRadius={14}
+                  backgroundColor="#1e1e1e"
                   pressStyle={{ opacity: 0.8 }}
                   onPress={() => setShowLanguagePicker((v) => !v)}
                 >
@@ -734,16 +778,18 @@ export default function OnboardingScreen() {
                     justifyContent="space-between"
                     alignItems="center"
                   >
-                    <Body>
+                    <Body color="#ffffff">
                       {LIST_LANGUAGES.find((l) => l.code === listLanguage)
                         ?.label ?? listLanguage}
                     </Body>
-                    <Caption>{showLanguagePicker ? "▲" : "▼"}</Caption>
+                    <Caption color="#9ca3af">
+                      {showLanguagePicker ? "▲" : "▼"}
+                    </Caption>
                   </XStack>
                   {showLanguagePicker && (
                     <YStack
                       borderTopWidth={1}
-                      borderColor="$borderColor"
+                      borderColor="#333333"
                       maxHeight={200}
                     >
                       <ScrollView nestedScrollEnabled>
@@ -753,14 +799,14 @@ export default function OnboardingScreen() {
                             padding="$3"
                             pressStyle={{ opacity: 0.7 }}
                             backgroundColor={
-                              listLanguage === lang.code ? "$blue2" : undefined
+                              listLanguage === lang.code ? "#3d2d0a" : undefined
                             }
                             onPress={() => {
                               setListLanguage(lang.code);
                               setShowLanguagePicker(false);
                             }}
                           >
-                            <Body>{lang.label}</Body>
+                            <Body color="#ffffff">{lang.label}</Body>
                           </YStack>
                         ))}
                       </ScrollView>
@@ -775,7 +821,7 @@ export default function OnboardingScreen() {
                   pressStyle={{ opacity: 0.7 }}
                   onPress={() => setDescriptionExpanded((v) => !v)}
                 >
-                  <Caption color="$blue10">
+                  <Caption color="#F5A623">
                     {i18n._("onboarding.topic.descriptionToggle")}
                   </Caption>
                 </YStack>
@@ -786,17 +832,18 @@ export default function OnboardingScreen() {
                     placeholder={i18n._(
                       "onboarding.topic.descriptionPlaceholder",
                     )}
+                    placeholderTextColor="#6b7280"
                     multiline
                     numberOfLines={3}
                     maxLength={500}
                     style={{
                       fontSize: 14,
                       padding: 12,
-                      borderRadius: 12,
+                      borderRadius: 14,
                       borderWidth: 1,
-                      borderColor: "#e2e8f0",
-                      backgroundColor: "#f8fafc",
-                      color: "#0f172a",
+                      borderColor: "#333333",
+                      backgroundColor: "#1e1e1e",
+                      color: "#ffffff",
                       minHeight: 80,
                       textAlignVertical: "top",
                     }}
@@ -827,20 +874,20 @@ export default function OnboardingScreen() {
                 🔮
               </Body>
               <YStack gap="$3" alignItems="center" width="100%">
-                <H3 textAlign="center">
+                <H3 textAlign="center" color="#ffffff">
                   {i18n._("onboarding.loading.generatingTitle")}
                 </H3>
                 <YStack
-                  height={6}
-                  borderRadius={3}
-                  backgroundColor="$gray5"
+                  height={4}
+                  borderRadius={2}
+                  backgroundColor="#2a2a2a"
                   overflow="hidden"
                   width="100%"
                 >
                   <YStack
-                    height={6}
-                    borderRadius={3}
-                    backgroundColor="$blue10"
+                    height={4}
+                    borderRadius={2}
+                    backgroundColor="#F5A623"
                     width={`${Math.round(
                       ((loadingMicrocopyIndex + 1) /
                         LOADING_MICROCOPY_KEYS.length) *
@@ -848,17 +895,17 @@ export default function OnboardingScreen() {
                     )}%`}
                   />
                 </YStack>
-                <Body color="$colorSubtitle" textAlign="center">
+                <Body color="#9ca3af" textAlign="center">
                   {i18n._(LOADING_MICROCOPY_KEYS[loadingMicrocopyIndex])}
                 </Body>
               </YStack>
               {showFunFact && (
                 <Card
-                  backgroundColor="$blue2"
-                  borderColor="$blue8"
+                  backgroundColor="#1e1e1e"
+                  borderColor="#F5A623"
                   borderWidth={1}
                 >
-                  <BodySmall color="$colorSubtitle" textAlign="center">
+                  <BodySmall color="#9ca3af" textAlign="center">
                     {i18n._("onboarding.loading.funFact")}
                   </BodySmall>
                 </Card>
@@ -873,12 +920,14 @@ export default function OnboardingScreen() {
                 <Body fontSize={64} textAlign="center">
                   ✨
                 </Body>
-                <H2 textAlign="center">{i18n._("onboarding.preview.title")}</H2>
+                <H2 textAlign="center" color="#ffffff" fontWeight="700">
+                  {i18n._("onboarding.preview.title")}
+                </H2>
                 <YStack alignItems="center" gap="$1">
-                  <H3 textAlign="center">
+                  <H3 textAlign="center" color="#ffffff">
                     {(topic.trim() || previewList?.name) ?? ""}
                   </H3>
-                  <BodySmall color="$colorSubtitle" textAlign="center">
+                  <BodySmall color="#9ca3af" textAlign="center">
                     {i18n
                       ._("onboarding.preview.meta")
                       .replace(
@@ -895,23 +944,28 @@ export default function OnboardingScreen() {
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                   <XStack gap="$3" paddingHorizontal="$1">
                     {previewWords.map((word) => (
-                      <Card
+                      <YStack
                         key={word.id}
                         width={140}
                         alignItems="center"
                         gap="$1"
+                        backgroundColor="#1e1e1e"
+                        borderRadius={14}
+                        padding="$3"
+                        borderWidth={1}
+                        borderColor="#333333"
                       >
-                        <Label textAlign="center" numberOfLines={2}>
+                        <Label textAlign="center" numberOfLines={2} color="#ffffff">
                           {word.term}
                         </Label>
                         <Caption
-                          color="$colorSubtitle"
+                          color="#9ca3af"
                           textAlign="center"
                           numberOfLines={2}
                         >
                           {word.translation}
                         </Caption>
-                      </Card>
+                      </YStack>
                     ))}
                   </XStack>
                 </ScrollView>
@@ -919,10 +973,12 @@ export default function OnboardingScreen() {
 
               {/* Blurred remaining words */}
               {remainingCount > 0 && (
-                <Card
-                  backgroundColor="$gray3"
-                  borderColor="$borderColor"
+                <YStack
+                  backgroundColor="#1e1e1e"
+                  borderRadius={14}
+                  padding="$4"
                   borderWidth={1}
+                  borderColor="#333333"
                   alignItems="center"
                   gap="$2"
                   opacity={0.85}
@@ -930,17 +986,17 @@ export default function OnboardingScreen() {
                   <XStack gap="$2" alignItems="center">
                     <Body fontSize={22}>🔒</Body>
                     <YStack gap="$1">
-                      <Label>
+                      <Label color="#ffffff">
                         {i18n
                           ._("onboarding.preview.locked")
                           .replace("{count}", String(remainingCount))}
                       </Label>
-                      <Caption color="$colorSubtitle">
+                      <Caption color="#9ca3af">
                         {i18n._("onboarding.preview.lockedCta")}
                       </Caption>
                     </YStack>
                   </XStack>
-                </Card>
+                </YStack>
               )}
 
               <YStack flex={1} justifyContent="flex-end" paddingBottom="$4">
@@ -964,8 +1020,10 @@ export default function OnboardingScreen() {
                 😕
               </Body>
               <YStack alignItems="center" gap="$2">
-                <H2 textAlign="center">{i18n._("onboarding.error.title")}</H2>
-                <BodySmall color="$colorSubtitle" textAlign="center">
+                <H2 textAlign="center" color="#ffffff" fontWeight="700">
+                  {i18n._("onboarding.error.title")}
+                </H2>
+                <BodySmall color="#9ca3af" textAlign="center">
                   {i18n._("onboarding.error.subtitle")}
                 </BodySmall>
               </YStack>

@@ -88,7 +88,7 @@ function SessionRow({
         </YStack>
       </XStack>
       <YStack alignItems="flex-end">
-        <BodySmall color="$blue10">+{session.xpEarned} XP</BodySmall>
+        <BodySmall color="#F5A623">+{session.xpEarned} XP</BodySmall>
         <Caption color="$colorSubtitle">
           {durationMin} {minutesLabel}
         </Caption>

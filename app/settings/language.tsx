@@ -26,7 +26,7 @@ export default function LanguageScreen() {
           >
             <XStack justifyContent="space-between" alignItems="center">
               <Label>{lang.label}</Label>
-              {locale === lang.code && <Check size={20} color="$blue10" />}
+              {locale === lang.code && <Check size={20} color="#F5A623" />}
             </XStack>
           </Card>
         ))}

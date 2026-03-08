@@ -25,11 +25,11 @@ export function CategoryChips<T extends string>({
               paddingHorizontal="$3"
               paddingVertical="$2"
               borderRadius={100}
-              backgroundColor={isSelected ? "$blue10" : "$gray3"}
+              backgroundColor={isSelected ? "#F5A623" : "#2a2a2a"}
               pressStyle={{ opacity: 0.8 }}
               onPress={() => onSelect(category.key)}
             >
-              <Label color={isSelected ? "white" : "$gray11"}>
+              <Label color={isSelected ? "#1a1a1a" : "$gray10"} fontWeight={isSelected ? "700" : "500"}>
                 {category.label}
               </Label>
             </XStack>
