@@ -1,11 +1,12 @@
 import { useLingui } from "@lingui/react";
 import { useEffect, useState } from "react";
-import { ScrollView } from "react-native";
+import { Alert, ScrollView } from "react-native";
 import { PACKAGE_TYPE, type PurchasesPackage } from "react-native-purchases";
 import { Spinner, XStack, YStack } from "tamagui";
 
 import { OutlineButton, PrimaryButton } from "@/components/DesignSystem/Button";
 import { Card } from "@/components/DesignSystem/Card";
+import { ErrorState } from "@/components/DesignSystem/ErrorState";
 import {
   Body,
   BodySmall,
@@ -44,9 +45,11 @@ export default function LapsedPaywallScreen() {
   const {
     offerings,
     loading,
+    offeringsError,
     purchasePackage,
     restorePurchases,
     isSubscribed,
+    refetch,
   } = useSubscription();
 
   const packages = offerings?.current?.availablePackages ?? [];
@@ -84,8 +87,20 @@ export default function LapsedPaywallScreen() {
       analyticsService.track("lapsed_paywall_purchase_completed", {
         packageId: selectedPackage.identifier,
       });
-    } catch {
-      // Cancelled or failed — stay on the paywall
+    } catch (e) {
+      const userCancelled =
+        typeof e === "object" &&
+        e !== null &&
+        (e as Record<string, unknown>).userCancelled === true;
+      if (!userCancelled) {
+        analyticsService.track("lapsed_paywall_purchase_failed", {
+          packageId: selectedPackage.identifier,
+        });
+        Alert.alert(
+          i18n._("paywall.purchaseErrorTitle"),
+          i18n._("paywall.purchaseError"),
+        );
+      }
     } finally {
       setPurchasing(false);
     }
@@ -93,10 +108,22 @@ export default function LapsedPaywallScreen() {
 
   const handleRestore = async () => {
     try {
-      await restorePurchases();
+      const customerInfo = await restorePurchases();
       analyticsService.track("lapsed_paywall_restore_tapped");
+      const hasActive =
+        customerInfo != null &&
+        Object.keys(customerInfo.entitlements.active).length > 0;
+      if (!hasActive) {
+        Alert.alert(
+          i18n._("paywall.restoreErrorTitle"),
+          i18n._("paywall.restoreError"),
+        );
+      }
     } catch {
-      // Silently ignore restore errors
+      Alert.alert(
+        i18n._("paywall.restoreErrorTitle"),
+        i18n._("paywall.restoreError"),
+      );
     }
   };
 
@@ -109,6 +136,25 @@ export default function LapsedPaywallScreen() {
         backgroundColor="$background"
       >
         <Spinner size="large" />
+      </YStack>
+    );
+  }
+
+  if (offeringsError) {
+    return (
+      <YStack flex={1} backgroundColor="$background">
+        <ErrorState
+          emoji="📡"
+          title={i18n._("paywall.offeringsErrorTitle")}
+          subtitle={i18n._("paywall.offeringsError")}
+          retryLabel={i18n._("error.retry")}
+          onRetry={refetch}
+        />
+        <YStack padding="$5" paddingBottom="$8" gap="$3">
+          <OutlineButton onPress={handleRestore}>
+            {i18n._("paywall.restore")}
+          </OutlineButton>
+        </YStack>
       </YStack>
     );
   }

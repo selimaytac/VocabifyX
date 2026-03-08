@@ -435,4 +435,26 @@ export const messages: Record<string, string> = {
   "onboarding.error.subtitle":
     "We couldn't prepare your list right now. Please try again.",
   "onboarding.error.retry": "Try Again",
+
+  // Generic error states
+  "common.tryAgain": "Try Again",
+  "error.retry": "Retry",
+  "error.network.title": "Connection Error",
+  "error.network.subtitle":
+    "Please check your internet connection and try again.",
+  "error.generic.title": "Something went wrong",
+  "error.generic.subtitle": "An unexpected error occurred. Please try again.",
+
+  // Paywall error messages
+  "paywall.purchaseErrorTitle": "Purchase Failed",
+  "paywall.purchaseError":
+    "Your purchase could not be completed. Please try again.",
+  "paywall.restoreErrorTitle": "Restore Failed",
+  "paywall.restoreError":
+    "No purchases found to restore, or an error occurred.",
+  "paywall.restoreSuccessTitle": "Purchases Restored",
+  "paywall.restoreSuccess": "Your purchases have been restored successfully.",
+  "paywall.offeringsErrorTitle": "Pricing Unavailable",
+  "paywall.offeringsError":
+    "Could not load pricing. Please check your connection and try again.",
 };
