@@ -1,13 +1,11 @@
 import { BarChart2, Compass, Home, User } from "@tamagui/lucide-icons";
 import { Redirect, Tabs } from "expo-router";
 import { Platform } from "react-native";
-import { useTheme } from "tamagui";
 
 import { config } from "@/config";
 import { useSubscription } from "@/hooks/useSubscription";
 
 export default function TabLayout() {
-  const theme = useTheme();
   const { isSubscribed, loading } = useSubscription();
 
   // Hard paywall gate: if the subscription has lapsed and we're not in
@@ -19,16 +17,23 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#F5A623",
-        tabBarInactiveTintColor: theme.gray9.val,
+        tabBarActiveTintColor: "#1B2D4F",
+        tabBarInactiveTintColor: "#9CA3AF",
         tabBarStyle: {
-          backgroundColor: "#111111",
-          borderTopColor: "#2a2a2a",
+          backgroundColor: "#FFFFFF",
+          borderTopColor: "#E5E7EB",
+          height: 60,
+          paddingBottom: 8,
         },
         headerStyle: {
-          backgroundColor: "#111111",
+          backgroundColor: "#FFFFFF",
         },
-        headerTintColor: "#ffffff",
+        headerTintColor: "#0D0D0D",
+        headerShadowVisible: false,
+        headerTitleStyle: {
+          fontWeight: "700",
+          fontSize: 18,
+        },
       }}
     >
       <Tabs.Screen
@@ -60,6 +65,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: "Profile",
+          headerShown: false,
           tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
         }}
       />

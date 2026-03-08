@@ -5,20 +5,8 @@ import { useState } from "react";
 import { Alert, ScrollView, TextInput } from "react-native";
 import { XStack, YStack } from "tamagui";
 
-import {
-  PrimaryButton,
-  SecondaryButton,
-} from "@/components/DesignSystem/Button";
-import { Card } from "@/components/DesignSystem/Card";
 import { CategoryChips } from "@/components/DesignSystem/CategoryChip";
-import {
-  Body,
-  BodySmall,
-  Caption,
-  H2,
-  H3,
-  Label,
-} from "@/components/DesignSystem/Typography";
+import { Body, Caption, H2 } from "@/components/DesignSystem/Typography";
 import {
   LIST_CATEGORIES,
   type ListCategory,
@@ -133,164 +121,211 @@ export default function CreateListScreen() {
   };
 
   return (
-    <ScrollView keyboardShouldPersistTaps="handled">
-      <YStack padding="$4" gap="$4">
-        <XStack alignItems="center" gap="$3">
+    <ScrollView
+      style={{ backgroundColor: "#FFFFFF" }}
+      keyboardShouldPersistTaps="handled"
+    >
+      <YStack padding="$4" gap="$5">
+        {/* Header */}
+        <XStack alignItems="center" gap="$3" paddingTop="$2">
           <XStack
             onPress={() => router.back()}
             padding="$2"
             borderRadius={8}
             pressStyle={{ opacity: 0.7 }}
           >
-            <ArrowLeft size={24} color="$color" />
+            <ArrowLeft size={24} color="#0D0D0D" />
           </XStack>
-          <H2>{i18n._("createList.title")}</H2>
+          <H2 color="#0D0D0D">{i18n._("createList.title")}</H2>
         </XStack>
 
-        <Card elevated>
-          <YStack gap="$3">
-            <YStack gap="$1">
-              <Label>{i18n._("createList.listName")}</Label>
-              <YStack
-                borderWidth={1}
-                borderColor="$borderColor"
-                borderRadius={8}
-                padding="$3"
-              >
-                <TextInput
-                  value={listName}
-                  onChangeText={setListName}
-                  placeholder={i18n._("createList.listNamePlaceholder")}
-                  style={{ fontSize: 16 }}
-                />
-              </YStack>
-            </YStack>
+        {/* Category chips */}
+        <YStack gap="$2">
+          <Body color="#0D0D0D" fontWeight="700" fontSize={15}>
+            {i18n._("createList.category")}
+          </Body>
+          <CategoryChips
+            categories={nonAllCategories}
+            selected={category}
+            onSelect={(val) => setCategory(val as ListCategory)}
+            variant="scroll"
+          />
+        </YStack>
 
-            <YStack gap="$1">
-              <Label>{i18n._("createList.topic")}</Label>
-              <YStack
-                borderWidth={1}
-                borderColor="$borderColor"
-                borderRadius={8}
-                padding="$3"
-              >
-                <TextInput
-                  value={topic}
-                  onChangeText={setTopic}
-                  placeholder={i18n._("createList.topicPlaceholder")}
-                  style={{ fontSize: 16 }}
-                />
-              </YStack>
-            </YStack>
-          </YStack>
-        </Card>
-
-        <Card elevated>
-          <YStack gap="$2">
-            <Label>{i18n._("createList.category")}</Label>
-            <CategoryChips
-              categories={nonAllCategories}
-              selected={category}
-              onSelect={(val) => setCategory(val as ListCategory)}
+        {/* LIST NAME */}
+        <YStack gap="$2">
+          <Caption
+            color="#9CA3AF"
+            fontWeight="700"
+            fontSize={11}
+            letterSpacing={1}
+          >
+            {i18n._("createList.listName").toUpperCase()}
+          </Caption>
+          <YStack backgroundColor="#F5F7FA" borderRadius={12} padding="$4">
+            <TextInput
+              value={listName}
+              onChangeText={setListName}
+              placeholder={i18n._("createList.listNamePlaceholder")}
+              placeholderTextColor="#9CA3AF"
+              style={{ fontSize: 16, color: "#0D0D0D" }}
             />
           </YStack>
-        </Card>
+        </YStack>
 
-        <Card elevated>
-          <YStack gap="$2">
-            <Label>{i18n._("createList.language")}</Label>
-            <XStack gap="$2" flexWrap="wrap">
-              {LANGUAGE_OPTIONS.map((lang) => (
-                <XStack
-                  key={lang}
-                  onPress={() => setLanguage(lang)}
-                  paddingHorizontal="$3"
-                  paddingVertical="$2"
-                  borderRadius={8}
-                  borderWidth={1}
-                  borderColor={language === lang ? "#F5A623" : "$gray6"}
-                  backgroundColor={language === lang ? "#3d2d0a" : "$background"}
-                  pressStyle={{ opacity: 0.7 }}
-                >
-                  <Caption
-                    color={language === lang ? "#F5A623" : "$colorSubtitle"}
-                  >
-                    {lang}
-                  </Caption>
-                </XStack>
-              ))}
-            </XStack>
+        {/* TOPIC */}
+        <YStack gap="$2">
+          <Caption
+            color="#9CA3AF"
+            fontWeight="700"
+            fontSize={11}
+            letterSpacing={1}
+          >
+            {i18n._("createList.topic").toUpperCase()}
+          </Caption>
+          <YStack backgroundColor="#F5F7FA" borderRadius={12} padding="$4">
+            <TextInput
+              value={topic}
+              onChangeText={setTopic}
+              placeholder={i18n._("createList.topicPlaceholder")}
+              placeholderTextColor="#9CA3AF"
+              style={{ fontSize: 16, color: "#0D0D0D" }}
+            />
           </YStack>
-        </Card>
+        </YStack>
 
+        {/* LANGUAGE */}
+        <YStack gap="$2">
+          <Caption
+            color="#9CA3AF"
+            fontWeight="700"
+            fontSize={11}
+            letterSpacing={1}
+          >
+            {i18n._("createList.language").toUpperCase()}
+          </Caption>
+          <XStack gap="$2" flexWrap="wrap">
+            {LANGUAGE_OPTIONS.map((lang) => (
+              <XStack
+                key={lang}
+                onPress={() => setLanguage(lang)}
+                paddingHorizontal="$3"
+                paddingVertical="$2"
+                borderRadius={100}
+                borderWidth={1.5}
+                borderColor={language === lang ? "#1B2D4F" : "#E5E7EB"}
+                backgroundColor={language === lang ? "#1B2D4F" : "#FFFFFF"}
+                pressStyle={{ opacity: 0.7 }}
+              >
+                <Caption
+                  color={language === lang ? "#FFFFFF" : "#6B7280"}
+                  fontWeight="600"
+                  fontSize={13}
+                >
+                  {lang}
+                </Caption>
+              </XStack>
+            ))}
+          </XStack>
+        </YStack>
+
+        {/* WORDS */}
         <YStack gap="$3">
           <XStack justifyContent="space-between" alignItems="center">
-            <H3>{i18n._("createList.words")}</H3>
-            <Caption color="$colorSubtitle">
+            <Caption
+              color="#9CA3AF"
+              fontWeight="700"
+              fontSize={11}
+              letterSpacing={1}
+            >
+              {i18n._("createList.words").toUpperCase()}
+            </Caption>
+            <Caption color="#9CA3AF" fontSize={12}>
               {words.filter((w) => w.term.trim()).length}{" "}
               {i18n._("createList.wordCount")}
             </Caption>
           </XStack>
 
           {words.map((word, index) => (
-            <Card key={word.id} elevated>
-              <YStack gap="$2">
-                <XStack justifyContent="space-between" alignItems="center">
-                  <BodySmall color="$colorSubtitle">#{index + 1}</BodySmall>
-                  {words.length > 1 && (
-                    <XStack
-                      onPress={() => handleRemoveWord(word.id)}
-                      pressStyle={{ opacity: 0.7 }}
-                    >
-                      <Minus size={16} color="$red10" />
-                    </XStack>
-                  )}
-                </XStack>
-                <YStack
-                  borderWidth={1}
-                  borderColor="$borderColor"
-                  borderRadius={8}
-                  padding="$3"
-                >
-                  <TextInput
-                    value={word.term}
-                    onChangeText={(val) =>
-                      handleWordChange(word.id, "term", val)
-                    }
-                    placeholder={i18n._("createList.termPlaceholder")}
-                    style={{ fontSize: 15 }}
-                  />
-                </YStack>
-                <YStack
-                  borderWidth={1}
-                  borderColor="$borderColor"
-                  borderRadius={8}
-                  padding="$3"
-                >
-                  <TextInput
-                    value={word.translation}
-                    onChangeText={(val) =>
-                      handleWordChange(word.id, "translation", val)
-                    }
-                    placeholder={i18n._("createList.translationPlaceholder")}
-                    style={{ fontSize: 15 }}
-                  />
-                </YStack>
+            <YStack
+              key={word.id}
+              backgroundColor="#F5F7FA"
+              borderRadius={12}
+              padding="$4"
+              gap="$3"
+            >
+              <XStack justifyContent="space-between" alignItems="center">
+                <Caption color="#9CA3AF" fontSize={12}>
+                  #{index + 1}
+                </Caption>
+                {words.length > 1 && (
+                  <XStack
+                    onPress={() => handleRemoveWord(word.id)}
+                    pressStyle={{ opacity: 0.7 }}
+                  >
+                    <Minus size={16} color="#E5484D" />
+                  </XStack>
+                )}
+              </XStack>
+              <YStack backgroundColor="#FFFFFF" borderRadius={8} padding="$3">
+                <TextInput
+                  value={word.term}
+                  onChangeText={(val) =>
+                    handleWordChange(word.id, "term", val)
+                  }
+                  placeholder={i18n._("createList.termPlaceholder")}
+                  placeholderTextColor="#9CA3AF"
+                  style={{ fontSize: 15, color: "#0D0D0D" }}
+                />
               </YStack>
-            </Card>
+              <YStack backgroundColor="#FFFFFF" borderRadius={8} padding="$3">
+                <TextInput
+                  value={word.translation}
+                  onChangeText={(val) =>
+                    handleWordChange(word.id, "translation", val)
+                  }
+                  placeholder={i18n._("createList.translationPlaceholder")}
+                  placeholderTextColor="#9CA3AF"
+                  style={{ fontSize: 15, color: "#0D0D0D" }}
+                />
+              </YStack>
+            </YStack>
           ))}
 
-          <SecondaryButton onPress={handleAddWord}>
-            <XStack alignItems="center" gap="$2">
-              <Plus size={16} color="#F5A623" />
-              <Body color="#F5A623">{i18n._("createList.addWord")}</Body>
-            </XStack>
-          </SecondaryButton>
+          {/* Add word */}
+          <XStack
+            onPress={handleAddWord}
+            alignItems="center"
+            justifyContent="center"
+            gap="$2"
+            paddingVertical="$4"
+            borderRadius={12}
+            borderWidth={1.5}
+            borderColor="#E5E7EB"
+            pressStyle={{ opacity: 0.7 }}
+          >
+            <Plus size={18} color="#1B2D4F" />
+            <Body color="#1B2D4F" fontWeight="600" fontSize={15}>
+              {i18n._("createList.addWord")}
+            </Body>
+          </XStack>
         </YStack>
 
-        <PrimaryButton onPress={handleSave} marginBottom="$4">
-          {i18n._("createList.save")}
-        </PrimaryButton>
+        {/* Save button */}
+        <XStack
+          backgroundColor="#1B2D4F"
+          borderRadius={100}
+          height={52}
+          alignItems="center"
+          justifyContent="center"
+          marginBottom="$4"
+          pressStyle={{ opacity: 0.85 }}
+          onPress={handleSave}
+        >
+          <Body color="#FFFFFF" fontWeight="700" fontSize={17}>
+            {i18n._("createList.save")}
+          </Body>
+        </XStack>
       </YStack>
     </ScrollView>
   );

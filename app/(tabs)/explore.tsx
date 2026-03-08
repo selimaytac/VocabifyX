@@ -3,18 +3,12 @@ import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
-import {
-  PrimaryButton,
-  SecondaryButton,
-} from "@/components/DesignSystem/Button";
-import { Card } from "@/components/DesignSystem/Card";
 import { CategoryChips } from "@/components/DesignSystem/CategoryChip";
 import {
   Body,
-  BodySmall,
   Caption,
   H1,
-  H3,
+  Label,
 } from "@/components/DesignSystem/Typography";
 import {
   getPredefinedListsByLocale,
@@ -26,6 +20,32 @@ import { analyticsService } from "@/services/analytics/analytics.service";
 import { useGameStore } from "@/store/gameStore";
 import { useLanguageStore } from "@/store/languageStore";
 import { useListsStore, type VocabWord } from "@/store/listsStore";
+
+const CATEGORY_COLORS: Record<string, { bg: string; accent: string }> = {
+  technology: { bg: "#E8F4FD", accent: "#1B6CA8" },
+  business: { bg: "#FFF3E0", accent: "#E65100" },
+  travel: { bg: "#E8F5E9", accent: "#2E7D32" },
+  food: { bg: "#FFF8E1", accent: "#F57F17" },
+  science: { bg: "#EDE7F6", accent: "#4527A0" },
+  history: { bg: "#FCE4EC", accent: "#880E4F" },
+  arts: { bg: "#E3F2FD", accent: "#0D47A1" },
+  sports: { bg: "#F3E5F5", accent: "#6A1B9A" },
+  dailyLife: { bg: "#F1F8E9", accent: "#33691E" },
+  academic: { bg: "#FFF9C4", accent: "#F57F17" },
+};
+
+const CATEGORY_EMOJIS: Record<string, string> = {
+  technology: "💻",
+  business: "💼",
+  travel: "✈️",
+  food: "🍽️",
+  science: "🔬",
+  history: "📜",
+  arts: "🎨",
+  sports: "⚽",
+  dailyLife: "☀️",
+  academic: "📖",
+};
 
 function ExploreListCard({
   list,
@@ -40,51 +60,59 @@ function ExploreListCard({
   addLabel: string;
   inLibraryLabel: string;
 }) {
+  const colors = CATEGORY_COLORS[list.topicCategory] ?? {
+    bg: "#F5F7FA",
+    accent: "#374151",
+  };
+  const emoji = CATEGORY_EMOJIS[list.topicCategory] ?? "📚";
+
   return (
-    <Card elevated marginBottom="$3">
-      <YStack gap="$2">
-        <XStack justifyContent="space-between" alignItems="flex-start">
-          <YStack flex={1} marginRight="$2">
-            <H3 numberOfLines={1}>{list.name}</H3>
-            <Caption>{list.topic}</Caption>
-          </YStack>
-          <Caption>{list.words.length} words</Caption>
-        </XStack>
-
-        <BodySmall color="$colorSubtitle" numberOfLines={2}>
-          {list.description}
-        </BodySmall>
-
-        <XStack gap="$2" flexWrap="wrap">
-          {list.words.slice(0, 3).map((word) => (
-            <XStack
-              key={word.id}
-              backgroundColor="$gray3"
-              paddingHorizontal="$2"
-              paddingVertical="$1"
-              borderRadius={8}
-            >
-              <Caption>{word.term}</Caption>
-            </XStack>
-          ))}
-          {list.words.length > 3 && (
-            <Caption color="$colorSubtitle">
-              +{list.words.length - 3} more
-            </Caption>
-          )}
-        </XStack>
-
-        {isInLibrary ? (
-          <SecondaryButton size="$3" disabled opacity={0.6}>
+    <YStack
+      flexBasis="47%"
+      flexGrow={0}
+      backgroundColor={colors.bg}
+      borderRadius={20}
+      padding="$3"
+      gap="$2"
+      alignItems="center"
+      pressStyle={{ opacity: 0.85 }}
+    >
+      <Body fontSize={40}>{emoji}</Body>
+      <Label
+        fontWeight="700"
+        textAlign="center"
+        numberOfLines={2}
+        color="#0D0D0D"
+      >
+        {list.name}
+      </Label>
+      <Caption color="#6B7280">{list.words.length} words</Caption>
+      {isInLibrary ? (
+        <XStack
+          backgroundColor="rgba(0,0,0,0.06)"
+          paddingHorizontal="$3"
+          paddingVertical="$1"
+          borderRadius={100}
+        >
+          <Caption color={colors.accent} fontWeight="700">
             ✓ {inLibraryLabel}
-          </SecondaryButton>
-        ) : (
-          <PrimaryButton size="$3" onPress={onAdd}>
+          </Caption>
+        </XStack>
+      ) : (
+        <XStack
+          backgroundColor="white"
+          paddingHorizontal="$3"
+          paddingVertical="$1"
+          borderRadius={100}
+          onPress={onAdd}
+          pressStyle={{ opacity: 0.7 }}
+        >
+          <Caption color={colors.accent} fontWeight="700">
             + {addLabel}
-          </PrimaryButton>
-        )}
-      </YStack>
-    </Card>
+          </Caption>
+        </XStack>
+      )}
+    </YStack>
   );
 }
 
@@ -143,11 +171,11 @@ export default function ExploreScreen() {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
       <YStack padding="$4" gap="$4">
         <YStack>
-          <H1>{i18n._("explore.title")}</H1>
-          <Body color="$colorSubtitle">{i18n._("explore.subtitle")}</Body>
+          <H1 color="#0D0D0D">{i18n._("explore.title")}</H1>
+          <Caption color="#9CA3AF">{i18n._("explore.subtitle")}</Caption>
         </YStack>
 
         <CategoryChips
@@ -156,17 +184,21 @@ export default function ExploreScreen() {
           onSelect={setSelectedCategory}
         />
 
-        {filteredLists.map((list) => (
-          <ExploreListCard
-            key={list.id}
-            list={list}
-            isInLibrary={hasListFromSource(list.id)}
-            onAdd={() => handleAddToLibrary(list)}
-            addLabel={i18n._("explore.addToLibrary")}
-            inLibraryLabel={i18n._("explore.inLibrary")}
-          />
-        ))}
+        <XStack gap="$3" flexWrap="wrap">
+          {filteredLists.map((list) => (
+            <ExploreListCard
+              key={list.id}
+              list={list}
+              isInLibrary={hasListFromSource(list.id)}
+              onAdd={() => handleAddToLibrary(list)}
+              addLabel={i18n._("explore.addToLibrary")}
+              inLibraryLabel={i18n._("explore.inLibrary")}
+            />
+          ))}
+        </XStack>
       </YStack>
     </ScrollView>
   );
 }
+
+

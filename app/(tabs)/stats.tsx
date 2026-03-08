@@ -5,8 +5,6 @@ import { XStack, YStack } from "tamagui";
 
 import { Card } from "@/components/DesignSystem/Card";
 import { CategoryChips } from "@/components/DesignSystem/CategoryChip";
-import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
-import { StatChip } from "@/components/DesignSystem/StatChip";
 import {
   Body,
   BodySmall,
@@ -16,7 +14,6 @@ import {
   Label,
 } from "@/components/DesignSystem/Typography";
 import { useGameStore } from "@/store/gameStore";
-import { useListsStore } from "@/store/listsStore";
 import { type LearningSession, useSessionsStore } from "@/store/sessionsStore";
 
 type StatsPeriod = "today" | "week" | "allTime";
@@ -101,8 +98,8 @@ export default function StatsScreen() {
   const { i18n } = useLingui();
   const [selectedPeriod, setSelectedPeriod] = useState<StatsPeriod>("today");
   const sessions = useSessionsStore((state) => state.sessions);
-  const { totalXP, currentStreak, longestStreak, stats } = useGameStore();
-  const lists = useListsStore((state) => state.lists);
+  const { totalXP, currentStreak, longestStreak, achievements, stats } =
+    useGameStore();
 
   const periodCategories = [
     { key: "today", label: i18n._("stats.today") },
@@ -129,127 +126,164 @@ export default function StatsScreen() {
     )
     .slice(0, 10);
 
-  const flashcardSessions = periodSessions.filter(
-    (s) => s.mode === "flashcard",
-  ).length;
-  const quizSessions = periodSessions.filter((s) => s.mode === "quiz").length;
-  const totalPeriodSessions = periodSessions.length;
-  const flashcardRatio =
-    totalPeriodSessions > 0 ? flashcardSessions / totalPeriodSessions : 0;
-
   return (
-    <ScrollView>
+    <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
       <YStack padding="$4" gap="$4">
-        <H1>{i18n._("stats.title")}</H1>
+        <H1 color="#0D0D0D">{i18n._("stats.title")}</H1>
 
         <CategoryChips
           categories={periodCategories}
           selected={selectedPeriod}
           onSelect={(val) => setSelectedPeriod(val as StatsPeriod)}
+          variant="segmented"
         />
 
         {periodSessions.length === 0 ? (
           <YStack alignItems="center" paddingVertical="$8" gap="$3">
             <Body fontSize={48}>📊</Body>
-            <H3 textAlign="center">{i18n._("stats.noSessions")}</H3>
-            <BodySmall color="$colorSubtitle" textAlign="center">
+            <H3 textAlign="center" color="#0D0D0D">
+              {i18n._("stats.noSessions")}
+            </H3>
+            <BodySmall color="#9CA3AF" textAlign="center">
               {i18n._("stats.noSessionsSubtitle")}
             </BodySmall>
           </YStack>
         ) : (
           <>
-            <XStack gap="$2">
-              <StatChip
-                icon="📖"
-                value={periodSessions.length}
-                label={i18n._("stats.sessions")}
-              />
-              <StatChip
-                icon="⚡"
-                value={periodXP}
-                label={i18n._("stats.xpEarned")}
-              />
-            </XStack>
-            <XStack gap="$2">
-              <StatChip
-                icon="📝"
-                value={periodWordsStudied}
-                label={i18n._("stats.wordsStudied")}
-              />
-              <StatChip
-                icon="⏱️"
-                value={formatDuration(periodStudySeconds)}
-                label={i18n._("stats.minutes")}
-              />
-            </XStack>
+            {/* Summary Card */}
+            <Card elevated>
+              <YStack gap="$4">
+                {/* 3-column top row */}
+                <XStack justifyContent="space-between">
+                  <YStack alignItems="center" flex={1} gap="$1">
+                    <Caption
+                      fontWeight="700"
+                      color="#10B981"
+                      letterSpacing={0.5}
+                    >
+                      {i18n._("stats.xpEarned")}
+                    </Caption>
+                    <H3 color="#0D0D0D" fontWeight="800">
+                      ⚡{periodXP}
+                    </H3>
+                  </YStack>
+                  <YStack alignItems="center" flex={1} gap="$1">
+                    <Caption
+                      fontWeight="700"
+                      color="#F97316"
+                      letterSpacing={0.5}
+                    >
+                      {i18n._("stats.streakLabel")}
+                    </Caption>
+                    <H3 color="#0D0D0D" fontWeight="800">
+                      🔥{currentStreak}
+                    </H3>
+                    <Caption color="#9CA3AF">
+                      {i18n._("stats.bestStreak")}: {longestStreak}
+                    </Caption>
+                  </YStack>
+                  <YStack alignItems="center" flex={1} gap="$1">
+                    <Caption
+                      fontWeight="700"
+                      color="#8B5CF6"
+                      letterSpacing={0.5}
+                    >
+                      {i18n._("stats.pointsLabel")}
+                    </Caption>
+                    <H3 color="#0D0D0D" fontWeight="800">
+                      ⭐{totalXP}
+                    </H3>
+                  </YStack>
+                </XStack>
 
-            {totalPeriodSessions > 0 && (
-              <Card elevated>
-                <H3 marginBottom="$3">{i18n._("stats.sessionBreakdown")}</H3>
-                <YStack gap="$3">
-                  <YStack gap="$1">
-                    <XStack justifyContent="space-between">
-                      <BodySmall>🃏 {i18n._("stats.flashcard")}</BodySmall>
-                      <BodySmall>{flashcardSessions}</BodySmall>
-                    </XStack>
-                    <ProgressBar progress={flashcardRatio} color="primary" />
+                {/* Bottom stats grid */}
+                <XStack
+                  backgroundColor="#F5F7FA"
+                  borderRadius={16}
+                  padding="$3"
+                  justifyContent="space-around"
+                >
+                  <YStack alignItems="center" gap="$1">
+                    <Caption color="#9CA3AF" fontWeight="600">
+                      {i18n._("stats.sessions").toUpperCase()}
+                    </Caption>
+                    <H3 color="#0D0D0D" fontWeight="700">
+                      {periodSessions.length}
+                    </H3>
                   </YStack>
-                  <YStack gap="$1">
-                    <XStack justifyContent="space-between">
-                      <BodySmall>🧠 {i18n._("stats.quiz")}</BodySmall>
-                      <BodySmall>{quizSessions}</BodySmall>
-                    </XStack>
-                    <ProgressBar
-                      progress={1 - flashcardRatio}
-                      color="warning"
-                    />
+                  <YStack width={1} backgroundColor="#E5E7EB" />
+                  <YStack alignItems="center" gap="$1">
+                    <Caption color="#9CA3AF" fontWeight="600">
+                      {i18n._("stats.wordsLabel")}
+                    </Caption>
+                    <H3 color="#0D0D0D" fontWeight="700">
+                      {periodWordsStudied}
+                    </H3>
                   </YStack>
-                </YStack>
-              </Card>
-            )}
+                  <YStack width={1} backgroundColor="#E5E7EB" />
+                  <YStack alignItems="center" gap="$1">
+                    <Caption color="#9CA3AF" fontWeight="600">
+                      {i18n._("stats.minutesLabel")}
+                    </Caption>
+                    <H3 color="#0D0D0D" fontWeight="700">
+                      {formatDuration(periodStudySeconds)}
+                    </H3>
+                  </YStack>
+                </XStack>
+              </YStack>
+            </Card>
           </>
         )}
 
+        {/* Achievement Progress Card */}
         <Card elevated>
-          <H3 marginBottom="$3">{i18n._("stats.allTimeTitle")}</H3>
-          <XStack gap="$2">
-            <StatChip
-              icon="⚡"
-              value={totalXP}
-              label={i18n._("stats.totalXP")}
-            />
-            <StatChip
-              icon="🎯"
-              value={stats.wordsMastered}
-              label={i18n._("stats.totalWords")}
-            />
-            <StatChip
-              icon="📚"
-              value={lists.length}
-              label={i18n._("stats.totalLists")}
-            />
+          <XStack alignItems="center" gap="$3" marginBottom="$3">
+            <YStack
+              width={44}
+              height={44}
+              borderRadius={12}
+              backgroundColor="#EDE9FE"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Body fontSize={22}>🏆</Body>
+            </YStack>
+            <H3 color="#0D0D0D">{i18n._("stats.achievementProgress")}</H3>
+          </XStack>
+          <XStack gap="$3">
+            <YStack
+              flex={1}
+              alignItems="center"
+              gap="$1"
+              backgroundColor="#F5F7FA"
+              borderRadius={16}
+              padding="$3"
+            >
+              <H3 color="#0D0D0D" fontWeight="800">
+                {achievements.length}
+              </H3>
+              <Caption color="#9CA3AF">{i18n._("stats.totalUnlocked")}</Caption>
+            </YStack>
+            <YStack
+              flex={1}
+              alignItems="center"
+              gap="$1"
+              backgroundColor="#FEF3E2"
+              borderRadius={16}
+              padding="$3"
+            >
+              <H3 color="#F5A623" fontWeight="800">⭐ {totalXP}</H3>
+              <Caption color="#9CA3AF">{i18n._("stats.totalXP")}</Caption>
+            </YStack>
           </XStack>
         </Card>
 
-        <Card elevated>
-          <H3 marginBottom="$3">{i18n._("stats.streakTitle")}</H3>
-          <XStack gap="$2">
-            <StatChip
-              icon="🔥"
-              value={`${currentStreak}`}
-              label={i18n._("stats.currentStreak")}
-            />
-            <StatChip
-              icon="🏅"
-              value={`${longestStreak}`}
-              label={i18n._("stats.bestStreak")}
-            />
-          </XStack>
-        </Card>
-
+        {/* Recent Sessions */}
         {recentSessions.length > 0 && (
           <Card elevated>
-            <H3 marginBottom="$3">{i18n._("stats.recentSessions")}</H3>
+            <H3 color="#0D0D0D" marginBottom="$3">
+              {i18n._("stats.recentSessions")}
+            </H3>
             <YStack>
               {recentSessions.map((session) => (
                 <SessionRow
@@ -267,3 +301,4 @@ export default function StatsScreen() {
     </ScrollView>
   );
 }
+

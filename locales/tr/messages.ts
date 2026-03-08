@@ -15,7 +15,19 @@ export const messages: Record<string, string> = {
   "auth.welcomeSubtitle": "Başlamak için giriş yapın",
   "settings.manageSubscription": "Abonelik Yönetimi",
   "settings.language": "Dil",
-  "settings.notifications": "Bildirimler",
+  "settings.notifications": "Bildirim Ayarları",
+  "settings.account": "Hesap",
+  "settings.memberSince": "Üye tarihi",
+  "settings.userId": "Kullanıcı Kimliği",
+  "settings.restoreCloudData": "Bulut Verilerini Geri Yükle (Sadece Premium)",
+  "settings.displayName": "Görünen Ad",
+  "settings.general": "GENEL",
+  "settings.aboutUs": "Hakkımızda",
+  "settings.rate": "VocabifyX'i Değerlendir",
+  "settings.share": "Arkadaşlarla Paylaş",
+  "settings.deleteAccount": "Hesabı Sil",
+  "settings.free": "Ücretsiz",
+  "settings.premium": "Premium",
   "onboarding.getStarted": "Başla",
   "onboarding.skip": "Atla",
   "onboarding.next": "İleri",
@@ -57,6 +69,9 @@ export const messages: Record<string, string> = {
   "profile.recentAchievements": "Son Başarılar",
   "profile.noAchievements": "Başarı açmak için oturum tamamla!",
   "profile.days": "gün",
+  "profile.viewAll": "Tümünü Gör",
+  "profile.title": "Profilin",
+  "profile.longestStreak": "En İyi Seri",
 
   // Başarılar
   "achievement.newbie.title": "Çaylak",
@@ -132,6 +147,14 @@ export const messages: Record<string, string> = {
   "stats.recentSessions": "Son Oturumlar",
   "stats.flashcard": "Kartlar",
   "stats.quiz": "Quiz",
+  "stats.sessionBreakdown": "Oturum Dağılımı",
+  "stats.successRate": "BAŞARI ORANI",
+  "stats.streakLabel": "SERİ",
+  "stats.pointsLabel": "PUAN",
+  "stats.achievementProgress": "Başarı İlerlemesi",
+  "stats.totalUnlocked": "Açıldı",
+  "stats.wordsLabel": "KELİME",
+  "stats.minutesLabel": "DAKİKA",
 
   // Liste detay ekranı
   "listDetail.words": "Kelimeler",
@@ -336,7 +359,6 @@ export const messages: Record<string, string> = {
   "notifications.notNow": "Şimdi Değil",
 
   // İstatistik bölüm başlıkları
-  "stats.sessionBreakdown": "Oturum Dağılımı",
   "stats.allTimeTitle": "🏆 Tüm Zamanlar",
   "stats.streakTitle": "🔥 Seri",
 
@@ -352,15 +374,18 @@ export const messages: Record<string, string> = {
   "achievements.title": "Başarılar",
   "achievements.unlocked": "açıldı",
   "achievements.locked": "Devam et, açmak için",
+  "achievements.xpEarned": "Kazanılan XP",
+  "achievements.total": "Toplam",
+  "achievements.filterAll": "Tümü",
+  "achievements.filterStreak": "Seri",
+  "achievements.filterWords": "Kelimeler",
+  "achievements.filterSessions": "Oturumlar",
 
   // Seviye atlama modalı
   "levelUp.title": "Seviye Atladın! 🎉",
   "levelUp.congratulations": "Tebrikler!",
   "levelUp.subtitle": "Yeni bir seviyeye ulaştın. Devam et!",
   "levelUp.keepLearning": "Öğrenmeye Devam Et!",
-
-  // Profil tümünü gör
-  "profile.viewAll": "Tümünü Gör",
 
   // Bildirim planlama
   "notifications.types": "Bildirim Türleri",

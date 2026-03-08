@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "app-template",
-    "slug": "app-template",
+    "name": "VocabifyX",
+    "slug": "vocabifyx",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme": "app-template",
+    "scheme": "vocabifyx",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
@@ -15,7 +15,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.yourcompany.apptemplate",
+      "bundleIdentifier": "com.mobilyptic.vocabifyx",
       "usesAppleSignIn": true,
       "appleTeamId": "78YA2XXFM3"
     },
@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.yourcompany.apptemplate"
+      "package": "com.mobilyptic.vocabifyx"
     },
     "web": {
       "bundler": "metro",

@@ -1,6 +1,9 @@
 import { YStack } from "tamagui";
 
-import { Caption, H3 } from "@/components/DesignSystem/Typography";
+import {
+  Body,
+  Caption,
+} from "@/components/DesignSystem/Typography";
 
 interface StatChipProps {
   icon: string;
@@ -13,15 +16,24 @@ export function StatChip({ icon, value, label }: StatChipProps) {
     <YStack
       alignItems="center"
       gap="$1"
-      backgroundColor="$gray3"
-      borderRadius={12}
-      padding="$3"
+      backgroundColor="#F5F7FA"
+      borderRadius={14}
+      paddingVertical="$3"
+      paddingHorizontal="$2"
       flex={1}
-      minWidth={80}
     >
-      <Caption>{icon}</Caption>
-      <H3>{value}</H3>
-      <Caption>{label}</Caption>
+      <Body fontSize={22}>{icon}</Body>
+      <Body fontWeight="700" fontSize={18} color="#0D0D0D">
+        {String(value)}
+      </Body>
+      <Caption
+        color="#9CA3AF"
+        textAlign="center"
+        numberOfLines={1}
+        fontSize={11}
+      >
+        {label}
+      </Caption>
     </YStack>
   );
 }

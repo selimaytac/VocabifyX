@@ -15,7 +15,19 @@ export const messages: Record<string, string> = {
   "auth.welcomeSubtitle": "Sign in to get started",
   "settings.manageSubscription": "Manage Subscription",
   "settings.language": "Language",
-  "settings.notifications": "Notifications",
+  "settings.notifications": "Notification Settings",
+  "settings.account": "Account",
+  "settings.memberSince": "Member since",
+  "settings.userId": "User ID",
+  "settings.restoreCloudData": "Restore Cloud Data (Premium Only)",
+  "settings.displayName": "Display Name",
+  "settings.general": "GENERAL",
+  "settings.aboutUs": "About Us",
+  "settings.rate": "Rate VocabifyX",
+  "settings.share": "Share with Friends",
+  "settings.deleteAccount": "Delete Account",
+  "settings.free": "Free",
+  "settings.premium": "Premium",
   "onboarding.getStarted": "Get Started",
   "onboarding.skip": "Skip",
   "onboarding.next": "Next",
@@ -57,6 +69,9 @@ export const messages: Record<string, string> = {
   "profile.recentAchievements": "Recent Achievements",
   "profile.noAchievements": "Complete sessions to unlock achievements!",
   "profile.days": "days",
+  "profile.viewAll": "See All",
+  "profile.title": "Your Profile",
+  "profile.longestStreak": "Best Streak",
 
   // Achievements
   "achievement.newbie.title": "Newbie",
@@ -132,6 +147,14 @@ export const messages: Record<string, string> = {
   "stats.recentSessions": "Recent Sessions",
   "stats.flashcard": "Flashcards",
   "stats.quiz": "Quiz",
+  "stats.sessionBreakdown": "Session Breakdown",
+  "stats.successRate": "SUCCESS RATE",
+  "stats.streakLabel": "STREAK",
+  "stats.pointsLabel": "POINTS",
+  "stats.achievementProgress": "Achievement Progress",
+  "stats.totalUnlocked": "Unlocked",
+  "stats.wordsLabel": "WORDS",
+  "stats.minutesLabel": "MINUTES",
 
   // List detail screen
   "listDetail.words": "Words",
@@ -334,7 +357,6 @@ export const messages: Record<string, string> = {
   "notifications.notNow": "Not Now",
 
   // Stats section headings
-  "stats.sessionBreakdown": "Session Breakdown",
   "stats.allTimeTitle": "🏆 All Time",
   "stats.streakTitle": "🔥 Streak",
 
@@ -350,15 +372,18 @@ export const messages: Record<string, string> = {
   "achievements.title": "Achievements",
   "achievements.unlocked": "unlocked",
   "achievements.locked": "Keep going to unlock",
+  "achievements.xpEarned": "XP Earned",
+  "achievements.total": "Total",
+  "achievements.filterAll": "All",
+  "achievements.filterStreak": "Streak",
+  "achievements.filterWords": "Words",
+  "achievements.filterSessions": "Sessions",
 
   // Level up modal
   "levelUp.title": "Level Up! 🎉",
   "levelUp.congratulations": "Congratulations!",
   "levelUp.subtitle": "You've reached a new level. Keep it up!",
   "levelUp.keepLearning": "Keep Learning!",
-
-  // Profile view all
-  "profile.viewAll": "View All",
 
   // Notification scheduling
   "notifications.types": "Notification Types",

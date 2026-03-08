@@ -13,7 +13,6 @@ export const PrimaryButton = styled(TamaguiButton, {
   },
   disabledStyle: {
     backgroundColor: "#2a2a2a",
-    color: "#6b7280",
     opacity: 1,
   },
 });
