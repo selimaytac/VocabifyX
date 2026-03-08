@@ -1,9 +1,11 @@
 import { BarChart2, Compass, Home, Plus, User } from "@tamagui/lucide-icons";
-import { Redirect, Tabs, useRouter } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
 
+import { CreateListSheet } from "@/components/CreateListSheet";
 import { config } from "@/config";
 import { useSubscription } from "@/hooks/useSubscription";
+import { useCreateListSheetStore } from "@/store/createListSheetStore";
 
 function CenterFAB({ onPress }: { onPress: () => void }) {
   return (
@@ -44,7 +46,7 @@ const fabStyles = StyleSheet.create({
 
 export default function TabLayout() {
   const { isSubscribed, loading } = useSubscription();
-  const router = useRouter();
+  const openSheet = useCreateListSheetStore((s) => s.open);
 
   // Hard paywall gate: if the subscription has lapsed and we're not in
   // dev/web mode, redirect to the lapsed-subscriber modal paywall.
@@ -53,73 +55,74 @@ export default function TabLayout() {
   }
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: "#213448",
-        tabBarInactiveTintColor: "#B0B0B0",
-        tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: "#FFFFFF",
-          borderTopWidth: 1,
-          borderTopColor: "#E0E0E0",
-          height: 72,
-          paddingBottom: 12,
-          paddingTop: 8,
-        },
-        headerStyle: {
-          backgroundColor: "#FFFFFF",
-        },
-        headerTintColor: "#09122C",
-        headerShadowVisible: false,
-        headerTitleStyle: {
-          fontWeight: "600",
-          fontSize: 18,
-          color: "#09122C",
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
+    <>
+      <Tabs
+        screenOptions={{
+          tabBarActiveTintColor: "#213448",
+          tabBarInactiveTintColor: "#B0B0B0",
+          tabBarShowLabel: false,
+          tabBarStyle: {
+            backgroundColor: "#FFFFFF",
+            borderTopWidth: 1,
+            borderTopColor: "#E0E0E0",
+            height: 72,
+            paddingBottom: 12,
+            paddingTop: 8,
+          },
+          headerStyle: {
+            backgroundColor: "#FFFFFF",
+          },
+          headerTintColor: "#09122C",
+          headerShadowVisible: false,
+          headerTitleStyle: {
+            fontWeight: "600",
+            fontSize: 18,
+            color: "#09122C",
+          },
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: "Explore",
-          tabBarIcon: ({ color, size }) => (
-            <Compass color={color} size={size} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="create"
-        options={{
-          title: "",
-          tabBarButton: () => (
-            <CenterFAB onPress={() => router.push("/list/create")} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="stats"
-        options={{
-          title: "Stats",
-          tabBarIcon: ({ color, size }) => (
-            <BarChart2 color={color} size={size} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: "Home",
+            tabBarIcon: ({ color, size }) => <Home color={color} size={size} />,
+          }}
+        />
+        <Tabs.Screen
+          name="explore"
+          options={{
+            title: "Explore",
+            tabBarIcon: ({ color, size }) => (
+              <Compass color={color} size={size} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="create"
+          options={{
+            title: "",
+            tabBarButton: () => <CenterFAB onPress={() => openSheet()} />,
+          }}
+        />
+        <Tabs.Screen
+          name="stats"
+          options={{
+            title: "Stats",
+            tabBarIcon: ({ color, size }) => (
+              <BarChart2 color={color} size={size} />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: "Profile",
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => <User color={color} size={size} />,
+          }}
+        />
+      </Tabs>
+      <CreateListSheet />
+    </>
   );
 }

@@ -17,6 +17,7 @@ import {
   H3,
   Label,
 } from "@/components/DesignSystem/Typography";
+import { useCreateListSheetStore } from "@/store/createListSheetStore";
 import { useGameStore } from "@/store/gameStore";
 import {
   getCompletionPercent,
@@ -168,12 +169,12 @@ function ListCard({
 
 export default function HomeScreen() {
   const { i18n } = useLingui();
-  const router = useRouter();
   const profile = useUserStore((state) => state.profile);
   const lists = useListsStore((state) => state.lists);
   const hasHydrated = useListsStore((state) => state._hasHydrated);
   const { currentStreak } = useGameStore();
   const sessions = useSessionsStore((state) => state.sessions);
+  const openSheet = useCreateListSheetStore((s) => s.open);
 
   const todaySessions = useMemo(() => {
     const today = new Date();
@@ -240,7 +241,7 @@ export default function HomeScreen() {
               <Caption color="#547792">{lists.length} lists saved</Caption>
             </YStack>
             <XStack
-              onPress={() => router.push("/list/create")}
+              onPress={openSheet}
               backgroundColor="#213448"
               borderRadius={20}
               width={32}
@@ -266,7 +267,7 @@ export default function HomeScreen() {
               <BodySmall color="#777777" textAlign="center">
                 {i18n._("home.emptySubtitle")}
               </BodySmall>
-              <PrimaryButton onPress={() => router.push("/list/create")}>
+              <PrimaryButton onPress={openSheet}>
                 + {i18n._("home.createList")}
               </PrimaryButton>
             </YStack>
