@@ -30,13 +30,13 @@ import {
 function wordStatusColor(status: WordStatus): string {
   switch (status) {
     case "mastered":
-      return "#38AD49";
+      return "#4CAF50";
     case "learned":
-      return "#F5A623";
+      return "#FFB400";
     case "learning":
-      return "#007AFF";
+      return "#213448";
     default:
-      return "#D7D7D7";
+      return "#777777";
   }
 }
 
@@ -63,20 +63,20 @@ function WordRow({ word, statusLabels }: WordRowProps) {
     <XStack
       paddingVertical="$3"
       borderBottomWidth={1}
-      borderBottomColor="#F2F2F2"
+      borderBottomColor="#E0E0E0"
       justifyContent="space-between"
       alignItems="center"
     >
       <YStack flex={1} marginRight="$2">
         <Label numberOfLines={1}>{word.term}</Label>
-        <Caption color="#D7D7D7" numberOfLines={1}>
+        <Caption color="#777777" numberOfLines={1}>
           {word.translation}
         </Caption>
       </YStack>
       <XStack
         alignItems="center"
         gap="$1"
-        backgroundColor="#F8F8F8"
+        backgroundColor="#F7F8FB"
         borderRadius={8}
         paddingHorizontal="$2"
         paddingVertical="$1"
@@ -177,10 +177,10 @@ export default function ListDetailScreen() {
         </XStack>
 
         {list.description ? (
-          <BodySmall color="#D7D7D7">{list.description}</BodySmall>
+          <BodySmall color="#777777">{list.description}</BodySmall>
         ) : null}
 
-        <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4">
+        <YStack backgroundColor="#F7F8FB" borderRadius={16} padding="$4">
           <YStack gap="$3">
             <XStack justifyContent="space-between" alignItems="center">
               <H3>{i18n._("listDetail.progress")}</H3>
@@ -228,12 +228,12 @@ export default function ListDetailScreen() {
           </SecondaryButton>
         </XStack>
 
-        <YStack backgroundColor="#F8F8F8" borderRadius={12} padding="$4">
+        <YStack backgroundColor="#F7F8FB" borderRadius={16} padding="$4">
           <H3 marginBottom="$2">
             {i18n._("listDetail.words")} ({list.words.length})
           </H3>
           {list.words.length === 0 ? (
-            <BodySmall color="#D7D7D7">
+            <BodySmall color="#777777">
               {i18n._("listDetail.noWords")}
             </BodySmall>
           ) : (
@@ -252,13 +252,13 @@ export default function ListDetailScreen() {
         <YStack
           pressStyle={{ opacity: 0.8 }}
           onPress={handleDelete}
-          backgroundColor="#FFF0EF"
-          borderRadius={12}
+          backgroundColor="#FFEEED"
+          borderRadius={16}
           padding="$4"
         >
           <XStack alignItems="center" gap="$3" justifyContent="center">
-            <Trash2 size={18} color="#D53F36" />
-            <Label color="#D53F36">{i18n._("listDetail.deleteList")}</Label>
+            <Trash2 size={18} color="#BE3144" />
+            <Label color="#BE3144">{i18n._("listDetail.deleteList")}</Label>
           </XStack>
         </YStack>
       </YStack>

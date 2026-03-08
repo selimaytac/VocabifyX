@@ -168,7 +168,7 @@ export default function CreateListScreen() {
           <Caption fontWeight="700" fontSize={11} letterSpacing={1}>
             {i18n._("createList.listName").toUpperCase()}
           </Caption>
-          <YStack backgroundColor="$gray3" borderRadius={12} padding="$4">
+          <YStack backgroundColor="$gray3" borderRadius={16} padding="$4">
             <TextInput
               value={listName}
               onChangeText={setListName}
@@ -184,7 +184,7 @@ export default function CreateListScreen() {
           <Caption fontWeight="700" fontSize={11} letterSpacing={1}>
             {i18n._("createList.topic").toUpperCase()}
           </Caption>
-          <YStack backgroundColor="$gray3" borderRadius={12} padding="$4">
+          <YStack backgroundColor="$gray3" borderRadius={16} padding="$4">
             <TextInput
               value={topic}
               onChangeText={setTopic}
@@ -209,8 +209,8 @@ export default function CreateListScreen() {
                 paddingVertical="$2"
                 borderRadius={100}
                 borderWidth={1.5}
-                borderColor={language === lang ? "#1B2D4F" : "$borderColor"}
-                backgroundColor={language === lang ? "#1B2D4F" : "$background"}
+                borderColor={language === lang ? "#213448" : "$borderColor"}
+                backgroundColor={language === lang ? "#213448" : "$background"}
                 pressStyle={{ opacity: 0.7 }}
               >
                 <Caption
@@ -241,7 +241,7 @@ export default function CreateListScreen() {
             <YStack
               key={word.id}
               backgroundColor="$gray3"
-              borderRadius={12}
+              borderRadius={16}
               padding="$4"
               gap="$3"
             >
@@ -312,13 +312,13 @@ export default function CreateListScreen() {
             justifyContent="center"
             gap="$2"
             paddingVertical="$4"
-            borderRadius={12}
+            borderRadius={16}
             borderWidth={1.5}
             borderColor="$borderColor"
             pressStyle={{ opacity: 0.7 }}
           >
-            <Plus size={18} color="#1B2D4F" />
-            <Body color="#1B2D4F" fontWeight="600" fontSize={15}>
+            <Plus size={18} color="#213448" />
+            <Body color="#213448" fontWeight="600" fontSize={15}>
               {i18n._("createList.addWord")}
             </Body>
           </XStack>
@@ -326,7 +326,7 @@ export default function CreateListScreen() {
 
         {/* Save button */}
         <XStack
-          backgroundColor="#1B2D4F"
+          backgroundColor="#213448"
           borderRadius={100}
           height={52}
           alignItems="center"
