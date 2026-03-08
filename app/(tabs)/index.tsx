@@ -5,9 +5,7 @@ import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
 
-import {
-  PrimaryButton,
-} from "@/components/DesignSystem/Button";
+import { PrimaryButton } from "@/components/DesignSystem/Button";
 import { Card } from "@/components/DesignSystem/Card";
 import { ProgressBar } from "@/components/DesignSystem/ProgressBar";
 import { StatChip } from "@/components/DesignSystem/StatChip";

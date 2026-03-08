@@ -198,7 +198,11 @@ export default function PaywallScreen() {
                               paddingVertical="$1"
                               borderRadius={8}
                             >
-                              <Caption color="#1a1a1a" fontSize={10} fontWeight="700">
+                              <Caption
+                                color="#1a1a1a"
+                                fontSize={10}
+                                fontWeight="700"
+                              >
                                 {i18n._("paywall.mostPopular")}
                               </Caption>
                             </XStack>
@@ -211,7 +215,11 @@ export default function PaywallScreen() {
                             : ` ${i18n._("paywall.perMonth")}`}
                         </Caption>
                       </YStack>
-                      {isSelected && <Caption color="#F5A623" fontSize={18}>✓</Caption>}
+                      {isSelected && (
+                        <Caption color="#F5A623" fontSize={18}>
+                          ✓
+                        </Caption>
+                      )}
                     </XStack>
                   </Card>
                 );

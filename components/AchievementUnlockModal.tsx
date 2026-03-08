@@ -3,7 +3,13 @@ import * as Haptics from "expo-haptics";
 import { useEffect } from "react";
 import { Sheet, XStack, YStack } from "tamagui";
 
-import { Body, BodySmall, Caption, H2, Label } from "@/components/DesignSystem/Typography";
+import {
+  Body,
+  BodySmall,
+  Caption,
+  H2,
+  Label,
+} from "@/components/DesignSystem/Typography";
 import { getAchievementById } from "@/constants/achievements";
 import { useGameStore } from "@/store/gameStore";
 
@@ -107,7 +113,9 @@ export function AchievementUnlockModal() {
           gap="$3"
           alignItems="center"
         >
-          <Label color="#0D0D0D" fontWeight="600">Progress</Label>
+          <Label color="#0D0D0D" fontWeight="600">
+            Progress
+          </Label>
           <YStack
             backgroundColor="#1B2D4F"
             borderRadius={100}
@@ -163,4 +171,3 @@ export function AchievementUnlockModal() {
     </Sheet>
   );
 }
-

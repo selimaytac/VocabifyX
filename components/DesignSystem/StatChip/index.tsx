@@ -1,9 +1,6 @@
 import { YStack } from "tamagui";
 
-import {
-  Body,
-  Caption,
-} from "@/components/DesignSystem/Typography";
+import { Body, Caption } from "@/components/DesignSystem/Typography";
 
 interface StatChipProps {
   icon: string;

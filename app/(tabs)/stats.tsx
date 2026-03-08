@@ -127,7 +127,10 @@ export default function StatsScreen() {
     .slice(0, 10);
 
   return (
-    <ScrollView style={{ backgroundColor: "#FFFFFF" }} contentContainerStyle={{ paddingBottom: 100 }}>
+    <ScrollView
+      style={{ backgroundColor: "#FFFFFF" }}
+      contentContainerStyle={{ paddingBottom: 100 }}
+    >
       <YStack padding="$4" gap="$4">
         <H1 color="#0D0D0D">{i18n._("stats.title")}</H1>
 
@@ -272,7 +275,9 @@ export default function StatsScreen() {
               borderRadius={16}
               padding="$3"
             >
-              <H3 color="#F5A623" fontWeight="800">⭐ {totalXP}</H3>
+              <H3 color="#F5A623" fontWeight="800">
+                ⭐ {totalXP}
+              </H3>
               <Caption color="#9CA3AF">{i18n._("stats.totalXP")}</Caption>
             </YStack>
           </XStack>
@@ -301,4 +306,3 @@ export default function StatsScreen() {
     </ScrollView>
   );
 }
-

@@ -14,15 +14,15 @@ import {
   Label,
 } from "@/components/DesignSystem/Typography";
 import {
-  ACHIEVEMENTS,
   type AchievementCondition,
+  ACHIEVEMENTS,
 } from "@/constants/achievements";
 import {
   getLevelDisplayName,
   getLevelForXP,
   getXPForNextLevel,
 } from "@/constants/levels";
-import { useGameStore, type GameStats } from "@/store/gameStore";
+import { type GameStats, useGameStore } from "@/store/gameStore";
 
 type AchievementFilter = "all" | "streak" | "words" | "sessions";
 
@@ -34,35 +34,66 @@ function getConditionProgress(
 ): { current: number; target: number } {
   switch (condition.type) {
     case "lists_created":
-      return { current: Math.min(stats.listsCreated, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.listsCreated, condition.count),
+        target: condition.count,
+      };
     case "words_mastered":
-      return { current: Math.min(stats.wordsMastered, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.wordsMastered, condition.count),
+        target: condition.count,
+      };
     case "sessions_completed":
-      return { current: Math.min(stats.sessionsCompleted, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.sessionsCompleted, condition.count),
+        target: condition.count,
+      };
     case "streak_days":
-      return { current: Math.min(currentStreak, condition.count), target: condition.count };
+      return {
+        current: Math.min(currentStreak, condition.count),
+        target: condition.count,
+      };
     case "lists_completed":
-      return { current: Math.min(stats.listsCompleted, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.listsCompleted, condition.count),
+        target: condition.count,
+      };
     case "explore_added":
-      return { current: Math.min(stats.exploreAdded, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.exploreAdded, condition.count),
+        target: condition.count,
+      };
     case "quiz_perfect":
-      return { current: Math.min(stats.quizPerfectScores, condition.count), target: condition.count };
+      return {
+        current: Math.min(stats.quizPerfectScores, condition.count),
+        target: condition.count,
+      };
     case "level_reached":
-      return { current: Math.min(levelNum, condition.level), target: condition.level };
+      return {
+        current: Math.min(levelNum, condition.level),
+        target: condition.level,
+      };
   }
 }
 
-function matchesFilter(condition: AchievementCondition, filter: AchievementFilter): boolean {
+function matchesFilter(
+  condition: AchievementCondition,
+  filter: AchievementFilter,
+): boolean {
   if (filter === "all") return true;
   if (filter === "streak") return condition.type === "streak_days";
-  if (filter === "words") return condition.type === "words_mastered" || condition.type === "quiz_perfect";
-  if (filter === "sessions") return (
-    condition.type === "sessions_completed" ||
-    condition.type === "lists_created" ||
-    condition.type === "explore_added" ||
-    condition.type === "lists_completed" ||
-    condition.type === "level_reached"
-  );
+  if (filter === "words")
+    return (
+      condition.type === "words_mastered" || condition.type === "quiz_perfect"
+    );
+  if (filter === "sessions")
+    return (
+      condition.type === "sessions_completed" ||
+      condition.type === "lists_created" ||
+      condition.type === "explore_added" ||
+      condition.type === "lists_completed" ||
+      condition.type === "level_reached"
+    );
   return true;
 }
 
@@ -70,11 +101,21 @@ export default function AchievementsScreen() {
   const { i18n } = useLingui();
   const router = useRouter();
   const [filter, setFilter] = useState<AchievementFilter>("all");
-  const { achievements: unlockedList, totalXP, currentStreak, stats } = useGameStore();
+  const {
+    achievements: unlockedList,
+    totalXP,
+    currentStreak,
+    stats,
+  } = useGameStore();
 
   const unlockedIds = new Set(unlockedList.map((a) => a.achievementId));
-  const unlockedCount = ACHIEVEMENTS.filter((a) => unlockedIds.has(a.id)).length;
-  const totalXPFromAchievements = unlockedList.reduce((sum, a) => sum + a.xpAwarded, 0);
+  const unlockedCount = ACHIEVEMENTS.filter((a) =>
+    unlockedIds.has(a.id),
+  ).length;
+  const totalXPFromAchievements = unlockedList.reduce(
+    (sum, a) => sum + a.xpAwarded,
+    0,
+  );
 
   const currentLevel = getLevelForXP(totalXP);
   const levelName = getLevelDisplayName(currentLevel);
@@ -106,7 +147,6 @@ export default function AchievementsScreen() {
   return (
     <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
       <YStack padding="$4" gap="$4" paddingBottom="$8">
-
         {/* Level header card */}
         <YStack
           backgroundColor={tierStyle.bg}
@@ -215,7 +255,9 @@ export default function AchievementsScreen() {
                     width={52}
                     height={52}
                     borderRadius={26}
-                    backgroundColor={isUnlocked ? achievement.badgeColor : "#E5E7EB"}
+                    backgroundColor={
+                      isUnlocked ? achievement.badgeColor : "#E5E7EB"
+                    }
                     alignItems="center"
                     justifyContent="center"
                     flexShrink={0}

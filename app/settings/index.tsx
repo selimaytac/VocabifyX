@@ -47,17 +47,16 @@ function SettingsRow({
         {icon}
         <Label color="#0D0D0D">{label}</Label>
       </XStack>
-      {trailing ?? (showChevron && onPress ? (
-        <ChevronRight size={18} color="#9CA3AF" />
-      ) : null)}
+      {trailing ??
+        (showChevron && onPress ? (
+          <ChevronRight size={18} color="#9CA3AF" />
+        ) : null)}
     </XStack>
   );
 }
 
 function Divider() {
-  return (
-    <YStack height={1} backgroundColor="#F5F7FA" marginHorizontal="$4" />
-  );
+  return <YStack height={1} backgroundColor="#F5F7FA" marginHorizontal="$4" />;
 }
 
 export default function SettingsScreen() {
@@ -66,8 +65,10 @@ export default function SettingsScreen() {
   const { signOut } = useAuth();
   const profile = useUserStore((state) => state.profile);
 
-  const initial = profile?.displayName?.[0]?.toUpperCase() ??
-    profile?.email?.[0]?.toUpperCase() ?? "U";
+  const initial =
+    profile?.displayName?.[0]?.toUpperCase() ??
+    profile?.email?.[0]?.toUpperCase() ??
+    "U";
 
   const handleDeleteAccount = () => {
     Alert.alert(
@@ -87,10 +88,14 @@ export default function SettingsScreen() {
   return (
     <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
       <YStack padding="$4" gap="$5" paddingBottom="$8">
-
         {/* Account section */}
         <YStack gap="$2">
-          <Caption color="#9CA3AF" fontWeight="700" fontSize={12} paddingLeft="$1">
+          <Caption
+            color="#9CA3AF"
+            fontWeight="700"
+            fontSize={12}
+            paddingLeft="$1"
+          >
             {i18n._("settings.account")}
           </Caption>
           <YStack
@@ -158,7 +163,12 @@ export default function SettingsScreen() {
 
         {/* General section */}
         <YStack gap="$2">
-          <Caption color="#9CA3AF" fontWeight="700" fontSize={12} paddingLeft="$1">
+          <Caption
+            color="#9CA3AF"
+            fontWeight="700"
+            fontSize={12}
+            paddingLeft="$1"
+          >
             {i18n._("settings.general")}
           </Caption>
           <YStack
@@ -204,4 +214,3 @@ export default function SettingsScreen() {
     </ScrollView>
   );
 }
-

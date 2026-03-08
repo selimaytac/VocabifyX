@@ -50,7 +50,10 @@ export default function ProfileScreen() {
     .slice(0, 4);
 
   return (
-    <ScrollView style={{ backgroundColor: "#FFFFFF" }} contentContainerStyle={{ paddingBottom: 100 }}>
+    <ScrollView
+      style={{ backgroundColor: "#FFFFFF" }}
+      contentContainerStyle={{ paddingBottom: 100 }}
+    >
       <YStack padding="$4" gap="$4" paddingTop="$12">
         {/* Settings gear */}
         <XStack justifyContent="flex-end" alignItems="center">
@@ -166,7 +169,9 @@ export default function ProfileScreen() {
             </YStack>
             <YStack width={1} backgroundColor="#E5E7EB" />
             <YStack alignItems="center" gap="$1" flex={1}>
-              <H3 color="#0D0D0D" fontWeight="700">{longestStreak}d</H3>
+              <H3 color="#0D0D0D" fontWeight="700">
+                {longestStreak}d
+              </H3>
               <Caption color="#9CA3AF" textAlign="center">
                 {i18n._("profile.longestStreak")}
               </Caption>
@@ -245,4 +250,3 @@ export default function ProfileScreen() {
     </ScrollView>
   );
 }
-
