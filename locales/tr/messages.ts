@@ -439,4 +439,27 @@ export const messages: Record<string, string> = {
   "onboarding.error.subtitle":
     "Şu anda listenizi hazırlayamadık. Lütfen tekrar deneyin.",
   "onboarding.error.retry": "Tekrar Dene",
+
+  // Genel hata durumları
+  "common.tryAgain": "Tekrar Dene",
+  "error.retry": "Yeniden Dene",
+  "error.network.title": "Bağlantı Hatası",
+  "error.network.subtitle":
+    "Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin.",
+  "error.generic.title": "Bir şeyler ters gitti",
+  "error.generic.subtitle":
+    "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.",
+
+  // Ödeme ekranı hata mesajları
+  "paywall.purchaseErrorTitle": "Satın Alma Başarısız",
+  "paywall.purchaseError":
+    "Satın alma işleminiz tamamlanamadı. Lütfen tekrar deneyin.",
+  "paywall.restoreErrorTitle": "Geri Yükleme Başarısız",
+  "paywall.restoreError":
+    "Geri yüklenecek satın alma bulunamadı veya bir hata oluştu.",
+  "paywall.restoreSuccessTitle": "Satın Almalar Geri Yüklendi",
+  "paywall.restoreSuccess": "Satın almalarınız başarıyla geri yüklendi.",
+  "paywall.offeringsErrorTitle": "Fiyatlandırma Mevcut Değil",
+  "paywall.offeringsError":
+    "Fiyatlandırma yüklenemedi. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.",
 };

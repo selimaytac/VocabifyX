@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Platform } from "react-native";
 import Purchases, {
   type CustomerInfo,
@@ -12,6 +12,7 @@ interface SubscriptionState {
   offerings: PurchasesOfferings | null;
   isSubscribed: boolean;
   loading: boolean;
+  offeringsError: boolean;
 }
 
 export function useSubscription() {
@@ -20,43 +21,49 @@ export function useSubscription() {
     offerings: null,
     isSubscribed: false,
     loading: true,
+    offeringsError: false,
   });
 
-  useEffect(() => {
+  const fetchSubscriptionData = useCallback(async () => {
     if (config.isDev || Platform.OS === "web") {
-      setState((prev) => ({ ...prev, loading: false }));
+      setState((prev) => ({ ...prev, loading: false, offeringsError: false }));
       return;
     }
 
-    const fetchSubscriptionData = async () => {
-      try {
-        const [customerInfo, offerings] = await Promise.all([
-          Purchases.getCustomerInfo(),
-          Purchases.getOfferings(),
-        ]);
+    setState((prev) => ({ ...prev, loading: true, offeringsError: false }));
 
-        const activeEntitlements = customerInfo.entitlements.active;
-        const isSubscribed = Object.keys(activeEntitlements).length > 0;
+    try {
+      const [customerInfo, offerings] = await Promise.all([
+        Purchases.getCustomerInfo(),
+        Purchases.getOfferings(),
+      ]);
 
-        setState({
-          customerInfo,
-          offerings,
-          isSubscribed,
-          loading: false,
-        });
-      } catch {
-        setState((prev) => ({ ...prev, loading: false }));
-      }
-    };
+      const activeEntitlements = customerInfo.entitlements.active;
+      const isSubscribed = Object.keys(activeEntitlements).length > 0;
 
+      setState({
+        customerInfo,
+        offerings,
+        isSubscribed,
+        loading: false,
+        offeringsError: false,
+      });
+    } catch {
+      setState((prev) => ({ ...prev, loading: false, offeringsError: true }));
+    }
+  }, []);
+
+  useEffect(() => {
     fetchSubscriptionData();
+
+    if (config.isDev || Platform.OS === "web") return;
 
     Purchases.addCustomerInfoUpdateListener((customerInfo) => {
       const activeEntitlements = customerInfo.entitlements.active;
       const isSubscribed = Object.keys(activeEntitlements).length > 0;
       setState((prev) => ({ ...prev, customerInfo, isSubscribed }));
     });
-  }, []);
+  }, [fetchSubscriptionData]);
 
   const purchasePackage = async (packageToPurchase: any) => {
     if (config.isDev || Platform.OS === "web") return null;
@@ -73,5 +80,6 @@ export function useSubscription() {
     ...state,
     purchasePackage,
     restorePurchases,
+    refetch: fetchSubscriptionData,
   };
 }

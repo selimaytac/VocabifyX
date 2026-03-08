@@ -186,7 +186,7 @@ Week 8:     Polish, QA, Submission
 ### Polish
 - [ ] All animations smooth (60fps check)
 - [x] Empty states for all screens
-- [ ] Error states (network, AI fail, RC fail)
+- [x] Error states (network, AI fail, RC fail)
 - [x] Loading skeletons (Home screen: animated skeleton cards while Zustand store hydrates from AsyncStorage)
 - [x] Haptic feedback on key actions (level up, achievement, flashcard answers, quiz answers)
 - [ ] App icon + splash screen final assets
@@ -267,3 +267,20 @@ Week 8:     Polish, QA, Submission
 - Added `__tests__/predefinedLists.test.ts` – 16 tests covering `LIST_CATEGORIES`, `PREDEFINED_LISTS_EN`, `PREDEFINED_LISTS_TR`, and `getPredefinedListsByLocale`.
 - Added `__tests__/listsStoreExtended.test.ts` – 14 tests covering word status edge cases (learning → learned transition, mastery persistence) and `wordsMastered` stat integration with `gameStore`.
 - Total unit tests: **126** (up from 93).
+
+### Error States Pass (March 2026)
+
+#### RC (RevenueCat) Error Handling
+- **Purchase error feedback** – Both `app/paywall.tsx` and `app/(modals)/paywall.tsx` now show an `Alert.alert()` when a purchase fails with an actual error (user cancellation is still silently ignored by checking `err.userCancelled`). Analytics event `paywall_purchase_failed` / `lapsed_paywall_purchase_failed` fired on error.
+- **Restore error feedback** – Both paywall screens now show an `Alert.alert()` when restore fails or when no active subscriptions were found after restore.
+- **Offerings fetch error** – `useSubscription` hook now exposes `offeringsError: boolean` and `refetch()`. Both paywall screens show an `ErrorState` component with a **Retry** button when offerings fail to load (network error scenario).
+
+#### New Components
+- **`ErrorState` component** added at `components/DesignSystem/ErrorState/index.tsx` – reusable full-screen error state with emoji, title, subtitle, and optional retry button. Follows the same design system patterns as `Skeleton` and `StatChip`.
+
+#### i18n Additions (EN + TR)
+- `common.tryAgain`, `error.retry`, `error.network.title`, `error.network.subtitle`, `error.generic.title`, `error.generic.subtitle`
+- `paywall.purchaseErrorTitle`, `paywall.purchaseError`, `paywall.restoreErrorTitle`, `paywall.restoreError`, `paywall.restoreSuccessTitle`, `paywall.restoreSuccess`, `paywall.offeringsErrorTitle`, `paywall.offeringsError`
+
+#### Roadmap Update
+- `[ ] Error states (network, AI fail, RC fail)` → `[x]`
