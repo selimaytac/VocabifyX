@@ -174,27 +174,102 @@ export const messages: Record<string, string> = {
   "createList.turkish": "Türkçe",
   "createList.wordCount": "kelime",
 
-  // Kullanıcı alımı (tam akış)
+  // Onboarding – kahraman / karşılama ekranı
+  "onboarding.heroTitle": "VocabifyX'e Hoş Geldiniz! 🎓",
+  "onboarding.heroSubtitle":
+    "Yapay zeka destekli kişiselleştirme ile daha hızlı kelime öğrenin.",
+  "onboarding.letsGetStarted": "Hadi Başlayalım! 🚀",
+
+  // Onboarding – geriye dönük uyumluluk için tutulan eski anahtarlar
   "onboarding.welcome": "VocabifyX'e Hoş Geldiniz! 🎓",
   "onboarding.welcomeSubtitle": "Akıllı kartlar ve quizlerle kelime öğrenin.",
-  "onboarding.yourName": "Adınız nedir?",
-  "onboarding.namePlaceholder": "Adınızı girin (isteğe bağlı)",
-  "onboarding.chooseLanguage": "Arayüz dilinizi seçin",
-  "onboarding.english": "🇬🇧 İngilizce",
-  "onboarding.englishDesc": "Arayüz İngilizce olsun",
-  "onboarding.turkish": "🇹🇷 Türkçe",
-  "onboarding.turkishDesc": "Arayüz Türkçe olsun",
-  "onboarding.firstList": "Bir listeyle başlayın",
-  "onboarding.firstListSubtitle":
-    "Yolculuğunuza başlamak için bir kelime paketi seçin.",
-  "onboarding.pickCategory": "Kategoriye göre gözat",
-  "onboarding.addAndStart": "Ekle ve Başla",
-  "onboarding.addListAndStart": "Ekle ve Devam Et",
-  "onboarding.selectListFirst": "Devam etmek için bir liste seçin",
-  "onboarding.skipList": "Şimdilik atla",
-  "onboarding.allSet": "Hazırsınız! 🚀",
-  "onboarding.allSetSubtitle": "Hesabınız hazır. Öğrenmeye başlayalım!",
-  "onboarding.allSetWithList": "İlk listeniz hazır. Öğrenmeye başlayalım!",
+  "onboarding.back": "← Geri",
+
+  // Adım 1 – Ad ve dil
+  "onboarding.name.title": "Adın nedir?",
+  "onboarding.name.placeholder": "Adını gir...",
+  "onboarding.name.languageTitle": "Hangi dili öğrenmek istiyorsun?",
+  "onboarding.name.english": "🇬🇧 İngilizce",
+  "onboarding.name.englishDesc": "İngilizce kelime öğren",
+  "onboarding.name.turkish": "🇹🇷 Türkçe",
+  "onboarding.name.turkishDesc": "Türkçe kelime öğren",
+
+  // Adım 2 – Amaç
+  "onboarding.purpose.title": "Neden öğreniyorsun?",
+  "onboarding.purpose.subtitle":
+    "Kelime hazneni hedeflerine göre kişiselleştireceğiz",
+  "onboarding.purpose.work": "İş & Kariyer",
+  "onboarding.purpose.workEmoji": "💼",
+  "onboarding.purpose.travel": "Seyahat & Kültür",
+  "onboarding.purpose.travelEmoji": "✈️",
+  "onboarding.purpose.education": "Eğitim & Çalışma",
+  "onboarding.purpose.educationEmoji": "📚",
+  "onboarding.purpose.personal": "Kişisel Gelişim",
+  "onboarding.purpose.personalEmoji": "🌟",
+
+  // Adım 3 – Seviye
+  "onboarding.level.title": "Mevcut seviyeniz nedir?",
+  "onboarding.level.subtitle": "Dürüst ol – seni olduğun yerde karşılayacağız",
+  "onboarding.level.beginner": "Tam Başlangıç",
+  "onboarding.level.beginnerDesc": "Çok az kelime biliyorum",
+  "onboarding.level.beginnerEmoji": "🌱",
+  "onboarding.level.elementary": "Temel",
+  "onboarding.level.elementaryDesc": "Temel ifadeleri biliyorum",
+  "onboarding.level.elementaryEmoji": "📖",
+  "onboarding.level.intermediate": "Orta",
+  "onboarding.level.intermediateDesc": "Basit konuşmalar yapabiliyorum",
+  "onboarding.level.intermediateEmoji": "🎯",
+  "onboarding.level.advanced": "İleri",
+  "onboarding.level.advancedDesc": "Kelime haznemi ince ayar yapmak istiyorum",
+  "onboarding.level.advancedEmoji": "🚀",
+
+  // Adım 4 – Günlük hedef
+  "onboarding.dailyGoal.title": "Günde kaç kelime?",
+  "onboarding.dailyGoal.subtitle": "Küçük başla ve alışkanlık oluştur",
+  "onboarding.dailyGoal.5": "Günde 5 kelime",
+  "onboarding.dailyGoal.5desc": "Yeni başlıyorum",
+  "onboarding.dailyGoal.5emoji": "🐣",
+  "onboarding.dailyGoal.10": "Günde 10 kelime",
+  "onboarding.dailyGoal.10desc": "Düzenli öğrenci",
+  "onboarding.dailyGoal.10emoji": "📘",
+  "onboarding.dailyGoal.20": "Günde 20 kelime",
+  "onboarding.dailyGoal.20desc": "Kararlı öğrenci",
+  "onboarding.dailyGoal.20emoji": "🔥",
+  "onboarding.dailyGoal.30": "Günde 30 kelime",
+  "onboarding.dailyGoal.30desc": "Güçlü öğrenci",
+  "onboarding.dailyGoal.30emoji": "⚡",
+
+  // Adım 5 – Konular
+  "onboarding.topics.title": "Favori konularını seç!",
+  "onboarding.topics.subtitle": "Ustalaşmak istediğin konuları seç",
+  "onboarding.topics.travel": "Seyahat",
+  "onboarding.topics.travelEmoji": "✈️",
+  "onboarding.topics.business": "İş",
+  "onboarding.topics.businessEmoji": "💼",
+  "onboarding.topics.technology": "Teknoloji",
+  "onboarding.topics.technologyEmoji": "💻",
+  "onboarding.topics.dailyLife": "Günlük Yaşam",
+  "onboarding.topics.dailyLifeEmoji": "🏠",
+  "onboarding.topics.academic": "Akademik",
+  "onboarding.topics.academicEmoji": "🎓",
+  "onboarding.topics.startWith": "{n} konuyla başla!",
+
+  // Adım 6 – Yükleniyor
+  "onboarding.loading.title": "Kişisel planın hazırlanıyor...",
+  "onboarding.loading.analyzing": "Tercihleriniz analiz ediliyor...",
+  "onboarding.loading.matching": "Kelimeler seviyenize göre eşleştiriliyor...",
+  "onboarding.loading.building": "Kişiselleştirilmiş listeniz oluşturuluyor...",
+  "onboarding.loading.almostReady": "Neredeyse hazır...",
+
+  // Adım 7 – Plan açıklaması
+  "onboarding.plan.title": "Planın hazır! 🎯",
+  "onboarding.plan.subtitle": "İşte kişiselleştirilmiş öğrenme yolculuğun",
+  "onboarding.plan.dailyGoalLabel": "Günlük Hedef",
+  "onboarding.plan.levelLabel": "Seviye",
+  "onboarding.plan.topicsLabel": "Konular",
+  "onboarding.plan.firstListLabel": "İlk Listeniz",
+  "onboarding.plan.estimatedDays": "İlk listeni tamamlamak için ~{days} gün",
+  "onboarding.plan.commit": "Hazırım! Hadi Gidelim! 💪",
 
   // Bildirim ayarları
   "notifications.title": "Bildirimler",
