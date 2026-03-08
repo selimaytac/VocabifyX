@@ -177,27 +177,26 @@ export const messages: Record<string, string> = {
   // Onboarding – hero / welcome screen
   "onboarding.heroTitle": "Welcome to VocabifyX! 🎓",
   "onboarding.heroSubtitle":
-    "Master vocabulary faster with AI-powered personalization.",
+    "Master vocabulary for any topic — in any language.",
   "onboarding.letsGetStarted": "Let's Get Started! 🚀",
+  "onboarding.hero.feature1": "🤖  Master vocabulary for any topic or domain",
+  "onboarding.hero.feature2": "📊  Smart progress tracking & spaced practice",
+  "onboarding.hero.feature3": "🔥  Daily streaks, XP & achievements",
 
   // Onboarding – legacy keys kept for back-compat
   "onboarding.welcome": "Welcome to VocabifyX! 🎓",
   "onboarding.welcomeSubtitle":
-    "Learn vocabulary through smart flashcards and quizzes.",
+    "Build expertise through smart flashcards and quizzes.",
   "onboarding.back": "← Back",
 
-  // Step 1 – Name & language
+  // Step 1 – Name
   "onboarding.name.title": "What's your name?",
   "onboarding.name.placeholder": "Enter your name...",
-  "onboarding.name.languageTitle": "What language do you want to learn?",
-  "onboarding.name.english": "🇬🇧 English",
-  "onboarding.name.englishDesc": "Learn English vocabulary",
-  "onboarding.name.turkish": "🇹🇷 Turkish",
-  "onboarding.name.turkishDesc": "Learn Turkish vocabulary",
 
   // Step 2 – Purpose
-  "onboarding.purpose.title": "Why are you learning?",
-  "onboarding.purpose.subtitle": "We'll tailor your vocabulary to your goals",
+  "onboarding.purpose.title": "Why are you here?",
+  "onboarding.purpose.subtitle":
+    "We'll tailor your vocabulary to your specific goals",
   "onboarding.purpose.work": "Work & Career",
   "onboarding.purpose.workEmoji": "💼",
   "onboarding.purpose.travel": "Travel & Culture",
@@ -211,16 +210,16 @@ export const messages: Record<string, string> = {
   "onboarding.level.title": "What's your current level?",
   "onboarding.level.subtitle": "Be honest – we'll meet you where you are",
   "onboarding.level.beginner": "Complete Beginner",
-  "onboarding.level.beginnerDesc": "I know very few words",
+  "onboarding.level.beginnerDesc": "I'm new to this topic",
   "onboarding.level.beginnerEmoji": "🌱",
   "onboarding.level.elementary": "Elementary",
-  "onboarding.level.elementaryDesc": "I know basic phrases",
+  "onboarding.level.elementaryDesc": "I know some basics",
   "onboarding.level.elementaryEmoji": "📖",
   "onboarding.level.intermediate": "Intermediate",
-  "onboarding.level.intermediateDesc": "I can hold simple conversations",
+  "onboarding.level.intermediateDesc": "I have a solid foundation",
   "onboarding.level.intermediateEmoji": "🎯",
   "onboarding.level.advanced": "Advanced",
-  "onboarding.level.advancedDesc": "I want to fine-tune my vocabulary",
+  "onboarding.level.advancedDesc": "I want to deepen my expertise",
   "onboarding.level.advancedEmoji": "🚀",
 
   // Step 4 – Daily goal
