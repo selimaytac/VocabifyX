@@ -1,5 +1,5 @@
 import { useLingui } from "@lingui/react";
-import { ArrowLeft, Play, Trash2 } from "@tamagui/lucide-icons";
+import { Play, Trash2, X } from "@tamagui/lucide-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Alert, ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
@@ -162,18 +162,22 @@ export default function ListDetailScreen() {
   return (
     <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
       <YStack padding="$4" gap="$4">
-        <XStack alignItems="center" gap="$3">
-          <XStack
-            onPress={() => router.back()}
-            padding="$2"
-            borderRadius={8}
-            pressStyle={{ opacity: 0.7 }}
-          >
-            <ArrowLeft size={24} color="$color" />
-          </XStack>
+        <XStack alignItems="center" justifyContent="space-between">
           <H2 flex={1} numberOfLines={2}>
             {list.name}
           </H2>
+          <XStack
+            onPress={() => router.back()}
+            backgroundColor="#F7F8FB"
+            borderRadius={20}
+            width={36}
+            height={36}
+            alignItems="center"
+            justifyContent="center"
+            pressStyle={{ opacity: 0.7 }}
+          >
+            <X size={18} color="#777777" />
+          </XStack>
         </XStack>
 
         {list.description ? (

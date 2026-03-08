@@ -1,4 +1,6 @@
 import { useLingui } from "@lingui/react";
+import { X } from "@tamagui/lucide-icons";
+import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ScrollView } from "react-native";
 import { XStack, YStack } from "tamagui";
@@ -98,6 +100,7 @@ function matchesFilter(
 
 export default function AchievementsScreen() {
   const { i18n } = useLingui();
+  const router = useRouter();
   const [filter, setFilter] = useState<AchievementFilter>("all");
   const {
     achievements: unlockedList,
@@ -145,6 +148,23 @@ export default function AchievementsScreen() {
   return (
     <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
       <YStack padding="$4" gap="$4" paddingBottom="$8">
+        {/* Modal close button */}
+        <XStack justifyContent="space-between" alignItems="center">
+          <H2>{i18n._("achievements.title")}</H2>
+          <XStack
+            onPress={() => router.back()}
+            backgroundColor="#F7F8FB"
+            borderRadius={20}
+            width={36}
+            height={36}
+            alignItems="center"
+            justifyContent="center"
+            pressStyle={{ opacity: 0.7 }}
+          >
+            <X size={18} color="#777777" />
+          </XStack>
+        </XStack>
+
         {/* Level header card */}
         <YStack
           backgroundColor={tierStyle.bg}
@@ -180,11 +200,7 @@ export default function AchievementsScreen() {
         </YStack>
 
         {/* Summary stats */}
-        <YStack
-          backgroundColor="#F7F8FB"
-          borderRadius={16}
-          overflow="hidden"
-        >
+        <YStack backgroundColor="#F7F8FB" borderRadius={16} overflow="hidden">
           <XStack>
             <YStack flex={1} alignItems="center" padding="$3" gap="$1">
               <Body fontWeight="700" fontSize={22}>

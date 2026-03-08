@@ -2,7 +2,8 @@ import { useLingui } from "@lingui/react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { XStack, YStack } from "tamagui";
 
-import { PrimaryButton,
+import {
+  PrimaryButton,
   SecondaryButton,
 } from "@/components/DesignSystem/Button";
 import { StatChip } from "@/components/DesignSystem/StatChip";
@@ -52,7 +53,12 @@ export default function SummaryScreen() {
         </Body>
       </YStack>
 
-      <YStack backgroundColor="#F7F8FB" borderRadius={16} padding="$4" marginBottom="$4">
+      <YStack
+        backgroundColor="#F7F8FB"
+        borderRadius={16}
+        padding="$4"
+        marginBottom="$4"
+      >
         <XStack gap="$2" flexWrap="wrap" justifyContent="center">
           <StatChip
             icon="✅"
@@ -78,7 +84,12 @@ export default function SummaryScreen() {
       </YStack>
 
       {scorePercent === 100 && (
-        <YStack backgroundColor="#E8F5E9" borderRadius={16} padding="$3" marginBottom="$4">
+        <YStack
+          backgroundColor="#E8F5E9"
+          borderRadius={16}
+          padding="$3"
+          marginBottom="$4"
+        >
           <BodySmall color="#4CAF50" textAlign="center" fontWeight="600">
             🌟 {i18n._("session.summary.perfectScore")}
           </BodySmall>

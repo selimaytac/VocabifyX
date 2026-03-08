@@ -225,8 +225,8 @@ export default function PaywallScreen() {
                     pressStyle={{ opacity: 0.8 }}
                     onPress={() => setSelectedPkgId(pkg.identifier)}
                     borderWidth={1}
-                    borderColor={isSelected ? "#FFB400" : "#333333"}
-                    backgroundColor={isSelected ? "#3d2d0a" : "#1e1e1e"}
+                    borderColor={isSelected ? "#FFB400" : "#E0E0E0"}
+                    backgroundColor={isSelected ? "#213448" : "#F7F8FB"}
                   >
                     <XStack justifyContent="space-between" alignItems="center">
                       <YStack flex={1}>

@@ -1,5 +1,5 @@
 import { useLingui } from "@lingui/react";
-import { ArrowLeft, Minus, Plus } from "@tamagui/lucide-icons";
+import { Minus, Plus, X } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { Alert, ScrollView, TextInput, useColorScheme } from "react-native";
@@ -138,16 +138,24 @@ export default function CreateListScreen() {
     >
       <YStack padding="$4" gap="$5">
         {/* Header */}
-        <XStack alignItems="center" gap="$3" paddingTop="$2">
+        <XStack
+          alignItems="center"
+          justifyContent="space-between"
+          paddingTop="$2"
+        >
+          <H2>{i18n._("createList.title")}</H2>
           <XStack
             onPress={() => router.back()}
-            padding="$2"
-            borderRadius={8}
+            backgroundColor="#F7F8FB"
+            borderRadius={20}
+            width={36}
+            height={36}
+            alignItems="center"
+            justifyContent="center"
             pressStyle={{ opacity: 0.7 }}
           >
-            <ArrowLeft size={24} color="$color" />
+            <X size={18} color="#777777" />
           </XStack>
-          <H2>{i18n._("createList.title")}</H2>
         </XStack>
 
         {/* Category chips */}

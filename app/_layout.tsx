@@ -5,6 +5,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { Platform } from "react-native";
 import { TamaguiProvider } from "tamagui";
 
 import { AchievementUnlockModal } from "@/components/AchievementUnlockModal";
@@ -51,12 +52,41 @@ export default function RootLayout() {
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(auth)" />
             <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="(modals)" />
+            <Stack.Screen
+              name="(modals)"
+              options={{
+                presentation: "modal",
+              }}
+            />
             <Stack.Screen name="session" />
-            <Stack.Screen name="settings" />
-            <Stack.Screen name="list" />
-            <Stack.Screen name="achievements" />
-            <Stack.Screen name="paywall" />
+            <Stack.Screen
+              name="settings"
+              options={{
+                presentation: "modal",
+                animation: Platform.OS === "ios" ? "slide_from_bottom" : "fade",
+              }}
+            />
+            <Stack.Screen
+              name="list"
+              options={{
+                presentation: "modal",
+                animation: Platform.OS === "ios" ? "slide_from_bottom" : "fade",
+              }}
+            />
+            <Stack.Screen
+              name="achievements"
+              options={{
+                presentation: "modal",
+                animation: Platform.OS === "ios" ? "slide_from_bottom" : "fade",
+              }}
+            />
+            <Stack.Screen
+              name="paywall"
+              options={{
+                presentation: "modal",
+                animation: Platform.OS === "ios" ? "slide_from_bottom" : "fade",
+              }}
+            />
           </Stack>
           <AchievementUnlockModal />
           <LevelUpModal />

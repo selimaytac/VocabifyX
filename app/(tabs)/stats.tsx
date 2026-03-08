@@ -84,7 +84,9 @@ function SessionRow({
         </YStack>
       </XStack>
       <YStack alignItems="flex-end">
-        <BodySmall color="#213448" fontWeight="600">+{session.xpEarned} XP</BodySmall>
+        <BodySmall color="#213448" fontWeight="600">
+          +{session.xpEarned} XP
+        </BodySmall>
         <Caption color="#777777">
           {durationMin} {minutesLabel}
         </Caption>
@@ -151,7 +153,12 @@ export default function StatsScreen() {
         ) : (
           <>
             {/* Summary Card */}
-            <YStack backgroundColor="#F7F8FB" borderRadius={16} padding="$4" gap="$4">
+            <YStack
+              backgroundColor="#F7F8FB"
+              borderRadius={16}
+              padding="$4"
+              gap="$4"
+            >
               {/* 3-column top row — Speaker-style colored stat boxes */}
               <XStack gap="$2">
                 <YStack
@@ -165,7 +172,9 @@ export default function StatsScreen() {
                   <Caption fontWeight="600" color="#213448">
                     {i18n._("stats.xpEarned")}
                   </Caption>
-                  <H3 fontWeight="700" color="#213448">⚡{periodXP}</H3>
+                  <H3 fontWeight="700" color="#213448">
+                    ⚡{periodXP}
+                  </H3>
                 </YStack>
                 <YStack
                   flex={1}
@@ -178,10 +187,10 @@ export default function StatsScreen() {
                   <Caption fontWeight="600" color="#FFB400">
                     {i18n._("stats.streakLabel")}
                   </Caption>
-                  <H3 fontWeight="700" color="#FFB400">🔥{currentStreak}</H3>
-                  <Caption color="#777777">
-                    Best: {longestStreak}
-                  </Caption>
+                  <H3 fontWeight="700" color="#FFB400">
+                    🔥{currentStreak}
+                  </H3>
+                  <Caption color="#777777">Best: {longestStreak}</Caption>
                 </YStack>
                 <YStack
                   flex={1}
@@ -194,7 +203,9 @@ export default function StatsScreen() {
                   <Caption fontWeight="600" color="#4CAF50">
                     {i18n._("stats.pointsLabel")}
                   </Caption>
-                  <H3 fontWeight="700" color="#4CAF50">⭐{totalXP}</H3>
+                  <H3 fontWeight="700" color="#4CAF50">
+                    ⭐{totalXP}
+                  </H3>
                 </YStack>
               </XStack>
 
@@ -223,9 +234,7 @@ export default function StatsScreen() {
                   <Caption color="#777777" fontWeight="600">
                     {i18n._("stats.minutesLabel")}
                   </Caption>
-                  <H3 fontWeight="700">
-                    {formatDuration(periodStudySeconds)}
-                  </H3>
+                  <H3 fontWeight="700">{formatDuration(periodStudySeconds)}</H3>
                 </YStack>
               </XStack>
             </YStack>
@@ -257,9 +266,7 @@ export default function StatsScreen() {
               padding="$3"
             >
               <H3 fontWeight="700">{achievements.length}</H3>
-              <Caption color="#777777">
-                {i18n._("stats.totalUnlocked")}
-              </Caption>
+              <Caption color="#777777">{i18n._("stats.totalUnlocked")}</Caption>
             </YStack>
             <YStack
               flex={1}
@@ -272,9 +279,7 @@ export default function StatsScreen() {
               <H3 color={"#FFB400"} fontWeight="700">
                 ⭐ {totalXP}
               </H3>
-              <Caption color="#777777">
-                {i18n._("stats.totalXP")}
-              </Caption>
+              <Caption color="#777777">{i18n._("stats.totalXP")}</Caption>
             </YStack>
           </XStack>
         </YStack>

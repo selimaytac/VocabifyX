@@ -233,11 +233,7 @@ export default function FlashcardScreen() {
                 {i18n._("session.term")}
               </Caption>
               <H2 textAlign="center">{currentWord.term}</H2>
-              <BodySmall
-                color="#777777"
-                marginTop="$2"
-                textAlign="center"
-              >
+              <BodySmall color="#777777" marginTop="$2" textAlign="center">
                 {currentWord.partOfSpeech}
               </BodySmall>
             </ScrollView>

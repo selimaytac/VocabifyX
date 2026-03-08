@@ -1,5 +1,5 @@
 import { useLingui } from "@lingui/react";
-import { ArrowLeft } from "@tamagui/lucide-icons";
+import { X } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
 import { useCallback } from "react";
 import { ScrollView, Switch } from "react-native";
@@ -106,16 +106,20 @@ export default function NotificationsScreen() {
   return (
     <ScrollView>
       <YStack padding="$4" gap="$4">
-        <XStack alignItems="center" gap="$3">
+        <XStack alignItems="center" justifyContent="space-between">
+          <H2>{i18n._("notifications.title")}</H2>
           <XStack
             onPress={() => router.back()}
-            padding="$2"
-            borderRadius={8}
+            backgroundColor="#F7F8FB"
+            borderRadius={20}
+            width={36}
+            height={36}
+            alignItems="center"
+            justifyContent="center"
             pressStyle={{ opacity: 0.7 }}
           >
-            <ArrowLeft size={24} color="$color" />
+            <X size={18} color="#777777" />
           </XStack>
-          <H2>{i18n._("notifications.title")}</H2>
         </XStack>
 
         <Card elevated>

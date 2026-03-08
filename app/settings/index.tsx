@@ -10,9 +10,10 @@ import {
   Star,
   Trash2,
   User,
+  X,
 } from "@tamagui/lucide-icons";
 import { useRouter } from "expo-router";
-import { Alert, Linking, Share, ScrollView } from "react-native";
+import { Alert, Linking, ScrollView, Share } from "react-native";
 import { XStack, YStack } from "tamagui";
 
 import {
@@ -91,7 +92,8 @@ function Row({ icon, label, onPress, trailing }: RowProps) {
       <Label color="#09122C" flex={1}>
         {label}
       </Label>
-      {trailing ?? (onPress ? <ChevronRight size={18} color="#BBBBBB" /> : null)}
+      {trailing ??
+        (onPress ? <ChevronRight size={18} color="#BBBBBB" /> : null)}
     </XStack>
   );
 }
@@ -152,12 +154,27 @@ export default function SettingsScreen() {
   return (
     <ScrollView style={{ backgroundColor: "#FFFFFF" }}>
       <YStack padding="$4" gap="$5" paddingBottom="$10">
+        {/* ── Modal handle & close ───────────────────── */}
+        <XStack justifyContent="space-between" alignItems="center">
+          <H3>{i18n._("common.settings")}</H3>
+          <XStack
+            onPress={() => router.back()}
+            backgroundColor="#F7F8FB"
+            borderRadius={20}
+            width={36}
+            height={36}
+            alignItems="center"
+            justifyContent="center"
+            pressStyle={{ opacity: 0.7 }}
+          >
+            <X size={18} color="#777777" />
+          </XStack>
+        </XStack>
 
         {/* ── 1. ACCOUNT ─────────────────────────────────── */}
         <YStack gap="$2">
           <SectionHeader>{i18n._("settings.account")}</SectionHeader>
           <YStack {...CARD_STYLE}>
-
             {/* Profile row */}
             <XStack padding="$4" alignItems="center" gap="$3">
               <XStack
@@ -323,9 +340,7 @@ export default function SettingsScreen() {
             {i18n._("settings.deleteAccount")}
           </Body>
         </XStack>
-
       </YStack>
     </ScrollView>
   );
 }
-

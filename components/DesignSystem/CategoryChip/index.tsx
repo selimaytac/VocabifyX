@@ -18,12 +18,7 @@ export function CategoryChips<T extends string>({
 }: CategoryChipProps<T>) {
   if (variant === "segmented") {
     return (
-      <XStack
-        backgroundColor="#F7F8FB"
-        borderRadius={10}
-        padding="$1"
-        gap="$0"
-      >
+      <XStack backgroundColor="#F7F8FB" borderRadius={10} padding="$1" gap="$0">
         {categories.map((category) => {
           const isSelected = selected === category.key;
           return (

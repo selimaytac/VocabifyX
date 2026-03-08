@@ -228,11 +228,7 @@ export default function QuizScreen() {
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <YStack paddingVertical="$4" gap="$4">
-          <YStack
-            backgroundColor="#F7F8FB"
-            borderRadius={16}
-            padding="$4"
-          >
+          <YStack backgroundColor="#F7F8FB" borderRadius={16} padding="$4">
             <YStack gap="$2" paddingVertical="$2">
               <Caption color="#777777">
                 {i18n._("session.whatIsTranslation")}
@@ -293,11 +289,7 @@ export default function QuizScreen() {
 
           {answerState !== "idle" && (
             <YStack backgroundColor="#F7F8FB" borderRadius={16} padding="$4">
-              <BodySmall
-                color="#777777"
-                fontStyle="italic"
-                textAlign="center"
-              >
+              <BodySmall color="#777777" fontStyle="italic" textAlign="center">
                 {currentQuestion.word.example}
               </BodySmall>
             </YStack>

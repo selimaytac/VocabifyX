@@ -121,7 +121,12 @@ export default function ProfileScreen() {
         </XStack>
 
         {/* XP Progress Card */}
-        <YStack backgroundColor="#F7F8FB" borderRadius={16} padding="$4" gap="$2">
+        <YStack
+          backgroundColor="#F7F8FB"
+          borderRadius={16}
+          padding="$4"
+          gap="$2"
+        >
           <XStack justifyContent="space-between" alignItems="center">
             <BodySmall fontWeight="700" color="#09122C">
               {currentLevel.emoji} {getLevelDisplayName(currentLevel)}
@@ -172,7 +177,12 @@ export default function ProfileScreen() {
         </XStack>
 
         {/* Weekly Study Calendar */}
-        <YStack backgroundColor="#F7F8FB" borderRadius={16} padding="$4" gap="$3">
+        <YStack
+          backgroundColor="#F7F8FB"
+          borderRadius={16}
+          padding="$4"
+          gap="$3"
+        >
           <Caption fontWeight="600" color="#777777" letterSpacing={0.5}>
             {i18n._("profile.thisWeek").toUpperCase()}
           </Caption>
@@ -260,7 +270,11 @@ export default function ProfileScreen() {
                     >
                       <Body fontSize={28}>{achievement.icon}</Body>
                     </YStack>
-                    <Caption textAlign="center" numberOfLines={1} color="#09122C">
+                    <Caption
+                      textAlign="center"
+                      numberOfLines={1}
+                      color="#09122C"
+                    >
                       {i18n._(achievement.titleKey)}
                     </Caption>
                     <Caption color="#FFB400">+{ua.xpAwarded} XP</Caption>
