@@ -1,4 +1,5 @@
 import { useLingui } from "@lingui/react";
+import * as Haptics from "expo-haptics";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { ScrollView } from "react-native";
@@ -83,6 +84,17 @@ export default function QuizScreen() {
       const isCorrect = choiceIndex === currentQuestion.correctIndex;
       setSelectedChoice(choiceIndex);
       setAnswerState(isCorrect ? "correct" : "incorrect");
+
+      // Haptic feedback for quiz answers
+      if (isCorrect) {
+        Haptics.notificationAsync(
+          Haptics.NotificationFeedbackType.Success,
+        ).catch(() => undefined);
+      } else {
+        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error).catch(
+          () => undefined,
+        );
+      }
 
       updateWordProgress(
         list.id,

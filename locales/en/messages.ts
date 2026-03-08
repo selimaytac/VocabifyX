@@ -396,4 +396,16 @@ export const messages: Record<string, string> = {
   "paywall.legalNote":
     "Subscription renews automatically. Cancel anytime in Settings.",
   "paywall.noOfferings": "Pricing unavailable. Please try again later.",
+
+  // Lapsed-subscriber paywall (shown when subscription has expired)
+  "paywall.lapsed.headline": "Your subscription has expired",
+  "paywall.lapsed.subtitle":
+    "Renew your plan to continue learning and keep your progress.",
+  "paywall.lapsed.renewCta": "Renew Subscription",
+
+  // Onboarding error state (when list generation / lookup fails)
+  "onboarding.error.title": "Something went wrong",
+  "onboarding.error.subtitle":
+    "We couldn't prepare your list right now. Please try again.",
+  "onboarding.error.retry": "Try Again",
 };

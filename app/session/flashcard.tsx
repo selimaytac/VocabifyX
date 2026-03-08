@@ -1,4 +1,5 @@
 import { useLingui } from "@lingui/react";
+import * as Haptics from "expo-haptics";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useRef, useState } from "react";
 import { Animated, Pressable, ScrollView, StyleSheet } from "react-native";
@@ -77,6 +78,17 @@ export default function FlashcardScreen() {
   const handleAnswer = useCallback(
     (knew: boolean) => {
       if (!list || !currentWord) return;
+
+      // Haptic feedback on each answer
+      if (knew) {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium).catch(
+          () => undefined,
+        );
+      } else {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light).catch(
+          () => undefined,
+        );
+      }
 
       updateWordProgress(
         list.id,

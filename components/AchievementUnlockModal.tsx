@@ -1,4 +1,6 @@
 import { useLingui } from "@lingui/react";
+import * as Haptics from "expo-haptics";
+import { useEffect } from "react";
 import { Sheet, XStack, YStack } from "tamagui";
 
 import { PrimaryButton } from "@/components/DesignSystem/Button";
@@ -16,6 +18,15 @@ export function AchievementUnlockModal() {
   const isOpen = pendingAchievements.length > 0;
   const first = pendingAchievements[0];
   const achievement = first ? getAchievementById(first.id) : undefined;
+
+  // Haptic feedback when an achievement is first shown
+  useEffect(() => {
+    if (isOpen) {
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success).catch(
+        () => undefined,
+      );
+    }
+  }, [isOpen]);
 
   if (!achievement) return null;
 
