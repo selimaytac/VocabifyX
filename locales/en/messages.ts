@@ -182,7 +182,8 @@ export const messages: Record<string, string> = {
   "createList.topic": "Topic",
   "createList.topicPlaceholder": "e.g. Airport & Flying",
   "createList.language": "List Language",
-  "createList.category": "Category",
+  "createList.category": "Category (Optional)",
+  "createList.categoryPlaceholder": "e.g. Travel, Business, Tech…",
   "createList.words": "Words",
   "createList.addWord": "Add Word",
   "createList.term": "Term",
@@ -476,6 +477,7 @@ export const messages: Record<string, string> = {
     "e.g. Airport vocabulary, cooking terms, legal jargon…",
   "aiCreate.languageLabel": "List Language",
   "aiCreate.wordCountLabel": "Word Count",
+  "aiCreate.categoryLabel": "Category (Optional)",
   "aiCreate.descriptionLabel": "Description (Optional)",
   "aiCreate.descriptionPlaceholder":
     "Optional — but the more detail you provide, the more precise and relevant your list will be.",
