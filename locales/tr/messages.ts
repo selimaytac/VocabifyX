@@ -463,4 +463,41 @@ export const messages: Record<string, string> = {
   "paywall.offeringsErrorTitle": "Fiyatlandırma Mevcut Değil",
   "paywall.offeringsError":
     "Fiyatlandırma yüklenemedi. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.",
+
+  // Liste oluşturma sayfası
+  "createSheet.exploreBanner": "Keşfetteki listeleri incele!",
+  "createSheet.exploreBannerSub": "Hazır kelime paketlerini keşfet",
+  "createSheet.manualTitle": "Kendi Listeni Oluştur",
+  "createSheet.manualSubtitle": "Sıfırdan liste oluştur",
+  "createSheet.aiTitle": "AI ile Oluştur",
+  "createSheet.aiSubtitle": "AI senin için listeyi oluştursun",
+
+  // AI ile liste oluşturma ekranı
+  "aiCreate.title": "AI ile Oluştur",
+  "aiCreate.subtitle":
+    "Ne öğrenmek istediğini anlat, AI sana özel bir kelime listesi oluştursun.",
+  "aiCreate.topicLabel": "Konu / Anahtar Kelimeler",
+  "aiCreate.topicPlaceholder":
+    "örn. Havalimanı kelimeleri, yemek terimleri, hukuk jargonu…",
+  "aiCreate.languageLabel": "Liste Dili",
+  "aiCreate.wordCountLabel": "Kelime Sayısı",
+  "aiCreate.descriptionLabel": "Açıklama (İsteğe Bağlı)",
+  "aiCreate.descriptionPlaceholder":
+    "İsteğe bağlı — ama ne kadar detay verirsen, liste o kadar isabetli ve alakalı olur.",
+  "aiCreate.generateButton": "AI ile Oluştur",
+  "aiCreate.topicRequired": "Lütfen bir konu veya anahtar kelime girin",
+  "aiCreate.loading.title": "Listen oluşturuluyor…",
+  "aiCreate.loading.analyzing": "Konun analiz ediliyor…",
+  "aiCreate.loading.generating": "Kelimeler oluşturuluyor…",
+  "aiCreate.loading.refining": "Çeviriler ve örnekler iyileştiriliyor…",
+  "aiCreate.loading.almostReady": "Neredeyse hazır…",
+  "aiCreate.loading.funFact":
+    "💡 Biliyor musun? Sadece 1.000 kelime öğrenmek günlük konuşmaların ~%85'ini kapsar.",
+  "aiCreate.error.title": "Bir şeyler ters gitti",
+  "aiCreate.error.subtitle":
+    "Listen şu anda oluşturulamadı. Lütfen bağlantını kontrol et ve tekrar dene.",
+  "aiCreate.error.retry": "Tekrar Dene",
+  "aiCreate.preview.title": "Listen Hazır! 🎉",
+  "aiCreate.preview.wordsTitle": "Oluşturulan Kelimeler",
+  "aiCreate.preview.save": "Listelerime Kaydet",
 };

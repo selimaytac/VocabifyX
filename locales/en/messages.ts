@@ -458,4 +458,41 @@ export const messages: Record<string, string> = {
   "paywall.offeringsErrorTitle": "Pricing Unavailable",
   "paywall.offeringsError":
     "Could not load pricing. Please check your connection and try again.",
+
+  // Create list sheet
+  "createSheet.exploreBanner": "Check out the lists in Explore!",
+  "createSheet.exploreBannerSub": "Discover curated vocabulary packs",
+  "createSheet.manualTitle": "Create Your Own",
+  "createSheet.manualSubtitle": "Build a list from scratch",
+  "createSheet.aiTitle": "Create with AI",
+  "createSheet.aiSubtitle": "AI builds the list for you",
+
+  // AI create list screen
+  "aiCreate.title": "Create with AI",
+  "aiCreate.subtitle":
+    "Describe what you want to learn and AI will generate a tailored vocabulary list for you.",
+  "aiCreate.topicLabel": "Topic / Keywords",
+  "aiCreate.topicPlaceholder":
+    "e.g. Airport vocabulary, cooking terms, legal jargon…",
+  "aiCreate.languageLabel": "List Language",
+  "aiCreate.wordCountLabel": "Word Count",
+  "aiCreate.descriptionLabel": "Description (Optional)",
+  "aiCreate.descriptionPlaceholder":
+    "Optional — but the more detail you provide, the more precise and relevant your list will be.",
+  "aiCreate.generateButton": "Generate with AI",
+  "aiCreate.topicRequired": "Please enter a topic or keywords",
+  "aiCreate.loading.title": "Generating your list…",
+  "aiCreate.loading.analyzing": "Analyzing your topic…",
+  "aiCreate.loading.generating": "Generating vocabulary…",
+  "aiCreate.loading.refining": "Refining translations & examples…",
+  "aiCreate.loading.almostReady": "Almost ready…",
+  "aiCreate.loading.funFact":
+    "💡 Fun fact: Learning just 1,000 words covers ~85% of everyday conversation.",
+  "aiCreate.error.title": "Something went wrong",
+  "aiCreate.error.subtitle":
+    "We couldn't generate your list right now. Please check your connection and try again.",
+  "aiCreate.error.retry": "Try Again",
+  "aiCreate.preview.title": "Your List is Ready! 🎉",
+  "aiCreate.preview.wordsTitle": "Generated Words",
+  "aiCreate.preview.save": "Save to My Lists",
 };

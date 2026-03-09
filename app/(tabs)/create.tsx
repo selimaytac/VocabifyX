@@ -1,5 +1,10 @@
-import { Redirect } from "expo-router";
+import { View } from "react-native";
 
-export default function CreateTabRedirect() {
-  return <Redirect href="/list/create" />;
+/**
+ * Placeholder screen for the center "create" tab.
+ * The actual list-creation flow is triggered by the FAB button which opens
+ * a bottom sheet via useCreateListSheetStore.
+ */
+export default function CreateTabPlaceholder() {
+  return <View />;
 }
