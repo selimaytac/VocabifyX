@@ -182,7 +182,8 @@ export const messages: Record<string, string> = {
   "createList.topic": "Konu",
   "createList.topicPlaceholder": "örn. Havalimanı & Uçuş",
   "createList.language": "Liste Dili",
-  "createList.category": "Kategori",
+  "createList.category": "Kategori (İsteğe Bağlı)",
+  "createList.categoryPlaceholder": "örn. Seyahat, İş, Teknoloji…",
   "createList.words": "Kelimeler",
   "createList.addWord": "Kelime Ekle",
   "createList.term": "Kelime",
@@ -481,6 +482,7 @@ export const messages: Record<string, string> = {
     "örn. Havalimanı kelimeleri, yemek terimleri, hukuk jargonu…",
   "aiCreate.languageLabel": "Liste Dili",
   "aiCreate.wordCountLabel": "Kelime Sayısı",
+  "aiCreate.categoryLabel": "Kategori (İsteğe Bağlı)",
   "aiCreate.descriptionLabel": "Açıklama (İsteğe Bağlı)",
   "aiCreate.descriptionPlaceholder":
     "İsteğe bağlı — ama ne kadar detay verirsen, liste o kadar isabetli ve alakalı olur.",
